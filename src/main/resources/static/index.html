@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레시피 웹페이지</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="search-container">
+            <div class="logo-container">
+                <img src="./images/MainLogo.png" alt="Main Logo">
+            </div>
+            <div class="search">
+                <input type="text" placeholder="검색">
+                <button></button>
+            </div>
+        </div>
+        <div class="login">
+            Login
+        </div>
+    </div>
+    <div>
+        <button class="menu-button" onclick="toggleSidebar()"></button>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <button class="close-button" onclick="toggleSidebar()"></button>
+            <div class="content">
+                <div>랭킹 게시판</div>
+                <div>일반 게시판</div>
+                <div>공지사항 게시판</div>
+                <div class="fridge">
+                    <img src="./images/fridge.png" alt="냉장고 이미지">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./script/scripts.js"></script>
+</body>
+</html>
