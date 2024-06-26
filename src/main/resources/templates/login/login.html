@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link rel="stylesheet" th:href="@{/css/layout/login/Login.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+</head>
+<body>
+    <header th:replace="fragments/header :: header"></header>
+    <div class="container">
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+        <div class="main-content">
+         <div class="card align-middle" style="width:25rem;">
+          <form action="login" class="login" method="POST">
+            <div class="card-body">
+              <input type="text" name="LoginId" id="Id" class="form-control" placeholder="아이디" autofocus required><BR>
+              <input type="password" name="LoginPw" id="Pw" class="form-control" placeholder="비밀번호"  required><br>
+              <input id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" value="로 그 인">
+            </div>
+          </form>
+         <div class="links">
+          <a href="memberId">아이디 찾기</a> | <a href="memberPw">비밀번호 찾기</a> | <a href="memberRegist">회원가입</a>
+         </div>
+         </div>
+        </div>
+    </div>
+    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
+</body>
+</html>
