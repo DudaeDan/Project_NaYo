@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class="header" th:fragment="header">
+        <div class="search-container">
+            <div class="logo-container">
+                <img th:src="@{/images/layout/MainLogo.png}" alt="Main Logo">
+            </div>
+            <div class="search">
+                <input type="text" placeholder="검색">
+                <button></button>
+            </div>
+        </div>
+        <div class="login">
+            Login
+        </div>
+    </div>
+</body>
+</html>

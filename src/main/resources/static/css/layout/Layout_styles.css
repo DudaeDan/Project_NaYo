@@ -28,7 +28,7 @@ body {
     margin-left: 10px;
 }
 .header button {
-    background: url('../Images/search.png') no-repeat center center;
+    background: url('../../Images/layout/search.png') no-repeat center center;
     background-size: contain;
     width: 30px;
     height: 30px;
@@ -41,7 +41,7 @@ body {
     padding: 5px;
 }
 .menu-button {
-    background: url('../Images/Menu.png') no-repeat center center;
+    background: url('../../Images/layout/Menu.png') no-repeat center center;
     background-size: contain;
     width: 70px;
     height: 70px;
@@ -71,7 +71,7 @@ body {
     left: 0; /* 사이드바를 화면 안으로 이동 */
 }
 .sidebar .close-button {
-    background: url('../Images/Menu.png') no-repeat center center;
+    background: url('../../Images/layout/Menu.png') no-repeat center center;
     background-size: contain;
     width: 70px;
     height: 70px;

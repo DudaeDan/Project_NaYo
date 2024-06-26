@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레시피 웹페이지</title>
+    <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
+</head>
+<body>
+    <header th:replace="fragments/header :: header"></header>
+    <div class="container">
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+        <div class="main-content" th:fragment="content">
+            <p>Main content goes here</p>
+        </div>
+    </div>
+    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
+</body>
+</html>
