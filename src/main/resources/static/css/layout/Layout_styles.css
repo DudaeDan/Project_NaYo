@@ -94,7 +94,10 @@ body {
 .main-content {
     padding: 10px;
     flex-grow: 1;
+    margin-left: 15%; /* 사이드바 폭만큼 왼쪽 여백 추가 */
+   
 }
+
 .container {
     display: flex;
 }
