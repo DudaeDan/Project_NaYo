@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+	<!-- <link rel="stylesheet" href="../../static/css/layout/login/join.css">
+    <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+</head>
+<body>
+    <header th:replace="fragments/header :: header"></header>
+    <div class="container">
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+        <div class="main-content">
+		  <div class="join">
+			<form action="join" class="join-us" method="get">
+				<h2>회원가입</h2>
+				<div class="form">
+				<label for="user_name">이름</label>
+				<input type="text" class="info" name="user_name" id="user_Name"/>
+				</div>
+                 <label for="user_id"> 아이디</label>
+				  <div>
+					 <input type="text" class="info" name="user_id" id="user_Id"/><br>
+					 <span><input type="button" value="중복체크" onclick="checkId()"/></span>
+				  </div>
+				  <label for="user_pw"> 비밀번호</label>
+				  <div>
+					 <input type="password" class="info" name="user_pw" id="user_Pw"/>
+				  </div>
+				  <label for="user_repw"> 비밀번호 확인</label>
+				  <div>
+					 <input type="password" class="info" name="user_repw" id="user_rePw"/>
+				  </div>
+				  <label for="email">E-mail</label>
+				 <div>
+					<input type="text" class="info" name="email" size="10" autocomplete="nope"/>@
+					  <select name="domain">
+						 <option value="">직접입력</option>
+						 <option value="naver.com"> NAVER </option>
+						 <option value="gmail.com"> Gmail</option>
+					  </select>
+				 </div>
+				 <label for="phone">핸드폰</label>
+				 <div>
+					 <input type="text" class="info" name="tel_1" size="3" maxlength="3" autocomplete="nope"/> - 
+					 <input type="text" class="info" name="tel_2" size="4" maxlength="4" autocomplete="nope"/> - 
+					 <input type="text" class="info" name="tel_3" size="4" maxlength="4" autocomplete="nope"/>
+				 </div>
+				 <label for="addr">주소</label>
+				 <div>
+					 <input type="text" class="info" name="addr" size="50" autocomplete="nope"/>
+				 </div>
+				 <input type="button" class="btn" value="회원가입" onclick="checkWrite()"/>
+				 
+				</div>
+			 </form>
+		  </div>
+      </div>
+    </div>
+    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
+</body>
+</html>

@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LoginController {
     
-    @GetMapping("/layout")
+    @GetMapping("/login")
     public String layout() {
-        return "layout";
+        return "/login/logintest";
     }
     
 
