@@ -11,5 +11,11 @@ public class LoginController {
         return "layout";
     }
     
+    // 테스트
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin/admin_main";
+    }
+    
 
 }

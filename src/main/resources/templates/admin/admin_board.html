@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 목록</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin_list.css}">
+</head>
+<body>
+<main>
+
+    
+    <div class="sidebar">
+        <ul>
+            <div class="side-title">
+                <p>사이트 관리</p>
+            </div>
+            <br/>
+            <li class="admin-side-list">
+                <input type="button" class="side-menu-button" value="메인페이지"
+                onclick="location.href='admin_main.html'">
+            </li>
+            <li class="admin-side-list">
+                <input type="button" class="side-menu-button" value="사용자 목록"
+                onclick="location.href='admin_member.html'">
+            </li>
+            <li class="admin-side-list">
+                <input type="button" class="side-menu-button" value="게시글 목록"
+                onclick="location.href='admin_board.html'">
+            </li>
+            <li class="admin-side-list">
+                <input type="button" class="side-menu-button" value="공지사항 목록"
+                onclick="location.href='admin_notice.html'">
+            </li>
+            <li class="admin-side-list">
+                <input type="button" class="side-menu-button" value="문의 목록"
+                onclick="location.href='admin_inquiry.html'">
+            </li>
+            <br/>
+            <br/>
+            <li class="admin-side-list">
+                <input type="button" class="side-menu-button" value="사이트 바로가기"
+                onclick="location.href=''">
+            </li>
+        </ul>
+    </div>
+    
+    <section>
+
+        <div class="list-box">
+
+            <div class="page-name">
+                <h3>게시글 목록</h3>    
+            </div>
+            
+            <div class="admin-list-content">
+                
+                <div class="list-search">
+                    <form action="">
+                        <select name="" id="" class="search-select">
+                            <option value="title">제목</option>
+                            <option value="content">내용</option>
+                            <option value="id">작성자</option>
+                        </select>
+                        <input type="text" placeholder="검색" class="search-text">
+                        <button class="search-btn" type="submit" >
+                            <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" class="search-img">
+                        </button>
+                    </form>
+                </div>
+
+                <div class="admin-list-table">
+                    <table>
+                        <tr>
+                            <th style="width: 5%;">번호</th>
+                            <th style="width: 70%;">제목</th>
+                            <th style="width: 10%;">작성자</th>
+                            <th style="width: 10%;">작성일</th>
+                            <th style="width: 5%;">조회수</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>titletesttitletesttitletesttitletest</td>
+                            <td>test1</td>
+                            <td>2024-01-01</td>
+                            <td>1</td>
+                        </tr>
+                        <!-- 10개까지 -->
+                        <tr>
+                            <td>1</td>
+                            <td>titletesttitletesttitletesttitletest</td>
+                            <td>test1</td>
+                            <td>2024-01-01</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>titletesttitletesttitletesttitletest</td>
+                            <td>test1</td>
+                            <td>2024-01-01</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>titletesttitletesttitletesttitletest</td>
+                            <td>test1</td>
+                            <td>2024-01-01</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>titletesttitletesttitletesttitletest</td>
+                            <td>test1</td>
+                            <td>2024-01-01</td>
+                            <td>1</td>
+                        </tr>
+                    </table>
+                    <p class="pages">
+                        < 1 2 3 4 5 >
+                        <!-- 나중에 페이지 처리 -->
+                    </p>
+                </div>
+            </div> 
+        </div>   
+</section>
+    
+</main>
+</body>
+</html>

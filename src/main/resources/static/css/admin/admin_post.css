@@ -1,0 +1,99 @@
+
+
+.post_box {
+    width: 90%;
+    margin: 0 auto;
+    height: 80%;
+    position: relative;
+}
+
+.admin-post-content {
+    width: 80%;
+    margin: 0 auto;
+    height: 80%;
+    position: relative;
+}
+
+/* 테이블 */
+.post-info{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 70px;
+    margin: auto;
+}
+
+
+table {
+    background-color: white;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    min-width: 850px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+th, td {
+    border: 1px solid #cdcdcd;
+}
+
+td.post-title {
+    width: 50%;
+}
+td.notice-title {
+    width: 70%;
+}
+
+td.post-content {
+    padding: 20px 30px;
+}
+
+th{
+    width: 6%;
+    padding: 15px 0;
+}
+
+td textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    border: none;
+}
+
+table  input {
+    width: 95%;
+    height: 30px;
+    border: none;
+}
+
+/* 버튼 */
+
+.post-btns {
+    position: relative;    
+    margin-top: 70px;
+    width: 100%;
+}
+.post-btns > input{
+    background-color: white;
+    border: 1px solid #cdcdcd;
+    padding: 10px;
+    width: 100px;
+    position: absolute;
+    border-radius: 5px;
+    right: 0px;
+}
+
+.second_btn {
+    right: 110px !important;
+}
+.third_btn {
+    right: 220px !important;
+}
+
+.inquiry_answer {
+    height: 200px;
+}
+
+.post-modify{
+height: 300px;
+}
