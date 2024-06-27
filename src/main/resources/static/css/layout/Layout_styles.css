@@ -95,7 +95,8 @@ body {
     padding: 10px;
     flex-grow: 1;
     margin-left: 15%; /* 사이드바 폭만큼 왼쪽 여백 추가 */
-   
+    max-width: 1200px; /* 원하는 최대 너비로 설정 */
+    margin: 0 auto; /* 가로 중앙 정렬 */
 }
 
 .container {
