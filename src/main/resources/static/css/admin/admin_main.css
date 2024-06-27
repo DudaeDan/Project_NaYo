@@ -1,0 +1,63 @@
+@charset "utf-8";
+
+
+
+/* 테이블  */
+.admin-table-main {
+    width: 100%;
+    height: 100%;
+    border-top: 1px solid #cdcdcd;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: center;
+    border-bottom: 1px solid #efefef;
+    border-left: 1px solid #efefef;
+    height: 20%;
+}
+
+th {
+    padding: 20px 0;
+}
+
+th:first-child, td:first-child {
+    border-left: none;
+}
+
+
+table.admin-table-main > tbody > tr {
+    height: 35px;
+}
+
+/* 내용 */
+
+div.admin-big-box {
+    margin: 80px 20px;
+}
+
+div.admin-little-box {
+    display: flex;
+    margin: 15px;
+}
+
+div.admin-table {
+    margin: 15px;
+    width: 49%;
+    height: 90%;
+    background-color: white;
+    min-width: 650px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.admin-table div:first-child {
+    padding: 14px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.see-details {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}

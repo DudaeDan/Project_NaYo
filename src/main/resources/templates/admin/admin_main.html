@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지</title>
+	
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin_main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin.css}">
+</head>
+<body>
+    <main>
+    
+        <div class="sidebar">
+            <ul>
+                <div class="side-title">
+                    <p>사이트 관리</p>
+                </div>
+                <br/>
+                <li class="admin-side-list">
+                    <input type="button" class="side-menu-button" value="메인페이지"
+                    onclick="location.href='admin_main.html'">
+                </li>
+                <li class="admin-side-list">
+                    <input type="button" class="side-menu-button" value="사용자 목록"
+                    onclick="location.href='admin_member.html'">
+                </li>
+                <li class="admin-side-list">
+                    <input type="button" class="side-menu-button" value="게시글 목록"
+                    onclick="location.href='admin_board.html'">
+                </li>
+                <li class="admin-side-list">
+                    <input type="button" class="side-menu-button" value="공지사항 목록"
+                    onclick="location.href='admin_notice.html'">
+                </li>
+                <li class="admin-side-list">
+                    <input type="button" class="side-menu-button" value="문의 목록"
+                            onclick="location.href='admin_inquiry.html'">
+                </li>
+                <br/>
+                <br/>
+                <li class="admin-side-list">
+                    <input type="button" class="side-menu-button" value="사이트 바로가기"
+                    onclick="location.href=''">
+                </li>
+            </ul>
+        </div>
+        
+        <section>
+            <div class="admin-big-box">
+                <div class="admin-little-box">
+                    <div class="admin-table">
+                        <div>
+                            <p>사용자 목록</p>
+                            <a href="">
+                                <img src="https://cdn0.iconfinder.com/data/icons/mobile-basic-vol-1/32/Circle_Plus-48.png" class="see-details">
+                            </a>
+                        </div>
+                        <div>
+                            <table class="admin-table-main">
+                                <thead>
+                                <tr>
+                                    <th>이름</th>
+                                    <th>ID</th>
+                                    <th>닉네임</th>
+                                    <th>가입일</th>
+                                    <th>역할</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>test1</td>
+                                        <td>test1</td>
+                                        <td>test1111</td>
+                                        <td>2024-01-01</td>
+                                        <td>사용자</td>
+                                    </tr>
+                                    <tr>
+                                        <td>test2</td>
+                                        <td>test2</td>
+                                        <td>test2222</td>
+                                        <td>2024-01-01</td>
+                                        <td>관리자</td>
+                                    </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+    
+                                
+                            </table>
+                        </div>
+                    </div>
+                    <div class="admin-table">
+                        <div>
+                            <p>게시글 목록</p>
+                            <a href="">
+                                <img src="https://cdn0.iconfinder.com/data/icons/mobile-basic-vol-1/32/Circle_Plus-48.png" class="see-details">
+                            </a>
+                        </div>
+                        <div>
+                            <table class="admin-table-main">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10%;">번호</th>
+                                        <th style="width: 45%;">제목</th>
+                                        <th style="width: 15%;">작성자</th>
+                                        <th style="width: 20%;">작성일</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>test1</td>
+                                    <td>test1111</td>
+                                    <td>2024-01-01</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                    </div>
+                </div>
+                <div class="admin-little-box">
+                    <div class="admin-table">
+                        <div>
+                            <p>공지사항 목록</p>
+                            <a href="">
+                                <img src="https://cdn0.iconfinder.com/data/icons/mobile-basic-vol-1/32/Circle_Plus-48.png" class="see-details">
+                            </a>
+                        </div>
+                        <div>
+                            <table class="admin-table-main">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10%;">번호</th>
+                                        <th style="width: 45%;">제목</th>
+                                        <th style="width: 15%;">작성자</th>
+                                        <th style="width: 20%;">작성일</th>
+                                    </tr>
+                                </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>test2</td>
+                                        <td>test2222</td>
+                                        <td>2024-01-01</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </div>
+                    <div class="admin-table">
+                        <div>
+                            <p>문의 목록</p>
+                            <a href="">
+                                <img src="https://cdn0.iconfinder.com/data/icons/mobile-basic-vol-1/32/Circle_Plus-48.png" class="see-details">
+                            </a>
+                        </div>
+                        <div>
+                            <table class="admin-table-main">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 15%;">작성자</th>
+                                        <th style="width: 50%;">제목</th>
+                                        <th style="width: 20%;">작성일</th>
+                                        <th style="width: 15%;">진행상황</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>test1111</td>
+                                    <td>문의</td>
+                                    <td>2023-05-12</td>
+                                    <td>답변 완료</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        </div>
+                    </div>
+                </div>
+        </section>
+    
+    </main>
+</body>
+</html>

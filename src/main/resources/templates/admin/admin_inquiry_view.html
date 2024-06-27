@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의 답변</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin_post.css}">
+</head>
+<body>
+<main>
+
+    
+    <div class="sidebar">
+        <ul>
+            <div class="side-title">
+                <p>사이트 관리</p>
+            </div>
+            <br/>
+            <li class="admin-side-list">
+                <input type="button" class="side-menu-button" value="메인페이지"
+                onclick="location.href='admin_main.html'">
+            </li>
+            <li class="admin-side-list">
+                <input type="button" class="side-menu-button" value="사용자 목록"
+                onclick="location.href='admin_member.html'">
+            </li>
+            <li class="admin-side-list">
+                <input type="button" class="side-menu-button" value="게시글 목록"
+                onclick="location.href='admin_board.html'">
+            </li>
+            <li class="admin-side-list">
+                <input type="button" class="side-menu-button" value="공지사항 목록"
+                onclick="location.href='admin_notice.html'">
+            </li>
+            <li class="admin-side-list">
+                <input type="button" class="side-menu-button" value="문의 목록"
+                onclick="location.href='admin_inquiry.html'">
+            </li>
+            <br/>
+            <br/>
+            <li class="admin-side-list">
+                <input type="button" class="side-menu-button" value="사이트 바로가기"
+                onclick="location.href=''">
+            </li>
+        </ul>
+    </div>
+    
+    <section>
+
+        <div class="post-box">
+
+            <div class="admin-post-content">
+
+                <div class="post-btns">
+                    <input type="button" name="" id="" value="답변 완료" class="second_btn" onclick=""> 
+                    <input type="button" name="" id="" value="글 목록" onclick="location.href='admin_inquiry.html'"> 
+                </div>
+
+                <div class="post-info">
+                    <table class="admin-post">
+                        <tr>
+                            <th>제목</th>
+                            <td class="post-title">
+                            </td>
+                            <th>작성자</th>
+                            <td>test</td>
+                            <th>작성일</th>
+                            <td>test</td>
+                        </tr>
+                        <tr>
+                            <th>내용</th>
+                            <td colspan="5" class="post-content">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>답변</th>
+                            <td colspan="5" class="post-content inquiry_answer">
+                                <textarea name="" id=""></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    
+</main>
+</body>
+</html>
