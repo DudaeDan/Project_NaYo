@@ -1,13 +1,20 @@
-@charset "utf-8";
+/* body {
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background-color: #f5f5f5;
+} */
 
-/* @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css"); */
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
-
-
-
-
-
-
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
 
 .join {
     width: 420px;
@@ -15,112 +22,67 @@
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     overflow: hidden;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-}
-.join .join-us h2 {
-    background: #f5f5fa;
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    margin: 0 0 30px 0;
-    padding: 40px;
-    font-weight: 200;
-    color: #9596A2;
-    font-size: 19px;
-}
-.join .join-us .form .info *::placeholder {
-    display: flex;
-	/* align-items: center; */
-	height: 55px;
-	margin: 0 40px 30px 40px;
-	border-bottom: 1px solid #9596A2;
-
-}
-.join .join-us .info input {
-    width: 100%;
-	background: transparent;
-	color: #9596A2;
-	padding: 15px;
-	border: 0;
-	margin: 0;
-}
-.join .join-us .btn {
-    width: 100%;
-	position: relative;
-	cursor: pointer;
-	box-sizing: border-box;
-	padding: 0 40px 45px 40px;
-	margin: 0;
-	border: 0;
-	background: transparent;
-	outline: none;
-	background: linear-gradient(90deg, #04DFBD, #00FCD1);
-    box-shadow: 0 3px 20px rgba(0, 252, 209, 0.4);
-}
-.join .join-us .info .btn {
-    transition: all 0.45s ease-in-out;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	padding: 0;
-	margin: 0;
-	color: #fff;
-	line-height: 55px;
-	text-align: center;
-	text-transform: uppercase;
-}
-.btn {
     position: relative;
-	margin: 0;
-	width: 100%;
-	height: 55px;
-	right: 0;
-	float: right;
-	background: linear-gradient(90deg, #04DFBD, #00FCD1);
-	box-shadow: 0 3px 20px rgba(0, 252, 209, 0.4);
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.join h2 {
+    text-align: center;
+    color: #9596A2;
+    margin-bottom: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+label {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input[type="text"], input[type="password"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 22px);
+}
+
+input[type="button"], input[type="submit"] {
+    background-color: #04DFBD;
+    color: white;
+    padding: 10px 20px;
     border: none;
-	border-radius: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
 }
 
-.join-us .info {
-    position: relative;
-  	height: auto;
-  	padding: 10px;
-  	font-size: 16px;
+input[type="button"]:hover, input[type="submit"]:hover {
+    background-color: #00FCD1;
 }
-.join .join-us h2 {
-    background: #f5f5fa;
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    margin: 0 0 30px 0;
-    padding: 40px;
-    font-weight: 200;
-    color: #9596A2;
-    font-size: 19px;
+
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 10px;
 }
-.join .join-us .form {
+
+input[type="button"].check-button {
+    margin-left: 10px;
+}
+
+form span {
+    display: inline-block;
+}
+
+.join-us {
     display: flex;
-    align-items: center;
-    height: 55px;
-    margin: 0 40px 30px 40px;
-    border-bottom: 1px solid #9596A2;
-}
-.join .join-us .form .info {
-    width: 10px;
-    padding: 0 15px 0 0;
-    color: #9596A2;
-}
-.join .join-us .form input {
-    width: 100%;
-    background: transparent;
-    color: #9596A2;
-    padding: 15px;
-    border: 0;
-    margin: 0;
+    flex-direction: column;
 }

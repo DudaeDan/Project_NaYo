@@ -11,5 +11,13 @@ public class LoginController {
     public String layout() {
         return "/login/logintest";
     }
+    @GetMapping("/join")
+    public String layasdut() {
+        return "/login/join";
+    }
+    @GetMapping("/123")
+    public String layasd123ut() {
+        return "/login/findPw";
+    }
     
 }
