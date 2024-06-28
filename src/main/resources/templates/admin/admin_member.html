@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,41 +10,8 @@
 <body>
 <main>
 
-    
-    <div class="sidebar">
-        <ul>
-            <div class="side-title">
-                <p>사이트 관리</p>
-            </div>
-            <br/>
-            <li class="admin-side-list">
-                <input type="button" class="side-menu-button" value="메인페이지"
-                onclick="location.href='admin_main.html'">
-            </li>
-            <li class="admin-side-list">
-                <input type="button" class="side-menu-button" value="사용자 목록"
-                onclick="location.href='admin_member.html'">
-            </li>
-            <li class="admin-side-list">
-                <input type="button" class="side-menu-button" value="게시글 목록"
-                onclick="location.href='admin_board.html'">
-            </li>
-            <li class="admin-side-list">
-                <input type="button" class="side-menu-button" value="공지사항 목록"
-                onclick="location.href='admin_notice.html'">
-            </li>
-            <li class="admin-side-list">
-                <input type="button" class="side-menu-button" value="문의 목록"
-                onclick="location.href='admin_inquiry.html'">
-            </li>
-            <br/>
-            <br/>
-            <li class="admin-side-list">
-                <input type="button" class="side-menu-button" value="사이트 바로가기"
-                onclick="location.href=''">
-            </li>
-        </ul>
-    </div>
+	<header th:replace="fragments/admin_header :: admin_header"></header>
+	<aside 	th:replace="fragments/admin_sidebar :: admin_sidebar"></aside>
     
     <section>
 

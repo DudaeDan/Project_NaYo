@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,50 +9,19 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin.css}">
 </head>
 <body>
-    <main>
-    
-        <div class="sidebar">
-            <ul>
-                <div class="side-title">
-                    <p>사이트 관리</p>
-                </div>
-                <br/>
-                <li class="admin-side-list">
-                    <input type="button" class="side-menu-button" value="메인페이지"
-                    onclick="location.href='admin_main.html'">
-                </li>
-                <li class="admin-side-list">
-                    <input type="button" class="side-menu-button" value="사용자 목록"
-                    onclick="location.href='admin_member.html'">
-                </li>
-                <li class="admin-side-list">
-                    <input type="button" class="side-menu-button" value="게시글 목록"
-                    onclick="location.href='admin_board.html'">
-                </li>
-                <li class="admin-side-list">
-                    <input type="button" class="side-menu-button" value="공지사항 목록"
-                    onclick="location.href='admin_notice.html'">
-                </li>
-                <li class="admin-side-list">
-                    <input type="button" class="side-menu-button" value="문의 목록"
-                            onclick="location.href='admin_inquiry.html'">
-                </li>
-                <br/>
-                <br/>
-                <li class="admin-side-list">
-                    <input type="button" class="side-menu-button" value="사이트 바로가기"
-                    onclick="location.href=''">
-                </li>
-            </ul>
-        </div>
+<main>
+	
+	<header th:replace="fragments/admin_header :: admin_header"></header>
+	<aside 	th:replace="fragments/admin_sidebar :: admin_sidebar"></aside>
         
+		<!--6개씩-->
         <section>
             <div class="admin-big-box">
                 <div class="admin-little-box">
                     <div class="admin-table">
                         <div>
                             <p>사용자 목록</p>
-                            <a href="">
+                            <a th:href='@{/admin/memberList}'>
                                 <img src="https://cdn0.iconfinder.com/data/icons/mobile-basic-vol-1/32/Circle_Plus-48.png" class="see-details">
                             </a>
                         </div>
@@ -119,7 +88,7 @@
                     <div class="admin-table">
                         <div>
                             <p>게시글 목록</p>
-                            <a href="">
+                             <a th:href='@{/admin/boardList}'>
                                 <img src="https://cdn0.iconfinder.com/data/icons/mobile-basic-vol-1/32/Circle_Plus-48.png" class="see-details">
                             </a>
                         </div>
@@ -180,7 +149,7 @@
                     <div class="admin-table">
                         <div>
                             <p>공지사항 목록</p>
-                            <a href="">
+                             <a th:href='@{/admin/noticeList}'>
                                 <img src="https://cdn0.iconfinder.com/data/icons/mobile-basic-vol-1/32/Circle_Plus-48.png" class="see-details">
                             </a>
                         </div>
@@ -239,7 +208,7 @@
                     <div class="admin-table">
                         <div>
                             <p>문의 목록</p>
-                            <a href="">
+                             <a th:href='@{/admin/inquiryList}'>
                                 <img src="https://cdn0.iconfinder.com/data/icons/mobile-basic-vol-1/32/Circle_Plus-48.png" class="see-details">
                             </a>
                         </div>
