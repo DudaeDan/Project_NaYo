@@ -5,63 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
     <link rel="stylesheet" th:href="@{/css/layout/login/join.css}">
-    <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
+    <!-- <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}"> -->
 </head>
 <body>
-    <header th:replace="fragments/header :: header"></header>
+    <!-- <header th:replace="fragments/header :: header"></header>
     <div class="container">
         <div th:replace="fragments/sidebar :: sidebar"></div>
-        <div class="main-content">
-            <div class="join">
-                <form action="join" class="join-us" method="get">
-                    <h2>회원가입</h2>
-                    <div class="form">
-                        <label for="user_name">이름</label>
-                        <input type="text" class="info" name="user_name" id="user_Name" required />
-                    </div>
-                    <div class="form">
-                        <label for="user_id">아이디</label>
-                        <div>
-                            <input type="text" class="info" name="user_id" id="user_Id" required />
-                            <span><input type="button" value="중복체크" onclick="checkId()" class="check-button"/></span>
-                        </div>
-                    </div>
-                    <div class="form">
-                        <label for="user_pw">비밀번호</label>
-                        <input type="password" class="info" name="user_pw" id="user_Pw" required />
-                    </div>
-                    <div class="form">
-                        <label for="user_repw">비밀번호 확인</label>
-                        <input type="password" class="info" name="user_repw" id="user_rePw" required />
-                    </div>
-                    <div class="form">
-                        <label for="email">E-mail</label>
-                        <div>
-                            <input type="text" class="info" name="email" size="10" autocomplete="nope" required />@
-                            <select name="domain" required>
-                                <option value="">직접입력</option>
-                                <option value="naver.com">NAVER</option>
-                                <option value="gmail.com">Gmail</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form">
-                        <label for="phone">핸드폰</label>
-                        <div>
-                            <input type="text" class="info" name="tel_1" size="3" maxlength="3" autocomplete="nope" required /> -
-                            <input type="text" class="info" name="tel_2" size="4" maxlength="4" autocomplete="nope" required /> -
-                            <input type="text" class="info" name="tel_3" size="4" maxlength="4" autocomplete="nope" required />
-                        </div>
-                    </div>
-                    <div class="form">
-                        <label for="addr">주소</label>
-                        <input type="text" class="info" name="addr" size="50" autocomplete="nope" required />
-                    </div>
-                    <input type="button" class="btn" value="회원가입" onclick="checkWrite()" />
-                </form>
+        <div class="main-content"> -->
+            <div class="login">
+                <div class="form">
+                 <h2>회원가입</h2>
+                  <div class="form-field">
+                    <label for="user_name"></label>
+                    <input type="text" class="info" name="user_name" id="user_Name" placeholder="이름" required />
+                  </div>
+                  <div class="form-field">
+                    <label for="user_id"></label>
+                    <input type="text" class="info" name="user_id" id="user_Id" placeholder="아이디" required />
+                    <span><input type="button" value="중복체크" onclick="checkId()" class="check-button"/></span>
+                  </div>
+                  <div class="form-field">
+                    <label for="user_pw"></label>
+                    <input type="password" class="info" name="user_pw" id="user_Pw" placeholder="비밀번호" required />
+                  </div>
+                  <div class="form-field">
+                      <label for="user_repw"></label>
+                      <input type="password" class="info" name="user_repw" id="user_rePw"placeholder="비밀번호 확인" required />
+                  </div>
+                  <div class="form-field">
+                      <label for="email"></label>
+                      <input type="text" class="info" name="email" size="10" autocomplete="nope" placeholder="이메일" required />
+                  </div>
+                  <div class="form-field">
+                    <label for="phone"></label>
+                    <input type="text" class="info" name="tel_1" size="3" maxlength="3" autocomplete="nope"placeholder="핸드폰번호" required />
+                  </div>
+                  <div class="form-field">
+                    <label for="addr"></label>
+                    <input type="text" class="info" name="addr" size="50" autocomplete="nope" placeholder="주소" required />
+                 </div>
+                    <button type="submit" class="button">
+                     <div class="arrow-wrapper">
+                       <span class="arrow"></span>
+                     </div>
+                     <p class="button-text">회원가입</p>
+                   </button>
+                </div>
             </div>
-        </div>
-    </div>
+        <!-- </div> -->
+    <!-- </div> -->
     <script th:src="@{/script/layout/Layout_scripts.js}"></script>
 </body>
 </html>

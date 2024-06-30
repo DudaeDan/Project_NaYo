@@ -19,5 +19,9 @@ public class LoginController {
     public String layasd123ut() {
         return "/login/findPw";
     }
+    @GetMapping("/1234")
+    public String layouthaha() {
+    	return "/login/findId";
+    }
     
 }
