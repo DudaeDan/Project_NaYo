@@ -1,57 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시글</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>게시글</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin_post.css}">
 </head>
+
 <body>
-<main>
+	<main>
 
-	<header th:replace="fragments/admin_header :: admin_header"></header>
-	<aside 	th:replace="fragments/admin_sidebar :: admin_sidebar"></aside>
-    
-    <section>
+		<header th:replace="fragments/admin_header :: admin_header"></header>
+		<aside th:replace="fragments/admin_sidebar :: admin_sidebar"></aside>
 
-        <div class="post-box">
+		<section>
 
-            <div class="admin-post-content">
+			<div class="post-box">
 
-                <div class="post-btns">
-                    <input type="button" name="" id="" value="수정" class="third_btn" onclick="location.href='admin_board_modify.html'"> 
-                    <input type="button" name="" id="" value="삭제" class="second_btn" onclick=""> 
-                    <input type="button" name="" id="" value="글 목록" onclick="location.href='admin_board.html'"> 
-                </div>
+				<div class="admin-post-content">
 
-                <div class="post-info">
-                    <table class="admin-post">
-                        <tr>
-                            <th>제목</th>
-                            <td class="post-title">test</td>
-                            <th>작성자</th>
-                            <td>test</td>
-                            <th>작성일</th>
-                            <td>test</td>
-                            <th>조회수</th>
-                            <td>test</td>
-                        </tr>
-                        <tr>
-                            <th>내용</th>
-                            <td colspan="7" class="post-content"></td>
-                        </tr>
-                    </table>
-                    
-                    
-                </div>
+					<div class="post-btns">
 
-            </div>
+						<form th:action="@{/admin/boardModifyForm}" name="boardModify" method="get">
+                            <input type="hidden" name="boardNumber" th:value="${boardDetail.boardNumber}">
+                            <input type="button" name="" id="" value="수정" class="third_btn" onclick="modifySubmit()"> 
+                        </form>
+						<form th:action="@{/admin/boardDelete}" name="boardDelete"  method="post">
+							<input type="hidden" name="boardNumber" th:value="${boardDetail.boardNumber}">
+		                    <input type="button" name="" id="" value="삭제" class="second_btn" onclick="deleteSubmit()"> 
+						</form>
+						<input type="button" name="" id="" value="글 목록"
+							th:onclick="|location.href='@{/admin/boardList}'|">
+					</div>
 
-        </div>
+					<div class="post-info">
+						<table class="admin-post">
+							<tr>
+								<th>제목</th>
+								<td class="post-title" th:text="${boardDetail.boardTitle}"></td>
+								<th>작성자</th>
+								<td th:text="${boardDetail.User.userNickname}"></td>
+								<th>작성일</th>
+								<td th:text="${#dates.format(boardDetail.boardDate, 'yyyy-MM-dd')}"></td>
+								<th>조회수</th>
+								<td th:text="${boardDetail.boardHit}"></td>
+							</tr>
+							<tr>
+								<th>내용</th>
+								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent}"></td>
+							</tr>
+						</table>
 
-    </section>
-    
-</main>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</section>
+
+	</main>
 </body>
+<script>
+	function modifySubmit() {
+		document.boardModify.submit();
+	}
+	function deleteSubmit() {
+		document.boardDelete.submit();
+	}
+</script>
 </html>

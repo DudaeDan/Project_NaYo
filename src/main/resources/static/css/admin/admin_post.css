@@ -74,7 +74,7 @@ table  input {
     margin-top: 70px;
     width: 100%;
 }
-.post-btns > input{
+.post-btns > input, form > input{
     background-color: white;
     border: 1px solid #cdcdcd;
     padding: 10px;
@@ -82,6 +82,7 @@ table  input {
     position: absolute;
     border-radius: 5px;
     right: 0px;
+    cursor: pointer;
 }
 
 .second_btn {

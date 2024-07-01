@@ -1,0 +1,18 @@
+package com.web.repository;
+
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.web.domain.Board;
+
+public interface AdminBoardRepository extends JpaRepository<Board, Long>{
+
+	List<Board> findTop6ByOrderByBoardNumberDesc();
+	Page<Board> findAllByOrderByBoardNumberDesc(Pageable pageable);
+    Page<Board> findByBoardTitleContaining(String boardTitle, Pageable pageable);
+    Page<Board> findByUserUserNicknameContaining(String userNickname, Pageable pageable);
+	
+}

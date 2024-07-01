@@ -1,58 +1,71 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항 수정</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>공지사항 수정</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin_post.css}">
 </head>
+
 <body>
-<main>
+	<main>
 
-	<header th:replace="fragments/admin_header :: admin_header"></header>
-	<aside 	th:replace="fragments/admin_sidebar :: admin_sidebar"></aside>
-    
-    <section>
+		<header th:replace="fragments/admin_header :: admin_header"></header>
+		<aside th:replace="fragments/admin_sidebar :: admin_sidebar"></aside>
 
-        <div class="post-box">
+		<section>
 
-            <div class="admin-post-content">
+			<div class="post-box">
 
-                <div class="post-btns">
-                    <input type="button" name="" id="" value="수정 완료" class="second_btn" onclick=""> 
-                    <input type="button" name="" id="" value="글 목록" onclick="location.href='admin_notice.html'"> 
-                </div>
+				<div class="admin-post-content">
 
-                <div class="post-info">
-                    <table class="admin-post">
-                        <tr>
-                            <th>제목</th>
-                            <td class="notice-title">
-                                <input type="text" name="" id="">
-                            </td>
-                            <th>작성일</th>
-                            <td>test</td>
-                        </tr>
-                        <tr>
-                            <th>내용</th>
-                            <td colspan="3" class="post-content post-modify">
-                                <textarea name="" id="">
+					<div class="post-btns">
+						<input type="button" name="" id="" value="수정 완료" class="second_btn"
+							onclick="noticeModifyConfirm()">
+						<input type="button" name="" id="" value="글 목록"
+							th:onclick="|location.href='@{/admin/noticeList}'|">
+					</div>
 
-                                </textarea>
-                            </td>
-                        </tr>
-                    </table>
-                    
-                    
-                </div>
+					<div class="post-info">
+						<form th:action="@{/admin/noticeModify}" name="noticeModifyConfirmForm" method="post">
+							<input type="hidden" name="noticeNumber" th:value="${noticeModify.noticeNumber}">
+							<table class="admin-post">
+								<tr>
+									<th>제목</th>
+									<td class="notice-title">
+										<input type="text" name="noticeTitle" id=""
+											th:value="${noticeModify.noticeTitle}">
+									</td>
+									<th>작성일</th>
+									<td th:text="${#dates.format(noticeModify.noticeDate, 'yyyy-MM-dd')}"></td>
+								</tr>
+								<tr>
+									<th>내용</th>
+									<td colspan="3" class="post-content post-modify">
+										<textarea name="noticeContent" id=""
+											th:text="${noticeModify.noticeContent}"></textarea>
+									</td>
+								</tr>
+							</table>
 
-            </div>
+						</form>
 
-        </div>
+					</div>
 
-    </section>
-    
-</main>
+				</div>
+
+			</div>
+
+		</section>
+
+	</main>
+	<script>
+		function noticeModifyConfirm() {
+			document.forms['noticeModifyConfirmForm'].submit();
+		}
+	</script>
 </body>
+
 </html>

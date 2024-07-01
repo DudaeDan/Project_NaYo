@@ -23,18 +23,19 @@
             
             <div class="admin-list-content">
                 
-                <div class="list-search">
-                    <form action="">
-                        <select name="" id="" class="search-select">
-                            <option value="title">제목</option>
-                            <option value="content">내용</option>
-                        </select>
-                        <input type="text" placeholder="검색" class="search-text">
-                        <button class="search-btn" type="submit" >
-                            <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" class="search-img">
-                        </button>
-                    </form>
-                </div>
+
+				<div class="list-search">
+					<form th:action="@{/admin/inquiryList}" method="get">
+						<select name="searchType" class="search-select">
+							<option value="title" th:selected="${searchType == 'title'}">제목</option>
+							<option value="nickname" th:selected="${searchType == 'nickname'}">작성자</option>
+						</select>
+						<input type="text" name="searchKeyword" placeholder="검색" class="search-text" th:value="${searchKeyword}">
+						<button class="search-btn" type="submit">
+							<img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" class="search-img">
+						</button>
+					</form>
+				</div>
 
                 <div class="admin-list-table">
                     <table>
@@ -45,20 +46,39 @@
                             <th style="width: 10%;">작성일</th>
                             <th style="width: 10%;">진행상황</th>
                         </tr>
-                        <!-- 10개까지 -->
-                        <tr>
-                            <td>1</td>
-                            <td>titletesttitletesttitletesttitletest</td>
-                            <td>test1</td>
-                            <td>2024-01-01</td>
-                            <td>진행중</td>
-                        </tr>
+						<tr th:each="inquiry : ${inquiryList}">
+							<td th:text="${inquiry.inquiryNumber}"></td>
+							<td>
+							<a th:text="${inquiry.inquiryTitle}"
+								th:href="@{/admin/inquiryView/{id}(id=${inquiry.inquiryNumber})}"></a>
+							</td>
+							<td th:text="${inquiry.User.userNickname}"></td>
+							<td th:text="${#dates.format(inquiry.inquiryDate, 'yyyy-MM-dd')}"></td>
+							<th:block th:if="${inquiry.inquiryProgress == 0}">
+								<td style="color: red;">답변 대기</td>
+							</th:block>
+							<th:block th:if="${inquiry.inquiryProgress == 1}">
+								<td style="color: green;">답변 완료</td>
+							</th:block>
+						</tr>
 
                     </table>
-                    <p class="pages">
-                        < 1 2 3 4 5 >
-                        <!-- 나중에 페이지 처리 -->
-                    </p>
+
+					<div class="list-page">
+						<button type="button" class="page-button" onclick="navigateToPage(1)">&lt;&lt;</button>
+						<button type="button" class="page-button"
+							th:onclick="'navigateToPage(' + (${currentPage} - 1) + ')'"
+							th:if="${currentPage > 1}">&lt;</button>
+						<span th:each="i : ${#numbers.sequence(1, totalPages)}">
+							<button type="button" class="page-button" th:onclick="'navigateToPage(' + ${i} + ')'"
+								th:text="${i}" th:classappend="${currentPage == i} ? 'active' : ''"></button>
+						</span>
+						<button type="button" class="page-button"
+							th:onclick="'navigateToPage(' + (${currentPage} + 1) + ')'"
+							th:if="${currentPage < totalPages}">&gt;</button>
+						<button type="button" class="page-button"
+							th:onclick="'navigateToPage(' + ${totalPages} + ')'">&gt;&gt;</button>
+					</div>
                 </div>
             </div> 
         </div>   
@@ -66,4 +86,5 @@
     
 </main>
 </body>
+<script  th:src="@{/script/admin/adminList.js}"></script>
 </html>
