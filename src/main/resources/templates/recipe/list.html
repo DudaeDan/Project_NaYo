@@ -6,7 +6,7 @@
     <title>레시피 웹페이지</title>
     <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
     <link rel="stylesheet" th:href="@{/css/recipe/recipe_list_style.css}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
     <!-- 헤더 프래그먼트를 포함 -->
@@ -18,32 +18,35 @@
             <div class="recipe-grid">
                 <div th:each="recipe : ${recipes}" class="recipe-item">
                     <div class="thumbnail">
-                        <img th:src="@{${recipe.imageUrl}}" alt="썸네일" style="width:100%; height:auto;">
+                        <a th:href="@{'/recipes/' + ${recipe.encodedName}}">
+                            <img th:src="@{${recipe.MANUAL_IMG01}}" alt="썸네일" style="width:100%; height:auto;">
+                        </a>
                     </div>
                     <div class="details">
-                        <div class="title" th:text="${recipe.name}">제목</div>
+                        <div class="title">
+                            <a th:href="@{'/recipes/' + ${recipe.encodedName}}" th:text="${recipe.RCP_NM}">제목</a>
+                        </div>
                         <div class="nutrients">
-                            <p>열량: <span th:text="${recipe.calories}">0</span> kcal</p>
-                            <p>탄수화물: <span th:text="${recipe.carbohydrates}">0</span> g</p>
-                            <p>단백질: <span th:text="${recipe.protein}">0</span> g</p>
-                            <p>지방: <span th:text="${recipe.fat}">0</span> g</p>
-                            <p>나트륨: <span th:text="${recipe.sodium}">0</span> mg</p>
+                            <p>열량: <span th:text="${recipe.INFO_ENG}">0</span> kcal</p>
+                            <p>탄수화물: <span th:text="${recipe.INFO_CAR}">0</span> g</p>
+                            <p>단백질: <span th:text="${recipe.INFO_PRO}">0</span> g</p>
+                            <p>지방: <span th:text="${recipe.INFO_FAT}">0</span> g</p>
+                            <p>나트륨: <span th:text="${recipe.INFO_NA}">0</span> mg</p>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Pagination -->
             <div class="pagination">
-                <button th:if="${currentPage > 1}" th:onclick="'changePage(' + (${currentPage} - 1) + ')'" >&lt;</button>
+                <button th:if="${currentPage > 1}" th:onclick="'changePage(' + (${currentPage} - 1) + ')'">&lt;</button>
                 <span th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 > totalPages ? totalPages : currentPage + 2)}">
-                    <button th:text="${page}" th:classappend="${page == currentPage} ? 'active'" th:onclick="'changePage(' + ${page} + ')'" ></button>
+                    <button th:text="${page}" th:classappend="${page == currentPage} ? 'active'" th:onclick="'changePage(' + ${page} + ')'"></button>
                 </span>
-                <button th:if="${currentPage < totalPages}" th:onclick="'changePage(' + (${currentPage} + 1) + ')'" >&gt;</button>
+                <button th:if="${currentPage < totalPages}" th:onclick="'changePage(' + (${currentPage} + 1) + ')'">&gt;</button>
             </div>
         </div>
     </div>
-        <script th:src="@{/script/recipe/recipe_list.js}"></script>
-        <script th:src="@{/script/layout/Layout_scripts.js}"></script>
-    
+    <script th:src="@{/script/recipe/recipe_list.js}"></script>
+    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
 </body>
 </html>

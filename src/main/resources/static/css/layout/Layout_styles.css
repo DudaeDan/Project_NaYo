@@ -1,32 +1,38 @@
+/* 기본 스타일 */
 body {
     font-family: Arial, sans-serif;
 }
+
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #ccc;
     padding: 10px;
-    position: relative;
 }
+
 .logo-container {
     display: flex;
     align-items: center;
 }
+
 .header img {
     height: 90px;
     width: 210px;
 }
+
 .search-container {
     display: flex;
     align-items: center;
     margin-left: 33%;
 }
+
 .header .search {
     display: flex;
     align-items: center;
     margin-left: 10px;
 }
+
 .header button {
     background: url('../../Images/layout/search.png') no-repeat center center;
     background-size: contain;
@@ -35,11 +41,13 @@ body {
     border: none;
     cursor: pointer;
 }
+
 .header .search input[type="text"] {
     width: 290px;
     height: 20px;
     padding: 5px;
 }
+
 .menu-button {
     background: url('../../Images/layout/Menu.png') no-repeat center center;
     background-size: contain;
@@ -51,25 +59,30 @@ body {
     margin-left: 10px;
     position: relative;
 }
+
 .login {
     position: absolute;
     right: 200px;
     padding: 5px 10px;
 }
+
+/* 사이드바 스타일 */
 .sidebar {
-    width: 200px;
+    width: 250px;
     padding: 10px;
     border-right: 1px solid #ccc;
     position: fixed;
-    left: -250px; /* 사이드바를 화면 밖에 위치시킴 */
+    left: -700px; /* 사이드바를 화면 밖에 위치시킴 */
     top: 120px; /* 헤더 아래로 위치 */
     height: calc(100% - 120px); /* 헤더 높이를 제외한 전체 높이 */
     background-color: white;
     transition: left 0.3s ease; /* 애니메이션 효과 */
 }
+
 .sidebar.show {
     left: 0; /* 사이드바를 화면 안으로 이동 */
 }
+
 .sidebar .close-button {
     background: url('../../Images/layout/Menu.png') no-repeat center center;
     background-size: contain;
@@ -81,33 +94,35 @@ body {
     top: 10px;
     left: 10px; /* 닫기 버튼을 왼쪽으로 이동 */
 }
+
 .sidebar .content {
     margin-top: 90px; /* 닫기 버튼과 겹치지 않도록 아래로 이동 */
     border: none; /* 선 제거 */
 }
+
 .sidebar .content div {
     margin-bottom: 10px;
     padding: 10px;
     border: none; /* 선 제거 */
     cursor: pointer;
 }
+
+.fridge img {
+    max-width: 250px; /* 원하는 최대 너비로 설정 */
+    width: 100%;
+    height: auto;
+}
+/* 메인 콘텐츠 스타일 */
 .main-content {
     padding: 10px;
-    flex-grow: 1;
-    margin-left: 15%; /* 사이드바 폭만큼 왼쪽 여백 추가 */
-    max-width: 1200px; /* 원하는 최대 너비로 설정 */
-    margin: 0 auto; /* 가로 중앙 정렬 */
+    margin-left: 250px; /* 사이드바 폭만큼 왼쪽 여백 추가 */
+    transition: margin-left 0.3s ease; /* 애니메이션 효과 */
+}
+
+.sidebar.show + .main-content {
+    margin-left: 250px; /* 사이드바가 열렸을 때의 여백 */
 }
 
 .container {
     display: flex;
-}
-.fridge {
-    margin-top: 20px;
-    border: 1px solid #ccc;
-    padding: 20px;
-    text-align: center;
-}
-.fridge img {
-    max-width: 100%;
 }

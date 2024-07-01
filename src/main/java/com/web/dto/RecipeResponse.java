@@ -1,6 +1,7 @@
 package com.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class RecipeResponse {
@@ -16,19 +17,11 @@ public class RecipeResponse {
     }
 
     public static class CookRcp {
-        @JsonProperty("row")
-        private List<Recipe> recipes;
-
         @JsonProperty("total_count")
         private int totalCount;
 
-        public List<Recipe> getRecipes() {
-            return recipes;
-        }
-
-        public void setRecipes(List<Recipe> recipes) {
-            this.recipes = recipes;
-        }
+        @JsonProperty("row")
+        private List<Recipe> recipes;
 
         public int getTotalCount() {
             return totalCount;
@@ -36,6 +29,14 @@ public class RecipeResponse {
 
         public void setTotalCount(int totalCount) {
             this.totalCount = totalCount;
+        }
+
+        public List<Recipe> getRecipes() {
+            return recipes;
+        }
+
+        public void setRecipes(List<Recipe> recipes) {
+            this.recipes = recipes;
         }
     }
 }
