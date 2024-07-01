@@ -2,7 +2,7 @@ body {
   /* background: linear-gradient(135deg, #4D4E63, #333342); */
   height: 100vh;
   font-family: 'Roboto', sans-serif;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .login {
@@ -64,7 +64,7 @@ body {
   width: 100%;
   background: transparent;
   color: #9596A2;
-  padding: 15px;
+  padding: 17px;
   border: 0;
   margin: 0;
 }
@@ -103,13 +103,19 @@ body {
   background: transparent;
   outline: none;
 }
-.form-find {
+.form-find a {
   color: #9596A2;
   font-family: 'Roboto', sans-serif;
-  font-size: 15px;
-  text-align: center;
+  font-size: 14px;
+  
+ 
 }
-a:hover {
+.form-find {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+.form-find a:hover {
   color: blue;
 }
 

@@ -4,62 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
-	<!-- <link rel="stylesheet" href="../../static/css/layout/login/join.css">
-    <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="stylesheet" th:href="@{/css/layout/login/join.css}">
+    <!-- <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}"> -->
 </head>
 <body>
-    <header th:replace="fragments/header :: header"></header>
+    <!-- <header th:replace="fragments/header :: header"></header>
     <div class="container">
         <div th:replace="fragments/sidebar :: sidebar"></div>
-        <div class="main-content">
-		  <div class="join">
-			<form action="join" class="join-us" method="get">
-				<h2>회원가입</h2>
-				<div class="form">
-				<label for="user_name">이름</label>
-				<input type="text" class="info" name="user_name" id="user_Name"/>
-				</div>
-                 <label for="user_id"> 아이디</label>
-				  <div>
-					 <input type="text" class="info" name="user_id" id="user_Id"/><br>
-					 <span><input type="button" value="중복체크" onclick="checkId()"/></span>
-				  </div>
-				  <label for="user_pw"> 비밀번호</label>
-				  <div>
-					 <input type="password" class="info" name="user_pw" id="user_Pw"/>
-				  </div>
-				  <label for="user_repw"> 비밀번호 확인</label>
-				  <div>
-					 <input type="password" class="info" name="user_repw" id="user_rePw"/>
-				  </div>
-				  <label for="email">E-mail</label>
-				 <div>
-					<input type="text" class="info" name="email" size="10" autocomplete="nope"/>@
-					  <select name="domain">
-						 <option value="">직접입력</option>
-						 <option value="naver.com"> NAVER </option>
-						 <option value="gmail.com"> Gmail</option>
-					  </select>
-				 </div>
-				 <label for="phone">핸드폰</label>
-				 <div>
-					 <input type="text" class="info" name="tel_1" size="3" maxlength="3" autocomplete="nope"/> - 
-					 <input type="text" class="info" name="tel_2" size="4" maxlength="4" autocomplete="nope"/> - 
-					 <input type="text" class="info" name="tel_3" size="4" maxlength="4" autocomplete="nope"/>
-				 </div>
-				 <label for="addr">주소</label>
-				 <div>
-					 <input type="text" class="info" name="addr" size="50" autocomplete="nope"/>
-				 </div>
-				 <input type="button" class="btn" value="회원가입" onclick="checkWrite()"/>
-				 
-				</div>
-			 </form>
-		  </div>
-      </div>
-    </div>
-    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
+        <div class="main-content"> -->
+            <div class="login">
+                <div class="form">
+                 <h2>회원가입</h2>
+                  <div class="form-field">
+                    <label for="user_name"></label>
+                    <input type="text" class="info" name="user_name" id="user_Name" placeholder="이름" required />
+                  </div>
+                  <div class="form-field">
+                    <label for="user_id"></label>
+                    <input type="text" class="info" name="user_id" id="user_Id" placeholder="아이디" required />
+                    <span><input type="button" value="중복체크" onclick="checkId()" class="check-button"/></span>
+                  </div>
+                  <div class="form-field">
+                    <label for="user_pw"></label>
+                    <input type="password" class="info" name="user_pw" id="user_Pw" placeholder="비밀번호" required />
+                  </div>
+                  <div class="form-field">
+                      <label for="user_repw"></label>
+                      <input type="password" class="info" name="user_repw" id="user_rePw" placeholder="비밀번호 확인" required />
+                      <div id="pw-match-result"></div>
+                  </div>
+                  <div class="form-field">
+                      <label for="email"></label>
+                      <input type="text" class="info" name="email" size="10" autocomplete="nope" placeholder="이메일" required />
+                  </div>
+                  <div class="form-field">
+                    <label for="phone"></label>
+                    <input type="text" class="info" name="tel_1" size="3" maxlength="3" autocomplete="nope" placeholder="핸드폰번호" required />
+                  </div>
+                  <div class="form-field">
+                    <label for="addr"></label>
+                    <input type="text" class="info" name="addr" size="50" autocomplete="nope" placeholder="주소" required />
+                 </div>
+                    <button type="submit" class="button" onclick="return validateForm()">
+                     <div class="arrow-wrapper">
+                       <span class="arrow"></span>
+                     </div>
+                     <p class="button-text">회원가입</p>
+                   </button>
+		            <button type="button" class="button" th:onclick="|window.location.href='@{/login/login}'|">
+		                <div class="arrow-wrapper">
+		                    <span class="arrow"></span>
+		                </div>
+		                <p class="button-text">뒤로가기</p>
+		            </button>
+                </div>
+            </div>
+        <!-- </div> -->
+    <!-- </div> -->
+    <script>
+        async function checkId() {
+            const userIdInput = document.getElementById('user_Id');
+            const userId = userIdInput.value;
+            const resultMessage = document.createElement('div');
+            const formField = userIdInput.parentNode;
+
+            // Remove existing result message if any
+            const existingMessage = document.getElementById('check-result');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+
+            // This is a simulated check. Replace this with actual logic to check ID.
+            const existingUserIds = ["testUser1", "testUser2", "testUser3"]; // Example list of existing IDs
+
+            if (existingUserIds.includes(userId)) {
+                resultMessage.innerText = '아이디가 이미 존재합니다.';
+                resultMessage.style.color = 'red';
+            } else {
+                resultMessage.innerText = '사용 가능한 아이디입니다.';
+                resultMessage.style.color = 'green';
+            }
+
+            resultMessage.id = 'check-result';
+            formField.appendChild(resultMessage);
+        }
+
+        function checkPasswordMatch() {
+            const pw = document.getElementById('user_Pw').value;
+            const rePw = document.getElementById('user_rePw').value;
+            const resultMessage = document.getElementById('pw-match-result');
+
+            if (pw === rePw) {
+                resultMessage.innerText = '비밀번호가 일치합니다.';
+                resultMessage.style.color = 'green';
+            } else {
+                resultMessage.innerText = '비밀번호가 일치하지 않습니다.';
+                resultMessage.style.color = 'red';
+            }
+        }
+
+        function validateForm() {
+            const pw = document.getElementById('user_Pw').value;
+            const rePw = document.getElementById('user_rePw').value;
+
+            if (pw !== rePw) {
+                alert('비밀번호가 같지 않습니다.');
+                return false; // Prevent form submission
+            }
+
+            return true; // Allow form submission
+        }
+
+        // Add event listeners for real-time password matching
+        document.getElementById('user_Pw').addEventListener('input', checkPasswordMatch);
+        document.getElementById('user_rePw').addEventListener('input', checkPasswordMatch);
+    </script>
 </body>
 </html>

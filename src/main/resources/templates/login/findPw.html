@@ -3,34 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>비밀번호 찾기</title>
-    <link rel="stylesheet" href="../../static/css/layout/login/findPw.css">          
-    <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <title>레시피 웹페이지</title>
+    <link rel="stylesheet" th:href="@{/css/layout/login/logintest.css}">
 </head>
 <body>
-    <header th:replace="fragments/header :: header"></header>
-    <div class="container">
-        <div th:replace="fragments/sidebar :: sidebar"></div>
-        <div class="main-content">
-          <div class="card align-middle" style="width:25rem;">
-            <div class="card-body">
-              <form action="findPw" class="form-signin" method="POST">
-                <h2>비밀번호 찾기</h2>
-                <input type="text" name="member_id" id="member_id" class="form-control" placeholder="ID" required><br>
-                <input type="text" name="name" id="name" class="form-control" placeholder="name" required><br>
-                <input type="email" name="email" id="email" class="form-control" placeholder="E-Mail" required><br>
-                <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">비밀번호 찾기</button>
-             </form>
-           </div>
-        <div class="links">
-          <a href="memberId">아이디 찾기</a> | <a href="memberLogin">로그인</a> | <a href="memberRegist">회원가입</a>
+    <div class="login">
+        <div class="form">
+            <h2>비밀번호 찾기</h2>
+            <div class="form-field">
+                <label for="user_name"></label>
+                <input id="username" type="text" name="user_name" placeholder="name" required>
+            </div>
+            <div class="form-field">
+                <label for="login-mail"></label>
+                <input id="login-mail" type="text" name="mail" placeholder="E-Mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+            </div>
+            
+            <button type="submit" class="button" onclick="validateForm()">
+                <div class="arrow-wrapper">
+                    <span class="arrow"></span>
+                </div>
+                <p class="button-text">확인</p>
+            </button>
+            
+            <button type="button" class="button" th:onclick="|window.location.href='@{/login/findId}'|">
+                <div class="arrow-wrapper">
+                    <span class="arrow"></span>
+                </div>
+                <p class="button-text">아이디 찾기</p>
+            </button>
+            
+            <button type="button" class="button" th:onclick="|window.location.href='@{/login/login}'|">
+                <div class="arrow-wrapper">
+                    <span class="arrow"></span>
+                </div>
+                <p class="button-text">뒤로가기</p>
+            </button>
+            
         </div>
-         </div>
+        <div class="finished">
+            <svg>
+                <use href="#svg-check" />
+            </svg>
         </div>
     </div>
+    <!-- //--- ## SVG SYMBOLS ############# -->
+    <svg style="display:none;">
+        <symbol id="svg-check" viewBox="0 0 130.2 130.2">
+            <polyline points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+        </symbol>
+    </svg>
+    
+    <script th:src="@{/script/login/findPw.js}"></script>
     <script th:src="@{/script/layout/Layout_scripts.js}"></script>
+    <script>
+        function validateForm() {
+            const userName = document.getElementById('username').value;
+            const userEmail = document.getElementById('login-mail').value;
+            
+            // Here, simulate a failed validation.
+            // In a real application, you would check this information against your database or other data source.
+            if (userName === "" || userEmail === "") {
+                alert('이름 또는 이메일을 다시 확인하세요');
+            } else {
+                // Simulate successful form submission
+                alert('폼이 성공적으로 제출되었습니다.');
+            }
+        }
+    </script>
 </body>
 </html>
