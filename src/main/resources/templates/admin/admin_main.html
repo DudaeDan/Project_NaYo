@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>관리자 페이지</title>
-	
     <link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin_main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin.css}">
 </head>
 <body>
 <main>
-	
-	<header th:replace="fragments/admin_header :: admin_header"></header>
-	<aside 	th:replace="fragments/admin_sidebar :: admin_sidebar"></aside>
+   
+   <header th:replace="fragments/admin_header :: admin_header"></header>
+   <aside    th:replace="fragments/admin_sidebar :: admin_sidebar"></aside>
         
-		<!--6개씩-->
+      <!--6개씩-->
         <section>
             <div class="admin-big-box">
                 <div class="admin-little-box">
@@ -37,48 +36,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>test1</td>
-                                        <td>test1</td>
-                                        <td>test1111</td>
-                                        <td>2024-01-01</td>
-                                        <td>사용자</td>
-                                    </tr>
-                                    <tr>
-                                        <td>test2</td>
-                                        <td>test2</td>
-                                        <td>test2222</td>
-                                        <td>2024-01-01</td>
-                                        <td>관리자</td>
-                                    </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+									<tr th:each="member : ${mainMember}">
+										<td th:text="${member.userName}"></td>
+										<td th:text="${member.userId}"></td>
+										<td th:text="${member.userNickname}"></td>
+										<td  th:text="${#dates.format(member.userRegistdate, 'yyyy-MM-dd')}"></td>
+										<th:block th:if="${member.userRole == 0}">
+											<td>일반회원</td>
+										</th:block>
+										<th:block th:if="${member.userRole == 1}">
+											<td>관리자</td>
+										</th:block>
+									</tr>
                                 </tbody>
     
                                 
@@ -102,43 +71,14 @@
                                         <th style="width: 20%;">작성일</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>test1</td>
-                                    <td>test1111</td>
-                                    <td>2024-01-01</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+								<tbody>
+									<tr th:each="board : ${mainBoard}">
+										<td th:text="${board.boardNumber}"></td>
+										<td th:text="${board.boardTitle}"></td>
+										<td th:text="${board.User.userNickname}"></td>
+										<td th:text="${#dates.format(board.boardDate, 'yyyy-MM-dd')}" ></td>
+									</tr>
+								</tbody>
                             </tbody>
                         </table>
                         
@@ -158,48 +98,16 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 10%;">번호</th>
-                                        <th style="width: 45%;">제목</th>
-                                        <th style="width: 15%;">작성자</th>
-                                        <th style="width: 20%;">작성일</th>
+                                        <th style="width: 55%;">제목</th>
+                                        <th style="width: 35%;">작성일</th>
                                     </tr>
                                 </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>test2</td>
-                                        <td>test2222</td>
-                                        <td>2024-01-01</td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                <tbody>
+									<tr th:each="notice : ${mainNotice}">
+										<td th:text="${notice.noticeNumber}"></td>
+										<td th:text="${notice.noticeTitle}"></td>
+										<td th:text="${#dates.format(notice.noticeDate, 'yyyy-MM-dd')}" ></td>
+									</tr>
                                 </tbody>
                             </table>
                             
@@ -222,44 +130,19 @@
                                         <th style="width: 15%;">진행상황</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>test1111</td>
-                                    <td>문의</td>
-                                    <td>2023-05-12</td>
-                                    <td>답변 완료</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
+								<tbody>
+									<tr th:each="inquiry : ${mainInquiry}">
+										<td th:text="${inquiry.User.userNickname}"></td>
+										<td th:text="${inquiry.inquiryTitle}"></td>
+										<td th:text="${#dates.format(inquiry.inquiryDate, 'yyyy-MM-dd')}" ></td>
+										<th:block th:if="${inquiry.inquiryProgress == 0}">
+											<td style="color: red;">답변 대기</td>
+										</th:block>
+										<th:block th:if="${inquiry.inquiryProgress == 1}">
+											<td>답변 완료</td>
+										</th:block>
+									</tr>
+                               </tbody>
                         </table>
                         
                         </div>

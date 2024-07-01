@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>관리자 로그인</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin.css}">
+	<style type="text/css">
+		.admin-login {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<main>
+
+		<header th:replace="fragments/admin_header :: admin_header"></header>
+
+		<div class="admin-login">
+			<form th:action="@{/admin/login}" name="adminLogin" method="post">
+
+				<table class="admin-login-form">
+					<tr>
+						<td>
+							<input type="text" name="userId" placeholder="ID" />
+						</td>
+					</tr>
+
+					<tr>
+						<td>
+							<input type="password" name="userPw" placeholder="PASSWORD" />
+						</td>
+					</tr>
+
+					<tr>
+						<td align="center">
+							<input type="button" value="LOGIN" onclick="login()" />
+						</td>
+					</tr>
+
+			</form>
+		</div>
+
+</body>
+<script>
+	function login() {
+		if (document.adminLogin.userId.value == "") {
+			alert("아이디를 입력해주세요");
+			document.adminLogin.userId.focus();
+		} else if (document.adminLogin.userPw.value == "") {
+			alert("비밀번호를 입력해주세요");
+			document.adminLogin.userPw.focus();
+		} else {
+			document.adminLogin.submit();
+		}
+	}
+</script>
+
+</html>

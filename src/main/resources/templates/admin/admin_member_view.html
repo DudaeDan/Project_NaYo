@@ -17,44 +17,50 @@
 
         <div class="member-view-box">
 
-
             <div class="view-info">
                 <table>
-                    <tr>
-                        <th class="table-title" colspan="2">@@ 님의 회원정보</th>
+					<tr>
+                        <th class="table-title" colspan="2"> 
+							<span  th:text="${memberDetail.userName}"></span> 님의 회원정보 
+						</th>
                     </tr>
                     <tr>
                         <th>이름</th>
-                        <td>test</td>
+                        <td  th:text="${memberDetail.userName}"></td>
                     </tr>
                     <tr>
                         <th>ID</th>
-                        <td>test</td>
+                        <td  th:text="${memberDetail.userId}"></td>
                     </tr>
                     <tr>
                         <th>닉네임</th>
-                        <td>test</td>
+                        <td  th:text="${memberDetail.userNickname}"></td>
                     </tr>
                     <tr>
                         <th>전화번호</th>
-                        <td>test</td>
+                        <td  th:text="${memberDetail.userPhonenumber}"></td>
                     </tr>
                     <tr>
                         <th>주소</th>
-                        <td>test</td>
+                        <td th:text="${memberDetail.userAddress}"></td>
                     </tr>
                     <tr>
                         <th>가입일자</th>
-                        <td>test</td>
+                        <td th:text="${#dates.format(memberDetail.userRegistdate, 'yyyy-MM-dd')}"></td>
                     </tr>
                     <tr>
                         <th>역할</th>
-                        <td>test</td>
+						<th:block th:if="${memberDetail.userRole == 0}">
+							<td>일반회원</td>
+						</th:block>
+                           <th:block th:if="${memberDetail.userRole == 1}">
+							<td>관리자</td>
+						</th:block>
                     </tr>
                 </table>
             
                 <div class="view-btns">
-                    <input type="button" name="" id="" value="회원목록" onclick="location.href='admin_member.html'"> 
+                    <input type="button" name="" id="" value="회원목록" th:onclick="|location.href='@{/admin/memberList}'|"> 
                 </div>
                 
             </div>

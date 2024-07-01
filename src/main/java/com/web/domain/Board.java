@@ -30,11 +30,15 @@ public class Board {
     @Column(insertable = false, updatable = false, columnDefinition = "NUMBER DEFAULT 0")
     private Long boardHit;
 
-    @Column(nullable = false)
+    @Column(name ="user_number", nullable = false)
     private Long userNumber;
 
     private Long fileId;
     
     @Column
     private String thumbnailUrl; // 썸네일 URL
+    
+    @ManyToOne
+    @JoinColumn(name = "user_number", insertable = false, updatable = false)
+    private User user;
 }
