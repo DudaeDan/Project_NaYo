@@ -6,7 +6,7 @@
     <title>레시피 웹페이지</title>
     <link rel="stylesheet" th:href="@{/css/layout/login/logintest.css}">
 </head>
-<body>
+<body th:align="center">
             <div class="login">
              <div class="form">
               <h2>로그인</h2>
@@ -29,17 +29,17 @@
                     <span class="arrow"></span>
                   </div>
                   <p class="button-text">SIGN IN</p>
-                </button>
-                <div class="form-find">
-                 <a href="MemberPw">비밀번호 찾기</a> | <a href="MemberId">아이디 찾기</a> | <a href="MemberRegister">회원가입</a>
-               </div>
+                 </button>
+                 <div class="form-find">
+                   <a th:href="@{/login/findPw}">비밀번호 찾기</a> | <a th:href="@{/login/findId}">아이디 찾기</a> | <a th:href="@{/login/join}">회원가입</a>
+                </div>
             </div>
             <div class="finished">
                 <svg>
                 <use href="#svg-check" />
                 </svg>
             </div>
-            </div>
+          </div>
             <!-- //--- ## SVG SYMBOLS ############# -->
             <svg style="display:none;">
             <symbol id="svg-check" viewBox="0 0 130.2 130.2">

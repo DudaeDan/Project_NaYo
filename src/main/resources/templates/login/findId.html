@@ -16,24 +16,28 @@
             <div class="form">
              <h2>아이디 찾기</h2>
              <div class="form-field">
-               <label for="user_Pw"></label>
-                <input id="userpw" type="password" name="user_Pw" placeholder="password" required>
-             </div>
-             <div class="form-field">
-                <label for="login-mail"></label>
-                 <input id="login-mail" type="text" name="mail" placeholder="E-Mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                <label for="user-name"></label>
+                <input id="user-name" type="text" name="user_name" placeholder="이름" required>
               </div>
-                <button type="submit" class="button">
+              <div class="form-field">
+                <label for="user-phone"></label>
+                <input id="user-phone" type="text" name="user_phone" placeholder="전화번호" pattern="\d{3}-\d{3,4}-\d{4}" required>
+              </div>
+              <button type="submit" class="button" th:onclick="|window.location.href='@{/login/layout}'|">
                  <div class="arrow-wrapper">
                    <span class="arrow"></span>
                  </div>
-                 <p class="button-text">아이디 찾기</p>
+                 <p class="button-text">확인</p>
                </button>
-               <div class="form-find">
-            <a href="memberId">아이디 찾기</a> | <a href="memberLogin">로그인</a> | <a href="memberRegist">회원가입</a>
-           </div>
+               <button type="button" class="button" th:onclick="|window.location.href='@{/login/login}'|">
+                 <div class="arrow-wrapper">
+                   <span class="arrow"></span>
+                 </div>
+                 <p class="button-text">뒤로가기</p>
+               </button>
+            </div>
           </div>
-        </div>
+        <!-- </div> -->
     <!-- </div> -->
     <script th:src="@{/script/layout/Layout_scripts.js}"></script>
 </body>
