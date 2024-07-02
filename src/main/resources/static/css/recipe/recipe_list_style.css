@@ -2,9 +2,18 @@
     display: flex;
 }
 
-.sidebar {
-    width: 20%;
+.menu-button {
+    position: absolute;
+    left: 10px;
+    top: 120px;
+    width: 70px;
+    height: 70px;
+    background: url('../../Images/layout/Menu.png') no-repeat center center;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
 }
+
 
 .main-content {
     width: 80%;

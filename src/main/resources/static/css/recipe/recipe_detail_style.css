@@ -1,40 +1,77 @@
-/* recipe_detail_style.css */
-
 /* 기본 레이아웃 스타일 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5; /* 페이지 전체 배경색 */
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    position: relative;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-button {
+    position: absolute;
+    left: 10px;
+    top: 120px;
+    width: 70px;
+    height: 70px;
+    background: url('../../Images/layout/Menu.png') no-repeat center center;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+}
+
 .container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
 }
 
 .main-content {
     width: 100%;
     max-width: 800px;
-    margin: 20px auto;
+    background-color: #ffffff; /* 메인 컨텐츠 배경색 */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
-.recipe-detail {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.recipe-header {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.image img {
+.recipe-header .image {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.recipe-header .image img {
+    max-width: 400px; /* 이미지 크기 확대 */
+    height: 400px;
+    border-radius: 8px;
+}
+
+.details, .ingredients, .instructions {
     width: 100%;
-    max-width: 400px;
-    height: auto; /* height를 auto로 설정하여 원본 비율 유지 */
+    background-color: #fafafa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
 .details {
     text-align: center;
-    margin-bottom: 20px;
-}
-
-.ingredients, .instructions {
-    width: 100%;
-    text-align: left;
-    margin-bottom: 20px;
 }
 
 .instructions div {
@@ -43,8 +80,8 @@
 
 .instructions img {
     width: 100%;
-    max-width: 400px;
-    height: auto; /* height를 auto로 설정하여 원본 비율 유지 */
+    max-width: 300px; /* 이미지 크기 확대 */
+    height: auto;
     margin-top: 10px;
-    object-fit: contain; /* 이미지가 영역 내에 잘 맞도록 조정 */
+    object-fit: contain;
 }

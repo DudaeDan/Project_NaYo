@@ -49,15 +49,15 @@ body {
 }
 
 .menu-button {
-    background: url('../../Images/layout/Menu.png') no-repeat center center;
-    background-size: contain;
+    position: absolute;
+    left: 10px;
+    top: 120px;
     width: 70px;
     height: 70px;
-    top: 20px;
+    background: url('../../Images/layout/Menu.png') no-repeat center center;
+    background-size: contain;
     border: none;
     cursor: pointer;
-    margin-left: 10px;
-    position: relative;
 }
 
 .login {
@@ -72,7 +72,7 @@ body {
     padding: 10px;
     border-right: 1px solid #ccc;
     position: fixed;
-    left: -700px; /* 사이드바를 화면 밖에 위치시킴 */
+    left: -550px; /* 사이드바를 화면 밖에 위치시킴 */
     top: 120px; /* 헤더 아래로 위치 */
     height: calc(100% - 120px); /* 헤더 높이를 제외한 전체 높이 */
     background-color: white;
@@ -112,17 +112,18 @@ body {
     width: 100%;
     height: auto;
 }
+
 /* 메인 콘텐츠 스타일 */
 .main-content {
     padding: 10px;
-    margin-left: 250px; /* 사이드바 폭만큼 왼쪽 여백 추가 */
     transition: margin-left 0.3s ease; /* 애니메이션 효과 */
-}
-
-.sidebar.show + .main-content {
-    margin-left: 250px; /* 사이드바가 열렸을 때의 여백 */
+    margin: 0 auto; /* 가운데 정렬 */
+    max-width: 1200px; /* 최대 너비 설정 */
 }
 
 .container {
     display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
 }

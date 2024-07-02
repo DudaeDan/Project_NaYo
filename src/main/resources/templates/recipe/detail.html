@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
     <link rel="stylesheet" th:href="@{/css/recipe/recipe_detail_style.css}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
 </head>
 <body>
     <!-- 헤더 프래그먼트를 포함 -->
@@ -15,18 +16,19 @@
         <!-- 사이드바 프래그먼트를 포함 -->
         <div th:replace="fragments/sidebar :: sidebar"></div>
         <div class="main-content">
-            <h1 th:text="${recipe.RCP_NM}">레시피 이름</h1>
-            <div class="recipe-detail">
-                <div class="image">
-                    <img th:src="@{${recipe.MANUAL_IMG01}}" alt="레시피 이미지" style="width:100%; max-width:400px; height:auto;">
+            <div class="recipe-header">
+                <h1 th:text="${recipe.RCP_NM}">레시피 이름</h1>
+                <div class="thumbnail">
+                    <img th:src="@{${recipe.MANUAL_IMG01}}" alt="레시피 이미지" style="width:100%; height:auto;">
                 </div>
-                <div class="details">
-                    <p>열량: <span th:text="${recipe.INFO_ENG}">0</span> kcal</p>
-                    <p>탄수화물: <span th:text="${recipe.INFO_CAR}">0</span> g</p>
-                    <p>단백질: <span th:text="${recipe.INFO_PRO}">0</span> g</p>
-                    <p>지방: <span th:text="${recipe.INFO_FAT}">0</span> g</p>
-                    <p>나트륨: <span th:text="${recipe.INFO_NA}">0</span> mg</p>
-                </div>
+            </div>
+            <div class="details">
+                <h2>영양 성분</h2>
+                <p>열량: <span th:text="${recipe.INFO_ENG}">0</span> kcal</p>
+                <p>탄수화물: <span th:text="${recipe.INFO_CAR}">0</span> g</p>
+                <p>단백질: <span th:text="${recipe.INFO_PRO}">0</span> g</p>
+                <p>지방: <span th:text="${recipe.INFO_FAT}">0</span> g</p>
+                <p>나트륨: <span th:text="${recipe.INFO_NA}">0</span> mg</p>
             </div>
             <div class="ingredients">
                 <h2>재료</h2>
@@ -55,7 +57,7 @@
                                         img.src = manualImg;
                                         img.alt = "만드는 법 이미지";
                                         img.style.width = "100%";
-                                        img.style.maxWidth = "400px";
+                                        img.style.maxWidth = "500px"; /* 이미지 크기 확대 */
                                         img.style.height = "auto";
                                         instructionsContainer.appendChild(img);
                                     }
@@ -68,6 +70,5 @@
             </div>
         </div>
     </div>
-    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
 </body>
 </html>

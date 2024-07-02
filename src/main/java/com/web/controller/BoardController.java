@@ -26,4 +26,10 @@ public class BoardController {
         model.addAttribute("currentPage", page);
         return "border/boardlist";
     }
+    
+    @GetMapping("layout")
+    public String getMethodName() {
+    	return "layout";
+    }
+    
 }
