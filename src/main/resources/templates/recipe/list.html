@@ -19,7 +19,7 @@
             <div class="recipe-grid">
                 <div th:each="recipe : ${recipes}" class="recipe-item">
                     <div class="thumbnail">
-                        <a th:href="@{'/recipes/' + ${recipe.encodedName}}">
+                        <a th:href="@{'/recipes/recipes/' + ${recipe.encodedName}}">
                             <img th:src="@{${recipe.MANUAL_IMG01}}" alt="썸네일" style="width:100%; height:auto;">
                         </a>
                     </div>

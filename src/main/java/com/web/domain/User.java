@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,7 +21,7 @@ public class User {
     @Column(name="user_number")
     private Long userNumber;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String userId;
 
     @Column(nullable = false)
@@ -33,7 +34,7 @@ public class User {
     private String userNickname;
 
     private String userAddress;
-    
+
     @Column(nullable = false)
     private String userPhonenumber;
 
@@ -42,4 +43,11 @@ public class User {
 
     @Column(nullable = false)
     private Integer userRole; // 0: 일반, 1: 관리자
+
+    // board의 작성자 표시용
+    @OneToMany(mappedBy = "user")
+    private List<Board> boards;
+    // 한 유저가 한 게시글에 하나의 좋아요만 등록할 수 있음을 확인하기 위함
+    @OneToMany(mappedBy = "user")
+    private List<Like> likes;
 }

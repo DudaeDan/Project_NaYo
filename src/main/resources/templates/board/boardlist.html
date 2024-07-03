@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레시피 웹페이지</title>
+    <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
+    <link rel="stylesheet" th:href="@{/css/board/boardlist.css}" />
+    
+</head>
+<body>
+    <header th:replace="fragments/header :: header"></header>
+    <div class="container">
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+        <div class="main-content" th:fragment="content">
+			<div class="board-list">
+		        <div class="board-item" th:each="board : ${boards}">
+		            <div class="board-img">
+		                <img th:src="@{${board.mainImg}}" alt="main image"/>
+		            </div>
+		            <div class="board-content">
+		                <h2 th:text="${board.boardTitle}">Board Title</h2>
+		                <p th:text="${board.boardIngredient}">Board Ingredient</p>
+		                <p class="user-nickname" th:text="${board.user.userNickname}">User Nickname</p>
+		                <div class="board-info">
+		                    <span class="board-hit" th:text="'Hits: ' + ${board.boardHit}">Hits: 0</span>
+		                    <div class="board-like">
+		                        <img src="../../Images/border/like.png" alt="like"/>
+		                        <span th:text="${board.boardLike}">0</span>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+			</div>
+        </div>
+    </div>
+    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
+</body>
+</html>
