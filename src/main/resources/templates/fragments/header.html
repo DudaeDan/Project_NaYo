@@ -15,7 +15,14 @@
             </div>
         </div>
         <div class="login">
-            Login
+            <!-- 로그인 상태 확인 후 버튼 표시 -->
+            <div th:if="${session.user == null}">
+                <a th:href="@{/login/login}">Login</a>
+            </div>
+            <div th:if="${session.user != null}">
+                <a th:href="@{/mypage}">My Page</a> <!-- My Page 링크는 추후 수정 -->
+                <a th:href="@{/login/logout}">Logout</a>
+            </div>
         </div>
     </div>
 </body>
