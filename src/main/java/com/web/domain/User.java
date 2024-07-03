@@ -50,4 +50,9 @@ public class User {
     // 한 유저가 한 게시글에 하나의 좋아요만 등록할 수 있음을 확인하기 위함
     @OneToMany(mappedBy = "user")
     private List<Like> likes;
+
+    public boolean checkPassword(String userPw){
+        return this.userPw.equals(userPw);
+    }
 }
+    

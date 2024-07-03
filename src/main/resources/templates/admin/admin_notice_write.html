@@ -30,7 +30,7 @@
 
 					<div class="post-info">
 						<form th:action="@{/admin/noticeWrite}" name="noticeWriteConfirmForm" method="post">
-							<!--<input type="hidden" name="userNumber" th:value="${userNumber}">-->
+							<input type="hidden" name="userNumber" th:value="${loginMember.userNumber}">
 							<table class="admin-post">
 								<tr>
 									<th>제목</th>
@@ -60,9 +60,7 @@
 	</main>
 	<script>
 
-
 		function noticeWriteConfirm() {
-
 			if (document.noticeWriteConfirmForm.noticeTitle.value == "") {
 				alert("제목을 입력하세요");
 				document.noticeWriteConfirmForm.noticeTitle.focus();
@@ -74,10 +72,9 @@
 				document.forms['noticeWriteConfirmForm'].submit();
 			}
 
-
-
 		}
 	</script>
 </body>
+<script th:src="@{/script/admin/adminScript.js}"></script>
 
 </html>

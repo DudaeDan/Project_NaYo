@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import com.web.domain.Answer;
 import com.web.domain.Board;
 import com.web.domain.Inquiry;
 import com.web.domain.Notice;
 import com.web.domain.User;
+import com.web.repository.AdminAnswerRepository;
 import com.web.repository.AdminBoardRepository;
 import com.web.repository.AdminInquiryRepository;
 import com.web.repository.AdminNoticeRepository;
@@ -29,17 +32,14 @@ public class AdminServiceImpl implements AdminService {
 	private AdminNoticeRepository adNoticeRepo;
 	@Autowired
 	private AdminInquiryRepository adInquiryRepo;
+	@Autowired
+	private AdminAnswerRepository adAnswerRepo;
 
-	// 테스트
+	// 로그인
 
 	@Override
-	public User getLoginUser(User user) {
-		Optional<User> findUser = adUserRepo.findByUserId(user.getUserId());
-		if (findUser.isPresent()) { 
-			return findUser.get();
-		} else {
-			return null;
-		}
+	public User adminLogin(String userId, String userPw) {
+		return adUserRepo.findByUserIdAndUserPw(userId, userPw);
 	}
 
 	// admin main
@@ -147,7 +147,7 @@ public class AdminServiceImpl implements AdminService {
 	public void writeNotice(Long userNumber, String noticeTitle, String noticeContent) {
 		User user = adUserRepo.findById(userNumber).orElse(null);
 		Notice notice = new Notice();
-		notice.setUser(user);
+		notice.setUserNumber(user.getUserNumber());
 		notice.setNoticeTitle(noticeTitle);
 		notice.setNoticeContent(noticeContent);
 		adNoticeRepo.save(notice);
@@ -187,6 +187,28 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Inquiry getInquiry(Long inquiryNumber) {
 		return adInquiryRepo.findById(inquiryNumber).orElse(null);
+	}
+	
+	@Override
+	public Answer getAnswer(Long inquiryNumber) {
+		return adAnswerRepo.findById(inquiryNumber).orElse(null);
+	}
+
+//	@Override
+//	public void addinquiryAnswer(Long inquiryNumber, Long userNumber, String answerContent) {
+//		Inquiry inquiry = adInquiryRepo.findById(inquiryNumber).orElse(null);
+//		User user = adUserRepo.findById(userNumber).orElse(null);
+//		Answer answer = new Answer();
+//		answer.setUserNumber(user.getUserNumber());
+//		answer.setInquiryNumber(inquiry.getInquiryNumber());
+//		answer.setAnswerContent(answerContent);
+//		adAnswerRepo.save(answer);
+//	}
+	
+	@Override
+	public void addinquiryAnswer(Long inquiryNumber, Long userNumber, String answerContent) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

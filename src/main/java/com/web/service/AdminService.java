@@ -3,6 +3,8 @@ package com.web.service;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import com.web.domain.Answer;
 import com.web.domain.Board;
 import com.web.domain.Inquiry;
 import com.web.domain.Notice;
@@ -10,8 +12,10 @@ import com.web.domain.User;
 
 public interface AdminService {
 
-	// 테스트
-	public User getLoginUser(User user);
+	// 로그인
+
+	User adminLogin(String userId, String userPw);
+
 	// 메인
 	List<User> getMainUserList();
 
@@ -52,10 +56,17 @@ public interface AdminService {
 
 	void deleteNotice(Long noticeNumber);
 
+	// 문의
+
 	Page<Inquiry> getInquiryList(Pageable pageable);
 
 	Page<Inquiry> getInquiryList(Pageable pageable, String searchType, String searchKeyword);
 
 	Inquiry getInquiry(Long inquiryNumber);
+	
+	//답변
+	
+	Answer getAnswer(Long inquiryNumber);
 
+	void addinquiryAnswer(Long inquiryNumber, Long userNumber, String answerContent);
 }
