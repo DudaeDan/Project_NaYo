@@ -1,5 +1,7 @@
 package com.web.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -7,64 +9,75 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.web.domain.Answer;
 import com.web.domain.Board;
 import com.web.domain.Inquiry;
 import com.web.domain.Notice;
 import com.web.domain.User;
 import com.web.service.AdminService;
+import com.web.util.SessionConst;
 
-@SessionAttributes("user")
 @Controller
+@SessionAttributes("user")
 @RequestMapping("admin")
 public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
 
-	// test
+	@Autowired
+	private HttpSession session;
+
+	// 로그인
 	@GetMapping()
 	public String adminLoginForm() {
 		return "admin/admin_login";
 	}
 
-	@PostMapping("/login")
-	public String adminLogin(User user, Model model) {
-		User findUser = adminService.getLoginUser(user);
-
-		if (findUser != null && findUser.getUserPw().equals(user.getUserPw())) {
-			model.addAttribute("user", findUser);
-			return "forward:main";
+	@PostMapping("login")
+	public String login(@RequestParam String userId, @RequestParam String userPw, Model model,
+			HttpServletRequest request) {
+		User user = adminService.adminLogin(userId, userPw);
+		if (user == null) {
+			model.addAttribute("error", "잘못된 사용자 이름 또는 비밀번호");
+			return "redirect:/admin";
 		} else {
-			return "redirect:index";
-		}
+			if (user.getUserRole() == 1) {
+				session = request.getSession();
+				session.setAttribute(SessionConst.LOGIN_MEMBER, user);
+				return "redirect:/admin/main";
+			} else {
+				session = request.getSession();
+				session.setAttribute(SessionConst.LOGIN_MEMBER, user);
+				return "redirect:/index";
 
+			}
+
+		}
 	}
-//	@PostMapping("/login")
-//	public String adminLogin(User user, Model model) {
-//		User findUser = adminService.getLoginUser(user);
-//		if (findUser != null && findUser.getUserPw().equals(user.getUserPw())) {
-//			if (findUser.getUserRole() == 1) {
-//				model.addAttribute("member", findUser);
-//				return "forward:main";
-//			} else {
-//				return "redirect:/";
-//			}
-//		}
-//		return "redirect:/admin/admin_login";
-//	}
+
+	@GetMapping("logout")
+	public String Logout(HttpServletRequest request) {
+		session = request.getSession(false);
+		if (session != null) {
+			session.invalidate();
+		}
+		return "redirect:/index";
+	}
 
 	// ---- 메인 ----
 
 	// 메인페이지 데이터
 	@GetMapping("main")
 	public String admin(Model model) {
+
 		model.addAttribute("mainMember", adminService.getMainUserList());
 		model.addAttribute("mainBoard", adminService.getMainBoardList());
 		model.addAttribute("mainNotice", adminService.getMainNoticeList());
@@ -179,8 +192,9 @@ public class AdminController {
 
 	// 공지 작성
 	@PostMapping("noticeWrite")
-	public String WriteNotice(@RequestParam("userNumber") Long userNumber,
+	public String WriteNotice(@RequestParam("userNumber") String userNumberString,
 			@RequestParam("noticeTitle") String noticeTitle, @RequestParam("noticeContent") String noticeContent) {
+		Long userNumber = Long.parseLong(userNumberString);
 		adminService.writeNotice(userNumber, noticeTitle, noticeContent);
 		return "redirect:/admin/noticeList";
 	}
@@ -230,12 +244,30 @@ public class AdminController {
 	@GetMapping("inquiryView/{id}")
 	public String viewInquiry(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("inquiryDetail", adminService.getInquiry(id));
+		model.addAttribute("answer", adminService.getAnswer(id));
 		return "admin/admin_inquiry_view";
+	}
+
+	// 고칠거
+
+	// 문의 답변 페이지
+	@GetMapping("inquiryAnswerForm")
+	public String inquiryAnswerForm(@RequestParam("inquiryNumber") Long inquiryNumber, Model model) {
+		model.addAttribute("inquiryDetail", adminService.getInquiry(inquiryNumber));
+		return "admin/admin_inquiry_answer";
 	}
 
 	// 문의글 답변
 	@PostMapping("inquiryAnswer")
-	public String answerInquiry() {
+	public String answerInquiry(@RequestParam("inquiryNumber") String inquiryNumberString,
+			@RequestParam("userNumber") String userNumberString, @RequestParam("answerContent") String answerContent,
+			Model model) {
+
+		Long inquiryNumber = Long.parseLong(inquiryNumberString);
+		Long userNumber = Long.parseLong(userNumberString);
+		adminService.addinquiryAnswer(inquiryNumber, userNumber, answerContent);
+		Answer answer = adminService.getAnswer(inquiryNumber);
+		model.addAttribute("answer", answer);
 
 		return "redirect:/admin/inquiryList";
 	}

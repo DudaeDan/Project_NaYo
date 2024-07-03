@@ -42,4 +42,9 @@ public class User {
 
     @Column(nullable = false)
     private Integer userRole; // 0: 일반, 1: 관리자
+    
+    public boolean checkPassword(String userPw){
+        return this.userPw.equals(userPw);
+    }
+    
 }

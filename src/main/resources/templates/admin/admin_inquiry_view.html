@@ -22,38 +22,38 @@
 				<div class="admin-post-content">
 
 					<div class="post-btns">
-						<input type="button" value="답변 완료" class="second_btn" onclick="inquiryAnswerConfirm()">
-						<input type="button" value="글 목록"
-							th:onclick="|location.href='@{/admin/inquiryList}'|">
+						<form th:action="@{/admin/inquiryAnswerForm}" name="inquiryAnswerForm" method="get">
+							<input type="hidden" name="inquiryNumber" th:value="${inquiryDetail.inquiryNumber}">
+							<input type="button" value="답변" class="second_btn" onclick="inquiryAnswerSubmit()">
+						</form>
+						<input type="button" value="글 목록" th:onclick="|location.href='@{/admin/inquiryList}'|">
 					</div>
 
 					<div class="post-info">
-						<form th:action="@{/admin/inquiryAnswer}" name="inquiryAnswerForm" method="post">
-							<input type="hidden" name="inquiryNumber" th:value="${inquiryDetail.inquiryNumber}">
-							<input type="hidden" name="userNumber" th:value="${userNumber}">
-							<table class="admin-post">
-								<tr>
-									<th>제목</th>
-									<td class="post-title" th:text="${inquiryDetail.inquiryTitle}">
-									</td>
-									<th>작성자</th>
-									<td th:text="${inquiryDetail.User.userNickname}"></td>
-									<th>작성일</th>
-									<td th:text="${#dates.format(inquiryDetail.inquiryDate, 'yyyy-MM-dd')}"></td>
-								</tr>
-								<tr>
-									<th>내용</th>
-									<td colspan="5" class="post-content" th:text="${inquiryDetail.inquiryContent}">
-									</td>
-								</tr>
-								<tr>
-									<th>답변</th>
-									<td colspan="5" class="post-content inquiry_answer">
-										<textarea name="answerContent" id=""></textarea>
-									</td>
-								</tr>
-							</table>
-						</form>
+						<table class="admin-post">
+							<tr>
+								<th>제목</th>
+								<td class="post-title" th:text="${inquiryDetail.inquiryTitle}">
+								</td>
+								<th>작성자</th>
+								<td th:text="${inquiryDetail.User.userNickname}"></td>
+								<th>작성일</th>
+								<td th:text="${#dates.format(inquiryDetail.inquiryDate, 'yyyy-MM-dd')}"></td>
+							</tr>
+							<tr>
+								<th>내용</th>
+								<td colspan="5" class="post-content" th:text="${inquiryDetail.inquiryContent}">
+								</td>
+							</tr>
+							<tr>
+								<th>답변</th>
+								<td colspan="5" class="post-content inquiry_answer" ></td>
+								<!--th:text="${inquiryDetail.Answer.answerContent}">
+								</td>
+								https://fightingway.tistory.com/45 참고
+								-->
+							</tr>
+						</table>
 					</div>
 
 				</div>
@@ -65,13 +65,10 @@
 	</main>
 </body>
 <script>
-	function inquiryAnswerConfirm() {
-		if (document.inquiryAnswerForm.answerContent.value.length == 0) {
-			alert("답변을 입력해주세요");
-			document.inquiryAnswerForm.answerContent.focus();
-		} else {
-			document.inquiryAnswerForm.submit();
-		}
+	function inquiryAnswerSubmit() {
+		document.inquiryAnswerForm.submit();
 	}
 </script>
+<script  th:src="@{/script/admin/adminScript.js}"></script>
+
 </html>

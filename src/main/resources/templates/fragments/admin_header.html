@@ -13,15 +13,40 @@
 				<div class="logo-container">
 					<img th:src="@{/images/admin/admin_logo.png}" class="logo">
 				</div>
-				<div class="logout">
-					<input type="button" name="" id="" class="logout-btn" value="logout">
-				</div>
+
+				<!--로그인 전-->
+				<th:block th:if="${loginMember == null}">
+					<div class="info-btn-container">
+						<form th:action="@{/admin/login}" name="adminLogin" method="post">
+							<input type="text" name="userId" placeholder="ID" />
+							<input type="password" name="userPw" placeholder="PASSWORD" />
+							<div class="header-btn">
+								<input type="button" value="LOGIN" onclick="login()" />
+							</div>
+						</form>
+					</div>
+				</th:block>
+
+				<!--로그인 후-->
+				<th:block th:if="${loginMember != null}">
+					<div class="info-btn-container">
+						<p class="login-info">
+							<span th:text="${loginMember.userNickname}"></span>
+							로그인 중
+						</p>
+						<div class="header-btn">
+							<form th:action="@{/admin/logout}">
+								<input type="button" name="" id="" class="logout-btn" value="logout" onclick="submit()">
+							</form>
+						</div>
+					</div>
+
+				</th:block>
 
 			</div>
 		</div>
 	</th:block>
-
-
+	
 </body>
 
 </html>
