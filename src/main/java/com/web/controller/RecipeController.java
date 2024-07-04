@@ -25,6 +25,13 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
+    @GetMapping("/layout")
+    public String getRecipes() {
+    		
+        return "layout";
+    }
+
+    
     @GetMapping("/recipes")
     public String getRecipes(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "30") int size) {
         List<Recipe> recipes = recipeService.fetchRecipes((page - 1) * size + 1, page * size);
