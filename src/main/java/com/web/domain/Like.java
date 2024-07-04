@@ -10,14 +10,13 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Entity
-@Table(name = "LIKES")
+@Table(name = "LIKES", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_number", "board_number"})})
 public class Like {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "like_seq")
     @SequenceGenerator(name = "like_seq", sequenceName = "LIKE_SEQ", allocationSize = 1)
-    @Column(name="like_id")
-    private Long likeId;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_number", nullable = false)

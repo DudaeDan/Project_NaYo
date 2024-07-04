@@ -1,10 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Create Board</title>
+    <script>
+        function addStep() {
+            const stepContainer = document.getElementById('step-container');
+            const stepIndex = stepContainer.childElementCount / 2; // 각 스텝은 두 개의 요소(설명, 이미지)로 구성됨
+
+            const descriptionLabel = document.createElement('label');
+            descriptionLabel.textContent = `Step Description ${stepIndex + 1}`;
+            stepContainer.appendChild(descriptionLabel);
+
+            const descriptionInput = document.createElement('textarea');
+            descriptionInput.name = 'stepDescription';
+            descriptionInput.placeholder = 'Step Description';
+            stepContainer.appendChild(descriptionInput);
+
+            const imageLabel = document.createElement('label');
+            imageLabel.textContent = `Step Image ${stepIndex + 1}`;
+            stepContainer.appendChild(imageLabel);
+
+            const imageInput = document.createElement('input');
+            imageInput.type = 'file';
+            imageInput.name = 'stepImage';
+            stepContainer.appendChild(imageInput);
+        }
+    </script>
 </head>
 <body>
-
+<h1>Create Board</h1>
+<form th:action="@{/board/save}" th:object="${board}" method="post" enctype="multipart/form-data">
+    <div>
+        <label>Title</label>
+        <input type="text" th:field="*{boardTitle}" placeholder="Title" required/>
+    </div>
+    <div>
+        <label>Ingredients</label>
+        <input type="text" th:field="*{boardIngredient}" placeholder="Ingredients" required/>
+    </div>
+    <div>
+        <label>Content</label>
+        <textarea th:field="*{boardContent}" placeholder="Content" required></textarea>
+    </div>
+    <div>
+        <label>Main Image</label>
+        <input type="file" name="mainImgFile" accept="image/*" required/>
+    </div>
+    <div id="step-container">
+        <h2>Steps</h2>
+    </div>
+    <div>
+        <button type="button" onclick="addStep()">Add Step</button>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
 </body>
 </html>

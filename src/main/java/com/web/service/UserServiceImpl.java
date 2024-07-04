@@ -35,6 +35,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUserNameAndUserPhonenumber(user_name, user_phone);
     }
     
+    @Override
+    public User findUserByUserId(String userId) {
+        return userRepository.findByUserId(userId);
+    }
 //    if(username==email==전화번호) {
 //    	이메일로 랜덤 설정된 새로운 비밀번호를 보내주며
 //    	데이터베이스에 해당 유저의 비밀번호를 업데이트한다.

@@ -45,7 +45,7 @@ public class LoginController {
         User user = userService.validateUser(userId, userPw);
         if (user != null) {
             session.setAttribute("user", user);
-            return "redirect:/layout"; // 로그인 성공 후 메인 페이지로 리다이렉트 나중에 메인 페이지로 변경!!!!!!!!!!!!!!
+            return "redirect:/board/list"; // 로그인 성공 후 메인 페이지로 리다이렉트 나중에 메인 페이지로 변경!!!!!!!!!!!!!!
         } else {
             model.addAttribute("loginError", true); // 로그인 실패 플래그 설정
             return "login/login"; // 로그인 폼에 에러 메시지와 함께 다시 표시
@@ -80,4 +80,11 @@ public class LoginController {
         boolean isAvailable = userService.isUserIdAvailable(userId);
         return isAvailable ? "사용 가능한 아이디입니다." : "아이디가 이미 존재합니다.";
     }
+    
+    
+    
+    
+    
+    
+    
 }

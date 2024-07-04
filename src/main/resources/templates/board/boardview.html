@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Board View</title>
+    <style>
+        .like-icon {
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function toggleLike(boardId) {
+            const likeIcon = document.getElementById('like-icon');
+            fetch(`/board/like/${boardId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.text())
+            .then(status => {
+                if (status === 'liked') {
+                    likeIcon.src = '/Images/border/like.png';
+                } else {
+                    likeIcon.src = '/Images/border/empty_like.png';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function alertLogin() {
+            alert("로그인 후 이용 가능합니다.");
+        }
+    </script>
+</head>
+<body>
+    <h1 th:text="${board.boardTitle}">Board Title</h1>
+    <p>Ingredients: <span th:text="${board.boardIngredient}"></span></p>
+    <p>Date: <span th:text="${board.boardDate}"></span></p>
+    <p>Author: <span th:text="${board.user != null ? board.user.userNickname : 'Unknown User'}"></span></p>
+    <p>Views: <span th:text="${board.boardHit}"></span></p>
+    <p>Likes: <span th:text="${board.boardLike}"></span></p>
+    <img th:src="@{'/Images/border/main/' + ${board.mainImg}}" alt="Main Image">
+
+    <h2>Steps</h2>
+    <div th:each="step : ${steps}">
+        <img th:src="@{'/Images/border/step/' + ${step.stepImage}}" alt="Step Image">
+        <p th:text="${step.stepDescription}"></p>
+    </div>
+
+    <div>
+        <img id="like-icon"
+             th:src="${isLiked} ? @{/Images/border/like.png} : @{/Images/border/empty_like.png}"
+             onmouseover="this.src='/Images/border/like_hover.png'"
+             th:onmouseout="${isLiked} ? 'this.src=\'/Images/border/like.png\'' : 'this.src=\'/Images/border/empty_like.png\''"
+             th:onclick="${session.user != null} ? 'toggleLike(' + ${board.boardNumber} + ')' : 'alertLogin()'"
+             class="like-icon">
+    </div>
+</body>
+</html>

@@ -55,5 +55,19 @@
             alert("아이디 또는 비밀번호가 올바르지 않습니다.");
         </script>
     </div>
+	
+	<!-- 글 작성은 로그인 후 가능합니다 alert 메시지 표시 -->
+	<div th:if="${WriteSession}">
+	    <script th:inline="javascript">
+	        alert("글 작성은 로그인 후 가능합니다.");
+	    </script>
+	</div>
+	
+	<!-- 좋아요 버튼은 로그인 후 가능합니다 alert 메시지 표시 -->
+	<div th:if="${likeSession}">
+	    <script th:inline="javascript">
+	        alert("좋아요 버튼은 로그인 후 이용 가능합니다.");
+	    </script>
+	</div>
 </body>
 </html>

@@ -16,7 +16,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
         // 유저 아이디를 찾는다.
     User findByUserNameAndUserPhonenumber(String userName, String userPhonenumber);
 
-    
+    User findUserByUserId(String userId);
 
 }
 
