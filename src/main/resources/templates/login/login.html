@@ -20,7 +20,7 @@
                 </div>
                 <div class="form-field">
                     <label for="login-password"><i class="fa fa-lock"></i></label>
-                    <input id="login-password" type="password" name="userPw" placeholder="Password" pattern=".{6,}" required>
+                    <input id="login-password" type="password" name="userPw" placeholder="Password" pattern=".{4,}" required>
                     <svg>
                         <use href="#svg-check" />
                     </svg>
@@ -33,7 +33,7 @@
                 </button>
             </form>
             <div class="form-find">
-                <a th:href="@{/login/findPw}">비밀번호 찾기</a> | <a th:href="@{/login/findId}">아이디 찾기</a> | <a th:href="@{/login/register}">회원가입</a>
+                <a th:href="@{/login/findPw}">비밀번호 찾기</a> &nbsp; <a th:href="@{/login/findId}">아이디 찾기</a> &nbsp; <a th:href="@{/login/register}">회원가입</a>
             </div>
         </div>
         <div class="finished">

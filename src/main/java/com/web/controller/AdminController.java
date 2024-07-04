@@ -28,6 +28,7 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 
+
 	// test
 	@GetMapping()
 	public String adminLoginForm() {
