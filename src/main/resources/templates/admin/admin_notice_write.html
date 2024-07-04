@@ -18,14 +18,10 @@
 		<section>
 
 			<div class="post-box">
-
 				<div class="admin-post-content">
-
 					<div class="post-btns">
-						<input type="button" name="" id="" value="작성 완료" class="second_btn"
-							onclick="noticeWriteConfirm()">
-						<input type="button" name="" id="" value="글 목록"
-							th:onclick="|location.href='@{/admin/noticeList}'|">
+						<input type="button" value="작성 완료" class="second_btn" onclick="noticeWriteConfirm()">
+						<input type="button" value="글 목록" th:onclick="|location.href='@{/admin/noticeList}'|">
 					</div>
 
 					<div class="post-info">
@@ -47,34 +43,27 @@
 								</tr>
 							</table>
 						</form>
-
-
 					</div>
-
 				</div>
-
 			</div>
-
 		</section>
 
 	</main>
-	<script>
-
-		function noticeWriteConfirm() {
-			if (document.noticeWriteConfirmForm.noticeTitle.value == "") {
-				alert("제목을 입력하세요");
-				document.noticeWriteConfirmForm.noticeTitle.focus();
-			}
-			else if (document.noticeWriteConfirmForm.noticeContent.value.length == 0) {
-				alert("내용을 입력하세요");
-				document.noticeWriteConfirmForm.noticeContent.focus();
-			} else {
-				document.forms['noticeWriteConfirmForm'].submit();
-			}
-
-		}
-	</script>
 </body>
+<script>
+	function noticeWriteConfirm() {
+		if (document.noticeWriteConfirmForm.noticeTitle.value == "") {
+			alert("제목을 입력하세요");
+			document.noticeWriteConfirmForm.noticeTitle.focus();
+		}
+		else if (document.noticeWriteConfirmForm.noticeContent.value.length == 0) {
+			alert("내용을 입력하세요");
+			document.noticeWriteConfirmForm.noticeContent.focus();
+		} else {
+			document.forms['noticeWriteConfirmForm'].submit();
+		}
+	}
+</script>
 <script th:src="@{/script/admin/adminScript.js}"></script>
 
 </html>

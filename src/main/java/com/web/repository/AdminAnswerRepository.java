@@ -6,4 +6,6 @@ import com.web.domain.Answer;
 
 public interface AdminAnswerRepository extends JpaRepository<Answer, Long> {
 
+	Object findByInquiryNumber(Long inquiryNumber);
+
 }

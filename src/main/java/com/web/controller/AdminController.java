@@ -9,17 +9,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.web.domain.Answer;
 import com.web.domain.Board;
 import com.web.domain.Inquiry;
 import com.web.domain.Notice;
+import com.web.domain.TmpBoard;
 import com.web.domain.User;
 import com.web.service.AdminService;
 import com.web.util.SessionConst;
@@ -35,12 +35,13 @@ public class AdminController {
 	@Autowired
 	private HttpSession session;
 
-	// 로그인
+	// 로그인페이지
 	@GetMapping()
 	public String adminLoginForm() {
 		return "admin/admin_login";
 	}
 
+	// 로그인
 	@PostMapping("login")
 	public String login(@RequestParam String userId, @RequestParam String userPw, Model model,
 			HttpServletRequest request) {
@@ -57,12 +58,11 @@ public class AdminController {
 				session = request.getSession();
 				session.setAttribute(SessionConst.LOGIN_MEMBER, user);
 				return "redirect:/index";
-
 			}
-
 		}
 	}
 
+	// 로그아웃
 	@GetMapping("logout")
 	public String Logout(HttpServletRequest request) {
 		session = request.getSession(false);
@@ -77,7 +77,6 @@ public class AdminController {
 	// 메인페이지 데이터
 	@GetMapping("main")
 	public String admin(Model model) {
-
 		model.addAttribute("mainMember", adminService.getMainUserList());
 		model.addAttribute("mainBoard", adminService.getMainBoardList());
 		model.addAttribute("mainNotice", adminService.getMainNoticeList());
@@ -119,7 +118,8 @@ public class AdminController {
 			@RequestParam(value = "searchType", required = false) String searchType,
 			@RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
 		Pageable pageable = PageRequest.of(page - 1, size);
-		Page<Board> boardPage = adminService.getBoardList(pageable, searchType, searchKeyword);
+//		Page<Board> boardPage = adminService.getBoardList(pageable, searchType, searchKeyword);
+		Page<TmpBoard> boardPage = adminService.getBoardList(pageable, searchType, searchKeyword);
 		model.addAttribute("boardList", boardPage.getContent());
 		model.addAttribute("totalPages", boardPage.getTotalPages());
 		model.addAttribute("currentPage", page);
@@ -138,17 +138,23 @@ public class AdminController {
 	// 게시글 수정 페이지
 	@GetMapping("boardModifyForm")
 	public String boardModify(@RequestParam("boardNumber") Long boardNumber, Model model) {
-		Board board = adminService.getBoard(boardNumber);
+//		Board board = adminService.getBoard(boardNumber);
+		TmpBoard board = adminService.getBoard(boardNumber);
 		model.addAttribute("boardModify", board);
 		return "admin/admin_board_modify";
 	}
 
 	// 게시글 수정
+//	@PostMapping("boardModify")
+//	public String modifyBoard(@RequestParam("boardNumber") Long boardNumber,
+//			@RequestParam("boardTitle") String boardTitle, @RequestParam("boardContent") String boardContent,
+//			Model model) {
+//		adminService.modifyBoard(boardNumber, boardTitle, boardContent);
+//		return "redirect:/admin/boardList";
+//	}
 	@PostMapping("boardModify")
-	public String modifyBoard(@RequestParam("boardNumber") Long boardNumber,
-			@RequestParam("boardTitle") String boardTitle, @RequestParam("boardContent") String boardContent,
-			Model model) {
-		adminService.modifyBoard(boardNumber, boardTitle, boardContent);
+	public String modifyBoard(@ModelAttribute TmpBoard tmpBoard, Model model) {
+		adminService.modifyBoard(tmpBoard);
 		return "redirect:/admin/boardList";
 	}
 
@@ -177,7 +183,7 @@ public class AdminController {
 		return "admin/admin_notice";
 	}
 
-	// 공지 자세히보기
+	// 공지 상세보기
 	@GetMapping("noticeView/{id}")
 	public String viewNotice(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("noticeDetail", adminService.getNotice(id));
@@ -222,7 +228,7 @@ public class AdminController {
 		return "redirect:/admin/noticeList";
 	}
 
-	// ---- 문의 ----
+	// ---- 문의/답변----
 
 	// 문의글 리스트
 	@GetMapping("inquiryList")
@@ -244,31 +250,33 @@ public class AdminController {
 	@GetMapping("inquiryView/{id}")
 	public String viewInquiry(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("inquiryDetail", adminService.getInquiry(id));
-		model.addAttribute("answer", adminService.getAnswer(id));
+		Answer answer = adminService.getAnswer(id);
+		if (answer != null) {
+			model.addAttribute("answer", answer);
+		}
 		return "admin/admin_inquiry_view";
 	}
 
-	// 고칠거
-
-	// 문의 답변 페이지
+	// 문의 답변/수정 페이지
 	@GetMapping("inquiryAnswerForm")
 	public String inquiryAnswerForm(@RequestParam("inquiryNumber") Long inquiryNumber, Model model) {
 		model.addAttribute("inquiryDetail", adminService.getInquiry(inquiryNumber));
+		Answer answer = adminService.getAnswer(inquiryNumber);
+		if (answer != null) {
+			model.addAttribute("answer", answer);
+		}
 		return "admin/admin_inquiry_answer";
 	}
 
-	// 문의글 답변
+	// 문의글 답변/수정
 	@PostMapping("inquiryAnswer")
 	public String answerInquiry(@RequestParam("inquiryNumber") String inquiryNumberString,
 			@RequestParam("userNumber") String userNumberString, @RequestParam("answerContent") String answerContent,
 			Model model) {
-
 		Long inquiryNumber = Long.parseLong(inquiryNumberString);
 		Long userNumber = Long.parseLong(userNumberString);
 		adminService.addinquiryAnswer(inquiryNumber, userNumber, answerContent);
-		Answer answer = adminService.getAnswer(inquiryNumber);
-		model.addAttribute("answer", answer);
-
+		adminService.AnswerDone(inquiryNumber);
 		return "redirect:/admin/inquiryList";
 	}
 

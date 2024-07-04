@@ -9,24 +9,9 @@
 
 <body>
 
-
 	<header th:replace="fragments/admin_header :: admin_header"></header>
 
 </body>
-<!--<script>
-	function login() {
-		if (document.adminLogin.userId.value == "") {
-			alert("아이디를 입력해주세요");
-			document.adminLogin.userId.focus();
-		} else if (document.adminLogin.userPw.value == "") {
-			alert("비밀번호를 입력해주세요");
-			document.adminLogin.userPw.focus();
-		} else {
-			document.adminLogin.submit();
-		}
-	}
-</script>
--->
+<script th:src="@{/script/admin/adminScript.js}"></script>
 
-<script  th:src="@{/script/admin/adminScript.js}"></script>
 </html>

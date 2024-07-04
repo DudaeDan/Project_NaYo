@@ -18,21 +18,17 @@
 		<section>
 
 			<div class="post-box">
-
 				<div class="admin-post-content">
-
 					<div class="post-btns">
-
 						<form th:action="@{/admin/boardModifyForm}" name="boardModify" method="get">
-                            <input type="hidden" name="boardNumber" th:value="${boardDetail.boardNumber}">
-                            <input type="button" name="" id="" value="수정" class="third_btn" onclick="modifySubmit()"> 
-                        </form>
-						<form th:action="@{/admin/boardDelete}" name="boardDelete"  method="post">
 							<input type="hidden" name="boardNumber" th:value="${boardDetail.boardNumber}">
-		                    <input type="button" name="" id="" value="삭제" class="second_btn" onclick="deleteSubmit()"> 
+							<input type="button" value="수정" class="third_btn" onclick="modifySubmit()">
 						</form>
-						<input type="button" name="" id="" value="글 목록"
-							th:onclick="|location.href='@{/admin/boardList}'|">
+						<form th:action="@{/admin/boardDelete}" name="boardDelete" method="post">
+							<input type="hidden" name="boardNumber" th:value="${boardDetail.boardNumber}">
+							<input type="button" value="삭제" class="second_btn" onclick="deleteSubmit()">
+						</form>
+						<input type="button" value="글 목록" th:onclick="|location.href='@{/admin/boardList}'|">
 					</div>
 
 					<div class="post-info">
@@ -48,16 +44,44 @@
 								<td th:text="${boardDetail.boardHit}"></td>
 							</tr>
 							<tr>
-								<th>내용</th>
-								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent}"></td>
+								<th>재료</th>
+								<td colspan="7" class="post-content" th:text="${boardDetail.boardIngredient}"></td>
+							</tr>
+							<tr>
+								<th rowspan="10">내용</th>
+								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent1}"></td>
+							</tr>
+							<tr>
+								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent2}"></td>
+							</tr>
+							<tr>
+								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent3}"></td>
+							</tr>
+							<tr>
+								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent4}"></td>
+							</tr>
+							<tr>
+								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent5}"></td>
+							</tr>
+							<tr>
+								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent6}"></td>
+							</tr>
+							<tr>
+								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent7}"></td>
+							</tr>
+							<tr>
+								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent8}"></td>
+							</tr>
+							<tr>
+								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent9}"></td>
+							</tr>
+
+							<tr>
+								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent10}"></td>
 							</tr>
 						</table>
-
-
 					</div>
-
 				</div>
-
 			</div>
 
 		</section>
@@ -72,5 +96,6 @@
 		document.boardDelete.submit();
 	}
 </script>
-<script  th:src="@{/script/admin/adminScript.js}"></script>
+<script th:src="@{/script/admin/adminScript.js}"></script>
+
 </html>

@@ -1,47 +1,50 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
 </head>
+
 <body>
 
-	<th:block  th:fragment="admin_sidebar">
-	<div class="sidebar">
-       <ul>
-           <div class="side-title">
-               <p>사이트 관리</p>
-           </div>
-           <br/>
-           <li class="admin-side-list">
-               <input type="button" class="side-menu-button" value="메인페이지"
-               th:onclick="|location.href='@{/admin/main}'|">
-           </li>
-           <li class="admin-side-list">
-               <input type="button" class="side-menu-button" value="사용자 목록"
-               th:onclick="|location.href='@{/admin/memberList}'|">
-           </li>
-           <li class="admin-side-list">
-               <input type="button" class="side-menu-button" value="게시글 목록"
-               th:onclick="|location.href='@{/admin/boardList}'|">
-           </li>
-           <li class="admin-side-list">
-               <input type="button" class="side-menu-button" value="공지사항 목록"
-               th:onclick="|location.href='@{/admin/noticeList}'|">
-           </li>
-           <li class="admin-side-list">
-               <input type="button" class="side-menu-button" value="문의 목록"
-               th:onclick="|location.href='@{/admin/inquiryList}'|">
-           </li>
-           <br/>
-           <br/>
-           <li class="admin-side-list">
-               <input type="button" class="side-menu-button" value="사이트 바로가기"
-               th:onclick="|location.href='@{}'|">
-           </li>
-       </ul>
-   </div>
-   </th:block>
-	
+	<th:block th:fragment="admin_sidebar">
+		<div class="sidebar">
+			<ul>
+				<div class="side-title">
+					<p>사이트 관리</p>
+				</div>
+				<br />
+				<li class="admin-side-list">
+					<input type="button" class="side-menu-button" value="메인페이지"
+						th:onclick="|location.href='@{/admin/main}'|">
+				</li>
+				<li class="admin-side-list">
+					<input type="button" class="side-menu-button" value="사용자 목록"
+						th:onclick="|location.href='@{/admin/memberList}'|">
+				</li>
+				<li class="admin-side-list">
+					<input type="button" class="side-menu-button" value="게시글 목록"
+						th:onclick="|location.href='@{/admin/boardList}'|">
+				</li>
+				<li class="admin-side-list">
+					<input type="button" class="side-menu-button" value="공지사항 목록"
+						th:onclick="|location.href='@{/admin/noticeList}'|">
+				</li>
+				<li class="admin-side-list">
+					<input type="button" class="side-menu-button" value="문의 목록"
+						th:onclick="|location.href='@{/admin/inquiryList}'|">
+				</li>
+				<br />
+				<br />
+				<li class="admin-side-list">
+					<input type="button" class="side-menu-button" value="사이트 바로가기"
+						th:onclick="|location.href='@{/index}'|">
+				</li>
+			</ul>
+		</div>
+	</th:block>
+
 </body>
+
 </html>

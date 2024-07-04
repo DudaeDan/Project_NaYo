@@ -17,8 +17,8 @@ public interface AdminUserRepository extends JpaRepository<User, Long> {
 
 	Page<User> findAllByOrderByUserNumberDesc(Pageable pageable);
 
-	Page<User> findByUserNameContaining(String userName, Pageable pageable);
+	Page<User> findByUserNameContainingOrderByUserNumberDesc(String userName, Pageable pageable);
 
-	Page<User> findByUserIdContaining(String userId, Pageable pageable);
+	Page<User> findByUserIdContainingOrderByUserNumberDesc(String userId, Pageable pageable);
 
 }

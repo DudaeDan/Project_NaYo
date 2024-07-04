@@ -1,46 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>관리자 페이지</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin_main.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin.css}">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>관리자 페이지</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin_main.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin.css}">
 </head>
+
 <body>
-<main>
-   
-   <header th:replace="fragments/admin_header :: admin_header"></header>
-   <aside    th:replace="fragments/admin_sidebar :: admin_sidebar"></aside>
-        
-      <!--6개씩-->
-        <section>
-            <div class="admin-big-box">
-                <div class="admin-little-box">
-                    <div class="admin-table">
-                        <div>
-                            <p>사용자 목록</p>
-                            <a th:href='@{/admin/memberList}'>
-                                <img src="https://cdn0.iconfinder.com/data/icons/mobile-basic-vol-1/32/Circle_Plus-48.png" class="see-details">
-                            </a>
-                        </div>
-                        <div>
-                            <table class="admin-table-main">
-                                <thead>
-                                <tr>
-                                    <th>이름</th>
-                                    <th>ID</th>
-                                    <th>닉네임</th>
-                                    <th>가입일</th>
-                                    <th>역할</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+	<main>
+
+		<header th:replace="fragments/admin_header :: admin_header"></header>
+		<aside th:replace="fragments/admin_sidebar :: admin_sidebar"></aside>
+
+		<section>
+			<div class="admin-big-box">
+				<div class="admin-little-box">
+
+					<div class="admin-table">
+						<div>
+							<p>사용자 목록</p>
+							<a th:href='@{/admin/memberList}'>
+								<img src="https://cdn0.iconfinder.com/data/icons/mobile-basic-vol-1/32/Circle_Plus-48.png"
+									class="see-details">
+							</a>
+						</div>
+						<div>
+							<table class="admin-table-main">
+								<thead>
+									<tr>
+										<th>이름</th>
+										<th>ID</th>
+										<th>닉네임</th>
+										<th>가입일</th>
+										<th>역할</th>
+									</tr>
+								</thead>
+								<tbody>
 									<tr th:each="member : ${mainMember}">
 										<td th:text="${member.userName}"></td>
 										<td th:text="${member.userId}"></td>
 										<td th:text="${member.userNickname}"></td>
-										<td  th:text="${#dates.format(member.userRegistdate, 'yyyy-MM-dd')}"></td>
+										<td th:text="${#dates.format(member.userRegistdate, 'yyyy-MM-dd')}"></td>
 										<th:block th:if="${member.userRole == 0}">
 											<td>일반회원</td>
 										</th:block>
@@ -48,109 +51,114 @@
 											<td>관리자</td>
 										</th:block>
 									</tr>
-                                </tbody>
-    
-                                
-                            </table>
-                        </div>
-                    </div>
-                    <div class="admin-table">
-                        <div>
-                            <p>게시글 목록</p>
-                             <a th:href='@{/admin/boardList}'>
-                                <img src="https://cdn0.iconfinder.com/data/icons/mobile-basic-vol-1/32/Circle_Plus-48.png" class="see-details">
-                            </a>
-                        </div>
-                        <div>
-                            <table class="admin-table-main">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 10%;">번호</th>
-                                        <th style="width: 45%;">제목</th>
-                                        <th style="width: 15%;">작성자</th>
-                                        <th style="width: 20%;">작성일</th>
-                                    </tr>
-                                </thead>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="admin-table">
+						<div>
+							<p>게시글 목록</p>
+							<a th:href='@{/admin/boardList}'>
+								<img src="https://cdn0.iconfinder.com/data/icons/mobile-basic-vol-1/32/Circle_Plus-48.png"
+									class="see-details">
+							</a>
+						</div>
+						<div>
+							<table class="admin-table-main">
+								<thead>
+									<tr>
+										<th style="width: 10%;">번호</th>
+										<th style="width: 45%;">제목</th>
+										<th style="width: 15%;">작성자</th>
+										<th style="width: 20%;">작성일</th>
+									</tr>
+								</thead>
 								<tbody>
 									<tr th:each="board : ${mainBoard}">
 										<td th:text="${board.boardNumber}"></td>
 										<td th:text="${board.boardTitle}"></td>
 										<td th:text="${board.User.userNickname}"></td>
-										<td th:text="${#dates.format(board.boardDate, 'yyyy-MM-dd')}" ></td>
+										<td th:text="${#dates.format(board.boardDate, 'yyyy-MM-dd')}"></td>
 									</tr>
 								</tbody>
-                            </tbody>
-                        </table>
-                        
-                    </div>
-                    </div>
-                </div>
-                <div class="admin-little-box">
-                    <div class="admin-table">
-                        <div>
-                            <p>공지사항 목록</p>
-                             <a th:href='@{/admin/noticeList}'>
-                                <img src="https://cdn0.iconfinder.com/data/icons/mobile-basic-vol-1/32/Circle_Plus-48.png" class="see-details">
-                            </a>
-                        </div>
-                        <div>
-                            <table class="admin-table-main">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 10%;">번호</th>
-                                        <th style="width: 55%;">제목</th>
-                                        <th style="width: 35%;">작성일</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+							</table>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="admin-little-box">
+
+					<div class="admin-table">
+						<div>
+							<p>공지사항 목록</p>
+							<a th:href='@{/admin/noticeList}'>
+								<img src="https://cdn0.iconfinder.com/data/icons/mobile-basic-vol-1/32/Circle_Plus-48.png"
+									class="see-details">
+							</a>
+						</div>
+						<div>
+							<table class="admin-table-main">
+								<thead>
+									<tr>
+										<th style="width: 10%;">번호</th>
+										<th style="width: 55%;">제목</th>
+										<th style="width: 35%;">작성일</th>
+									</tr>
+								</thead>
+								<tbody>
 									<tr th:each="notice : ${mainNotice}">
 										<td th:text="${notice.noticeNumber}"></td>
 										<td th:text="${notice.noticeTitle}"></td>
-										<td th:text="${#dates.format(notice.noticeDate, 'yyyy-MM-dd')}" ></td>
+										<td th:text="${#dates.format(notice.noticeDate, 'yyyy-MM-dd')}"></td>
 									</tr>
-                                </tbody>
-                            </table>
-                            
-                        </div>
-                    </div>
-                    <div class="admin-table">
-                        <div>
-                            <p>문의 목록</p>
-                             <a th:href='@{/admin/inquiryList}'>
-                                <img src="https://cdn0.iconfinder.com/data/icons/mobile-basic-vol-1/32/Circle_Plus-48.png" class="see-details">
-                            </a>
-                        </div>
-                        <div>
-                            <table class="admin-table-main">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 15%;">작성자</th>
-                                        <th style="width: 50%;">제목</th>
-                                        <th style="width: 20%;">작성일</th>
-                                        <th style="width: 15%;">진행상황</th>
-                                    </tr>
-                                </thead>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="admin-table">
+						<div>
+							<p>문의 목록</p>
+							<a th:href='@{/admin/inquiryList}'>
+								<img src="https://cdn0.iconfinder.com/data/icons/mobile-basic-vol-1/32/Circle_Plus-48.png"
+									class="see-details">
+							</a>
+						</div>
+						<div>
+							<table class="admin-table-main">
+								<thead>
+									<tr>
+										<th style="width: 15%;">작성자</th>
+										<th style="width: 50%;">제목</th>
+										<th style="width: 20%;">작성일</th>
+										<th style="width: 15%;">진행상황</th>
+									</tr>
+								</thead>
 								<tbody>
 									<tr th:each="inquiry : ${mainInquiry}">
 										<td th:text="${inquiry.User.userNickname}"></td>
 										<td th:text="${inquiry.inquiryTitle}"></td>
-										<td th:text="${#dates.format(inquiry.inquiryDate, 'yyyy-MM-dd')}" ></td>
+										<td th:text="${#dates.format(inquiry.inquiryDate, 'yyyy-MM-dd')}"></td>
 										<th:block th:if="${inquiry.inquiryProgress == 0}">
-											<td style="color: red;">답변 대기</td>
+											<td style="color: red; font-weight: bold;">답변 대기</td>
 										</th:block>
 										<th:block th:if="${inquiry.inquiryProgress == 1}">
 											<td>답변 완료</td>
 										</th:block>
 									</tr>
-                               </tbody>
-                        </table>
-                        
-                        </div>
-                    </div>
-                </div>
-        </section>
-    
-    </main>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+	</main>
 </body>
-<script  th:src="@{/script/admin/adminScript.js}"></script>
+<script th:src="@{/script/admin/adminScript.js}"></script>
+
 </html>

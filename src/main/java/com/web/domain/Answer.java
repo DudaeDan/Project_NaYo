@@ -24,9 +24,8 @@ import lombok.ToString;
 public class Answer {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Answer_SEQ")
-	@SequenceGenerator(name = "Answer_SEQ", sequenceName = "Answer_SEQ", allocationSize = 1)
-	private Long AnswerNumber;
+	@Column(name = "inquiry_number", nullable = false)
+	private Long inquiryNumber;
 
 	@Column(nullable = false)
 	private String answerContent;
@@ -40,6 +39,10 @@ public class Answer {
 	@ManyToOne
 	@JoinColumn(name = "user_number", insertable = false, updatable = false)
 	private User user;
+
+	@ManyToOne
+	@JoinColumn(name = "inquiry_number", insertable = false, updatable = false)
+	private Inquiry inquiry;
 
 	public void update(String answerContent) {
 		this.answerContent = answerContent;

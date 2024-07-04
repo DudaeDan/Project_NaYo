@@ -18,23 +18,19 @@
 		<section>
 
 			<div class="post-box">
-
 				<div class="admin-post-content">
-
 					<div class="post-btns">
 						<form th:action="@{/admin/noticeModifyForm}" name="noticeModifyForm" method="get">
 							<input type="hidden" name="noticeNumber" th:value="${noticeDetail.noticeNumber}">
-							<input type="button" name="" id="" value="수정" class="third_btn" onclick="modifySubmit()">
+							<input type="button" value="수정" class="third_btn" onclick="modifySubmit()">
 						</form>
 						<form th:action="@{/admin/noticeDelete}" name="noticeDelete" method="post">
 							<input type="hidden" name="noticeNumber" th:value="${noticeDetail.noticeNumber}">
-							<input type="button" name="" id="" value="삭제" class="second_btn" onclick="deleteSubmit()">
+							<input type="button" value="삭제" class="second_btn" onclick="deleteSubmit()">
 						</form>
-
-						<input type="button" name="" id="" value="글 목록"
-							th:onclick="|location.href='@{/admin/noticeList}'|">
+						<input type="button" value="글 목록" th:onclick="|location.href='@{/admin/noticeList}'|">
 					</div>
-
+					
 					<div class="post-info">
 						<table class="admin-post">
 							<tr>
@@ -48,12 +44,8 @@
 								<td colspan="7" class="post-content" th:text="${noticeDetail.noticeContent}">내용</td>
 							</tr>
 						</table>
-
-
 					</div>
-
 				</div>
-
 			</div>
 
 		</section>
@@ -68,5 +60,6 @@
 		document.noticeDelete.submit();
 	}
 </script>
-<script  th:src="@{/script/admin/adminScript.js}"></script>
+<script th:src="@{/script/admin/adminScript.js}"></script>
+
 </html>

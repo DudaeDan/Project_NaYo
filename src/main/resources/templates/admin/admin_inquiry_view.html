@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>문의 답변</title>
+	<title>문의글</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin_post.css}">
 </head>
@@ -16,11 +16,8 @@
 		<aside th:replace="fragments/admin_sidebar :: admin_sidebar"></aside>
 
 		<section>
-
 			<div class="post-box">
-
 				<div class="admin-post-content">
-
 					<div class="post-btns">
 						<form th:action="@{/admin/inquiryAnswerForm}" name="inquiryAnswerForm" method="get">
 							<input type="hidden" name="inquiryNumber" th:value="${inquiryDetail.inquiryNumber}">
@@ -28,7 +25,7 @@
 						</form>
 						<input type="button" value="글 목록" th:onclick="|location.href='@{/admin/inquiryList}'|">
 					</div>
-
+					
 					<div class="post-info">
 						<table class="admin-post">
 							<tr>
@@ -47,19 +44,19 @@
 							</tr>
 							<tr>
 								<th>답변</th>
-								<td colspan="5" class="post-content inquiry_answer" ></td>
-								<!--th:text="${inquiryDetail.Answer.answerContent}">
-								</td>
-								https://fightingway.tistory.com/45 참고
-								-->
+
+								<th:block th:if="${answer != null}">
+									<td colspan="5" class="post-content inquiry_answer"
+										th:text="${answer.answerContent}"></td>
+								</th:block>
+								<th:block th:if="${answer == null}">
+									<td colspan="5" class="post-content inquiry_answer"></td>
+								</th:block>
 							</tr>
 						</table>
 					</div>
-
 				</div>
-
 			</div>
-
 		</section>
 
 	</main>
@@ -69,6 +66,6 @@
 		document.inquiryAnswerForm.submit();
 	}
 </script>
-<script  th:src="@{/script/admin/adminScript.js}"></script>
+<script th:src="@{/script/admin/adminScript.js}"></script>
 
 </html>

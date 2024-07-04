@@ -42,21 +42,14 @@ public class Inquiry {
 	@Column(insertable = false, updatable = false, columnDefinition = "DATE DEFAULT SYSDATE")
 	private Date inquiryDate;
 
-	@Column(insertable = false, updatable = false, columnDefinition = "NUMBER DEFAULT 0")
+	@Column(insertable = false, columnDefinition = "NUMBER DEFAULT 0")
 	private Long inquiryProgress;
 
 	@Column(name = "user_number", nullable = false)
 	private Long userNumber;
 
-	@Column(name = "answer_number", nullable = false)
-	private Long answerNumber;
-
 	@ManyToOne
 	@JoinColumn(name = "user_number", insertable = false, updatable = false)
 	private User user;
-
-	@ManyToOne
-	@JoinColumn(name = "answer_number", insertable = false, updatable = false)
-	private Answer answer;
 
 }

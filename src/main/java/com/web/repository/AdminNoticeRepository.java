@@ -14,8 +14,8 @@ public interface AdminNoticeRepository extends JpaRepository<Notice, Long> {
 
 	Page<Notice> findAllByOrderByNoticeNumberDesc(Pageable pageable);
 
-	Page<Notice> findByNoticeTitleContaining(String noticeTitle, Pageable pageable);
+	Page<Notice> findByNoticeTitleContainingOrderByNoticeNumberDesc(String noticeTitle, Pageable pageable);
 
-	Page<Notice> findByUserUserNicknameContaining(String userNickname, Pageable pageable);
+	Page<Notice> findByUserUserNicknameContainingOrderByNoticeNumberDesc(String userNickname, Pageable pageable);
 
 }

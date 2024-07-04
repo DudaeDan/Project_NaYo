@@ -7,13 +7,14 @@
 </head>
 
 <body>
+
 	<th:block th:fragment="admin_header">
 		<div class="admin-header">
 			<div class="header-content">
 				<div class="logo-container">
 					<img th:src="@{/images/admin/admin_logo.png}" class="logo">
 				</div>
-
+				
 				<!--로그인 전-->
 				<th:block th:if="${loginMember == null}">
 					<div class="info-btn-container">
@@ -26,7 +27,7 @@
 						</form>
 					</div>
 				</th:block>
-
+				
 				<!--로그인 후-->
 				<th:block th:if="${loginMember != null}">
 					<div class="info-btn-container">
@@ -36,17 +37,15 @@
 						</p>
 						<div class="header-btn">
 							<form th:action="@{/admin/logout}">
-								<input type="button" name="" id="" class="logout-btn" value="logout" onclick="submit()">
+								<input type="button" class="logout-btn" value="logout" onclick="submit()">
 							</form>
 						</div>
 					</div>
-
 				</th:block>
-
 			</div>
 		</div>
 	</th:block>
-	
+
 </body>
 
 </html>

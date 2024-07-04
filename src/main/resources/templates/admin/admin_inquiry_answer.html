@@ -18,14 +18,12 @@
 		<section>
 
 			<div class="post-box">
-
 				<div class="admin-post-content">
-
 					<div class="post-btns">
 						<input type="button" value="답변 완료" class="second_btn" onclick="inquiryAnswerConfirm()">
 						<input type="button" value="글 목록" th:onclick="|location.href='@{/admin/inquiryList}'|">
 					</div>
-
+					
 					<div class="post-info">
 						<form th:action="@{/admin/inquiryAnswer}" name="inquiryAnswerForm" method="post">
 							<input type="hidden" name="inquiryNumber" th:value="${inquiryDetail.inquiryNumber}">
@@ -48,17 +46,20 @@
 								<tr>
 									<th>답변</th>
 									<td colspan="5" class="post-content inquiry_answer">
-										<textarea name="answerContent" id=""  >
-											
-										</textarea>
+										<th:block th:if="${answer != null}">
+											<textarea name="answerContent" id="" th:text="${answer.answerContent}">
+											</textarea>
+										</th:block>
+										<th:block th:if="${answer == null}">
+											<textarea name="answerContent" id="">
+											</textarea>
+										</th:block>
 									</td>
 								</tr>
 							</table>
 						</form>
 					</div>
-
 				</div>
-
 			</div>
 
 		</section>
@@ -75,6 +76,6 @@
 		}
 	}
 </script>
-<script  th:src="@{/script/admin/adminScript.js}"></script>
+<script th:src="@{/script/admin/adminScript.js}"></script>
 
 </html>
