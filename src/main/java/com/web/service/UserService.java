@@ -8,6 +8,7 @@ public interface UserService {
     void saveUser(User user);
 	User validateUser(String userId, String userPw);
 	User findUserByNameAndPhone(String user_name, String user_phone);
+	User findUserByUserId(String name);
 	User findUserByNameIdAndPhone(String userName, String userId, String userPhonenumber);
 	String generateTemporaryPassword();
 	void sendTemporaryPassword(String userId, String temporaryPw);
