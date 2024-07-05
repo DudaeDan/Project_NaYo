@@ -3,33 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>레시피 웹페이지</title>
-    <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>레시피 웹 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/layout/login/findId.css}">
 </head>
 <body>
-    <header th:replace="fragments/header :: header"></header>
-    <div class="container">
-        <div th:replace="fragments/sidebar :: sidebar"></div>
-        <div class="main-content">
-            <div class="login">
-                <div class="form">
-                    <h2>아이디 찾기 결과</h2>
-                    <div th:if="${foundId != null}">
-                        <p>아이디: <span th:text="${foundId}"></span></p>
-                    </div>
-                    <div th:if="${findIdError != null}">
-                        <p th:text="${findIdError}" class="text-danger"></p>
-                    </div>
-                    <button type="button" class="button" th:onclick="|window.location.href='@{/login/login}'|">
-                        <div class="arrow-wrapper">
-                            <span class="arrow"></span>
-                        </div>
-                        <p class="button-text">로그인</p>
-                    </button>
-                </div>
+    <div class="login">
+        <div class="form">
+            <h2>아이디 찾기 결과</h2>
+            <form th:action="@{/login/founId}" method="post">
+            <div class="form-field">
+                <label for="found-id"></label>
+                <input id="found-id" type="text" th:value="'아이디 : '+${foundId}" readonly>
             </div>
+            <button type="button" class="button" th:onclick="|window.location.href='@{/login/login}'|">
+                <div class="arrow-wrapper">
+                    <span class="arrow"></span>
+                </div>
+                <p class="button-text">로그인</p>
+            </button>
+             </form>
+            
         </div>
     </div>
     <script th:src="@{/script/layout/Layout_scripts.js}"></script>

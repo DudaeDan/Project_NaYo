@@ -12,34 +12,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+	
     User findByUserId(String userId);
-        // 유저 아이디를 찾는다.
+    // 유저 아이디를 찾는다.
     User findByUserNameAndUserPhonenumber(String userName, String userPhonenumber);
+	User findByUserNameAndUserIdAndUserPhonenumber(String userName, String userId, String userPhonenumber);
 
     User findUserByUserId(String userId);
 
 }
 
-//package com.web.repository;
-//
-//import com.web.domain.User;
-//
-//import java.util.Optional;
-//
-//import org.springframework.data.jpa.repository.JpaRepository;
-//
-//public interface UserRepository extends JpaRepository<User, Long> {
-//
-//    //로그인
-//	User findByUserIdAndUserPw(String userId, String userPw);
-//
-//
-//
-//	//회원가입 중복 체크
-//	boolean existsByUserId(String userId);
-//	boolean existsByUserNickname(String userNickname);
-//	Optional<User> findByUserId(String userId);
-//	
-//
-//
-//}

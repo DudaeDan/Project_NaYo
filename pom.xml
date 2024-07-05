@@ -33,6 +33,21 @@
 
 				
 		
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+	
+	    <!-- Spring Boot Starter Mail -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-mail</artifactId>
+	    </dependency>
+	    
+	   
+	   
+
+				
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -78,6 +93,8 @@
 			<artifactId>maven-resources-plugin</artifactId>
 			<version>2.4.3</version>
 		</dependency>
+		
+	
 	</dependencies>
 
 	<build>
