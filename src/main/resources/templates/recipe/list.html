@@ -6,7 +6,8 @@
     <title>레시피 웹페이지</title>
     <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
     <link rel="stylesheet" th:href="@{/css/recipe/recipe_list_style.css}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
 </head>
 <body>
     <!-- 헤더 프래그먼트를 포함 -->
@@ -18,7 +19,7 @@
             <div class="recipe-grid">
                 <div th:each="recipe : ${recipes}" class="recipe-item">
                     <div class="thumbnail">
-                        <a th:href="@{'/recipes/' + ${recipe.encodedName}}">
+                        <a th:href="@{'/recipes/recipes/' + ${recipe.encodedName}}">
                             <img th:src="@{${recipe.MANUAL_IMG01}}" alt="썸네일" style="width:100%; height:auto;">
                         </a>
                     </div>
@@ -46,7 +47,5 @@
             </div>
         </div>
     </div>
-    <script th:src="@{/script/recipe/recipe_list.js}"></script>
-    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
 </body>
 </html>

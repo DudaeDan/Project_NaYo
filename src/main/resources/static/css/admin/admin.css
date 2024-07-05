@@ -1,117 +1,129 @@
 @charset "utf-8";
 
 * {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
 }
 
 body {
-    min-height: 100%;
-    line-height: 1.0 ;
-    margin: 0;
-    background-color: #efefef;
+	min-height: 100%;
+	line-height: 1.0;
+	margin: 0;
+	background-color: #efefef;
 }
 
 body main {
-    display: flex;
+	display: flex;
 }
 
 li {
-    list-style: none;
+	list-style: none;
 }
 
-
-/* 헤더 */
-
-.admin-header  {
-    height: 60px;
-    width: 100%;
-    background-color: white;
-    border-bottom: 1px solid #424453; 
-    box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    z-index: 3;
-    position: fixed;
-}
-
-.logo-container {
-    position: absolute;
-    margin-top: 7px;
-    margin-left: 41px;
-}
-.logo {
-    width: 60px;
-    height: 45px;
-
-}
-
-.logout {
-    position:   absolute;
-    right : 30px;
-    margin-top: 10px;
-}
-
-.logout input {
-    padding: 10px;
-    width: 80px;
-    border-radius: 5px;
-    color: white;
-    background-color: #424453;
-    font-weight: bold;
-    border: none;
-}
-
-.logout input:hover {
-    background-color: #9b9ca9 ;
-}
-
-.main-page-btn {
-    color: black !important;
-}
-
-
-/* 사이드 */
-
-.sidebar {
-    height: 100%;
-    position: fixed;
-    width: 10%;
-    min-width: 150px;
-    background: #424453;
-}
-
-li.admin-side-list:hover {
-    background-color: #9b9ca9;
-}
-
-.side-menu-button {
-    width: 100%;
-    background-color: inherit;
-    border: none;
-    cursor: pointer;
-    color: white;
-    text-align: left;
-    height: 40px;
-    padding-left: 20px;
-}
-
-.side-title {
-    margin: 90px 0 30px 0;
-    color: #fff;
-    font-size: 20px;
-    padding-left: 20px;
-}
-
-/*  */
-
-section{
-    width: 90%;
-    margin-left: 10%;
-    height: 100%;
+section {
+	width: 90%;
+	margin-left: 10%;
+	height: 100%;
 }
 
 .page-name {
-    margin-top: 50px;
-    margin-left: 30px;
+	margin-top: 50px;
+	margin-left: 30px;
+}
+
+
+
+/* 헤더 */
+.admin-header {
+	height: 60px;
+	width: 100%;
+	background-color: white;
+	border-bottom: 1px solid #424453;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	z-index: 3;
+	position: fixed;
+}
+
+.logo-container {
+	position: absolute;
+	margin-top: 7px;
+	margin-left: 41px;
+}
+
+.logo {
+	width: 60px;
+	height: 45px;
+
+}
+
+.info-btn-container {
+	position: absolute;
+	right: 30px;
+	margin-top: 10px;
+	display: block;
+}
+
+.login-info {
+	font-size: 14px;
+	display: inline-block;
+	padding: 0 10px;
+}
+
+.header-btn {
+	padding: 0 10px;
+	display: inline-block;
+}
+
+.header-btn input {
+	padding: 10px;
+	width: 80px;
+	border-radius: 5px;
+	color: white;
+	background-color: #424453;
+	font-weight: bold;
+	border: none;
+	position: relative;
+}
+
+.header-btn input:hover {
+	background-color: #9b9ca9;
+}
+
+.main-page-btn {
+	color: black !important;
+}
+
+
+
+/* 사이드 */
+.sidebar {
+	height: 100%;
+	position: fixed;
+	width: 10%;
+	min-width: 150px;
+	background: #424453;
+}
+
+li.admin-side-list:hover {
+	background-color: #9b9ca9;
+}
+
+.side-menu-button {
+	width: 100%;
+	background-color: inherit;
+	border: none;
+	cursor: pointer;
+	color: white;
+	text-align: left;
+	height: 40px;
+	padding-left: 20px;
+}
+
+.side-title {
+	margin: 90px 0 30px 0;
+	color: #fff;
+	font-size: 20px;
+	padding-left: 20px;
 }

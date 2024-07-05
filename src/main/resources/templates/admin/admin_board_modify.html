@@ -18,9 +18,7 @@
 		<section>
 
 			<div class="post-box">
-
 				<div class="admin-post-content">
-
 					<div class="post-btns">
 						<input type="button" name="" id="" value="수정 완료" class="second_btn"
 							onclick="boardModifyConfirm()">
@@ -45,30 +43,88 @@
 									<td th:text="${boardModify.boardHit}"></td>
 								</tr>
 								<tr>
-									<th>내용</th>
-									<td colspan="7" class="post-content post-modify">
-										<textarea name="boardContent" id="" th:text="${boardModify.boardContent}"></textarea>
+									<th>재료</th>
+									<td colspan="7" class="post-content board-modify">
+										<textarea name="boardIngredient"
+											th:text="${boardModify.boardIngredient}"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<th rowspan="10">내용</th>
+									<td colspan="7" class="post-content board-modify">
+										<textarea name="boardContent1"
+											th:text="${boardModify.boardContent1}"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="7" class="post-content board-modify">
+										<textarea name="boardContent2"
+											th:text="${boardModify.boardContent2}"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="7" class="post-content board-modify">
+										<textarea name="boardContent3"
+											th:text="${boardModify.boardContent3}"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="7" class="post-content board-modify">
+										<textarea name="boardContent4"
+											th:text="${boardModify.boardContent4}"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="7" class="post-content board-modify">
+										<textarea name="boardContent5"
+											th:text="${boardModify.boardContent5}"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="7" class="post-content board-modify">
+										<textarea name="boardContent6"
+											th:text="${boardModify.boardContent6}"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="7" class="post-content board-modify">
+										<textarea name="boardContent7"
+											th:text="${boardModify.boardContent7}"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="7" class="post-content board-modify">
+										<textarea name="boardContent8"
+											th:text="${boardModify.boardContent8}"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="7" class="post-content board-modify">
+										<textarea name="boardContent9"
+											th:text="${boardModify.boardContent9}"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="7" class="post-content board-modify">
+										<textarea name="boardContent10"
+											th:text="${boardModify.boardContent10}"></textarea>
 									</td>
 								</tr>
 							</table>
-
 						</form>
-
-
 					</div>
-
 				</div>
-
 			</div>
 
 		</section>
 
 	</main>
-	<script>
-		function boardModifyConfirm() {
-			document.forms['boardModifyConfirmForm'].submit();
-		}
-	</script>
 </body>
+<script>
+	function boardModifyConfirm() {
+		document.forms['boardModifyConfirmForm'].submit();
+	}
+</script>
+<script th:src="@{/script/admin/adminScript.js}"></script>
 
 </html>

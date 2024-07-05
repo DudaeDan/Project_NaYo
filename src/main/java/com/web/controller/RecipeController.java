@@ -52,4 +52,7 @@ public class RecipeController {
         model.addAttribute("recipe", recipe);
         return "recipe/detail";
     }
+     
+
+    
 }

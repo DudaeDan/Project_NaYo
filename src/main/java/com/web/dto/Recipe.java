@@ -171,7 +171,7 @@ public class Recipe {
 
     private String encodedName;
 
-    // 메소드 추가
+    // 개수 확인용
     public String getManual(int step) {
         switch (step) {
             case 1: return MANUAL01;

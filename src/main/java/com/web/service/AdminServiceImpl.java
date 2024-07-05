@@ -1,16 +1,17 @@
 package com.web.service;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import com.web.domain.Answer;
 import com.web.domain.Board;
 import com.web.domain.Inquiry;
 import com.web.domain.Notice;
+import com.web.domain.TmpBoard;
 import com.web.domain.User;
+import com.web.repository.AdminAnswerRepository;
 import com.web.repository.AdminBoardRepository;
 import com.web.repository.AdminInquiryRepository;
 import com.web.repository.AdminNoticeRepository;
@@ -29,17 +30,13 @@ public class AdminServiceImpl implements AdminService {
 	private AdminNoticeRepository adNoticeRepo;
 	@Autowired
 	private AdminInquiryRepository adInquiryRepo;
+	@Autowired
+	private AdminAnswerRepository adAnswerRepo;
 
-	// 테스트
-
+	// 로그인
 	@Override
-	public User getLoginUser(User user) {
-		Optional<User> findUser = adUserRepo.findByUserId(user.getUserId());
-		if (findUser.isPresent()) { 
-			return findUser.get();
-		} else {
-			return null;
-		}
+	public User adminLogin(String userId, String userPw) {
+		return adUserRepo.findByUserIdAndUserPw(userId, userPw);
 	}
 
 	// admin main
@@ -49,7 +46,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Board> getMainBoardList() {
+//	public List<Board> getMainBoardList() {
+	public List<TmpBoard> getMainBoardList() {
 		return adBoardRepo.findTop6ByOrderByBoardNumberDesc();
 	}
 
@@ -60,7 +58,8 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<Inquiry> getMainInquiryList() {
-		return adInquiryRepo.findTop6ByOrderByInquiryNumberDesc();
+//		return adInquiryRepo.findTop6ByOrderByInquiryNumberDesc();
+		return adInquiryRepo.findTop6ByOrderByInquiryProgressAsc();
 	}
 
 	// admin member
@@ -72,9 +71,9 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Page<User> getMemberList(Pageable pageable, String searchType, String searchKeyword) {
 		if ("name".equals(searchType)) {
-			return adUserRepo.findByUserNameContaining(searchKeyword, pageable);
+			return adUserRepo.findByUserNameContainingOrderByUserNumberDesc(searchKeyword, pageable);
 		} else if ("id".equals(searchType)) {
-			return adUserRepo.findByUserIdContaining(searchKeyword, pageable);
+			return adUserRepo.findByUserIdContainingOrderByUserNumberDesc(searchKeyword, pageable);
 		} else {
 			return adUserRepo.findAllByOrderByUserNumberDesc(pageable);
 		}
@@ -86,33 +85,68 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	// admin board
+//	@Override
+//	public Page<Board> getBoardList(Pageable pageable) {
+//		return adBoardRepo.findAllByOrderByBoardNumberDesc(pageable);
+//	}
 	@Override
-	public Page<Board> getBoardList(Pageable pageable) {
+	public Page<TmpBoard> getBoardList(Pageable pageable) {
 		return adBoardRepo.findAllByOrderByBoardNumberDesc(pageable);
 	}
 
+//	@Override
+//	public Page<Board> getBoardList(Pageable pageable, String searchType, String searchKeyword) {
+//		if ("title".equals(searchType)) {
+//			return adBoardRepo.findByBoardTitleContainingOrderByBoardNumberDesc(searchKeyword, pageable);
+//		} else if ("nickname".equals(searchType)) {
+//			return adBoardRepo.findByUserUserNicknameContainingOrderByBoardNumberDesc(searchKeyword, pageable);
+//		} else {
+//			return adBoardRepo.findAllByOrderByBoardNumberDesc(pageable);
+//		}
+//	}
 	@Override
-	public Page<Board> getBoardList(Pageable pageable, String searchType, String searchKeyword) {
+	public Page<TmpBoard> getBoardList(Pageable pageable, String searchType, String searchKeyword) {
 		if ("title".equals(searchType)) {
-			return adBoardRepo.findByBoardTitleContaining(searchKeyword, pageable);
+			return adBoardRepo.findByBoardTitleContainingOrderByBoardNumberDesc(searchKeyword, pageable);
 		} else if ("nickname".equals(searchType)) {
-			return adBoardRepo.findByUserUserNicknameContaining(searchKeyword, pageable);
+			return adBoardRepo.findByUserUserNicknameContainingOrderByBoardNumberDesc(searchKeyword, pageable);
 		} else {
 			return adBoardRepo.findAllByOrderByBoardNumberDesc(pageable);
 		}
 	}
 
+//	@Override
+//	public Board getBoard(Long boardNumber) {
+//		return adBoardRepo.findById(boardNumber).orElse(null);
+//	}
 	@Override
-	public Board getBoard(Long boardNumber) {
-		// TODO Auto-generated method stub
+	public TmpBoard getBoard(Long boardNumber) {
 		return adBoardRepo.findById(boardNumber).orElse(null);
 	}
 
+//	@Override
+//	public void modifyBoard(Long boardNumber, String boardTitle, String boardContent) {
+////		Board board = adBoardRepo.findById(boardNumber).orElse(null);
+//		TmpBoard board = adBoardRepo.findById(boardNumber).orElse(null);
+//		board.setBoardTitle(boardTitle);
+////		board.setBoardContent(boardContent);
+//		adBoardRepo.save(board);
+//	}
 	@Override
-	public void modifyBoard(Long boardNumber, String boardTitle, String boardContent) {
-		Board board = adBoardRepo.findById(boardNumber).orElse(null);
-		board.setBoardTitle(boardTitle);
-		board.setBoardContent(boardContent);
+	public void modifyBoard(TmpBoard tmpBoard) {
+		TmpBoard board = adBoardRepo.findById(tmpBoard.getBoardNumber()).orElse(null);
+		board.setBoardTitle(tmpBoard.getBoardTitle());
+		board.setBoardIngredient(tmpBoard.getBoardIngredient());
+		board.setBoardContent1(tmpBoard.getBoardContent1());
+		board.setBoardContent2(tmpBoard.getBoardContent2());
+		board.setBoardContent3(tmpBoard.getBoardContent3());
+		board.setBoardContent4(tmpBoard.getBoardContent4());
+		board.setBoardContent5(tmpBoard.getBoardContent5());
+		board.setBoardContent6(tmpBoard.getBoardContent6());
+		board.setBoardContent7(tmpBoard.getBoardContent7());
+		board.setBoardContent8(tmpBoard.getBoardContent8());
+		board.setBoardContent9(tmpBoard.getBoardContent9());
+		board.setBoardContent10(tmpBoard.getBoardContent10());
 		adBoardRepo.save(board);
 	}
 
@@ -130,9 +164,9 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Page<Notice> getNoticeList(Pageable pageable, String searchType, String searchKeyword) {
 		if ("title".equals(searchType)) {
-			return adNoticeRepo.findByNoticeTitleContaining(searchKeyword, pageable);
+			return adNoticeRepo.findByNoticeTitleContainingOrderByNoticeNumberDesc(searchKeyword, pageable);
 		} else if ("nickname".equals(searchType)) {
-			return adNoticeRepo.findByUserUserNicknameContaining(searchKeyword, pageable);
+			return adNoticeRepo.findByUserUserNicknameContainingOrderByNoticeNumberDesc(searchKeyword, pageable);
 		} else {
 			return adNoticeRepo.findAllByOrderByNoticeNumberDesc(pageable);
 		}
@@ -147,7 +181,7 @@ public class AdminServiceImpl implements AdminService {
 	public void writeNotice(Long userNumber, String noticeTitle, String noticeContent) {
 		User user = adUserRepo.findById(userNumber).orElse(null);
 		Notice notice = new Notice();
-		notice.setUser(user);
+		notice.setUserNumber(user.getUserNumber());
 		notice.setNoticeTitle(noticeTitle);
 		notice.setNoticeContent(noticeContent);
 		adNoticeRepo.save(notice);
@@ -170,17 +204,21 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Page<Inquiry> getInquiryList(Pageable pageable) {
-		return adInquiryRepo.findAllByOrderByInquiryNumberDesc(pageable);
+//		return adInquiryRepo.findAllByOrderByInquiryNumberDesc(pageable);
+		return adInquiryRepo.findAllByOrderByInquiryProgressAsc(pageable);
 	}
 
 	@Override
 	public Page<Inquiry> getInquiryList(Pageable pageable, String searchType, String searchKeyword) {
 		if ("title".equals(searchType)) {
-			return adInquiryRepo.findByInquiryTitleContaining(searchKeyword, pageable);
+//			return adInquiryRepo.findByInquiryTitleContainingOrderByInquiryNumberDesc(searchKeyword, pageable);
+			return adInquiryRepo.findByInquiryTitleContainingOrderByInquiryProgressAsc(searchKeyword, pageable);
 		} else if ("nickname".equals(searchType)) {
-			return adInquiryRepo.findByUserUserNicknameContaining(searchKeyword, pageable);
+//			return adInquiryRepo.findByUserUserNicknameContainingOrderByInquiryNumberDesc(searchKeyword, pageable);
+			return adInquiryRepo.findByUserUserNicknameContainingOrderByInquiryProgressAsc(searchKeyword, pageable);
 		} else {
-			return adInquiryRepo.findAllByOrderByInquiryNumberDesc(pageable);
+//			return adInquiryRepo.findAllByOrderByInquiryNumberDesc(pageable);
+			return adInquiryRepo.findAllByOrderByInquiryProgressAsc(pageable);
 		}
 	}
 
@@ -189,4 +227,28 @@ public class AdminServiceImpl implements AdminService {
 		return adInquiryRepo.findById(inquiryNumber).orElse(null);
 	}
 
+	@Override
+	public Answer getAnswer(Long inquiryNumber) {
+		return adAnswerRepo.findById(inquiryNumber).orElse(null);
+	}
+
+	@Override
+	public void addinquiryAnswer(Long inquiryNumber, Long userNumber, String answerContent) {
+		Inquiry inquiry = adInquiryRepo.findById(inquiryNumber).orElse(null);
+		User user = adUserRepo.findById(userNumber).orElse(null);
+		Answer answer = new Answer();
+		answer.setUserNumber(user.getUserNumber());
+		answer.setInquiryNumber(inquiry.getInquiryNumber());
+		answer.setAnswerContent(answerContent);
+		adAnswerRepo.save(answer);
+	}
+
+	@Override
+	public void AnswerDone(Long inquiryNumber) {
+		Inquiry inquiry = adInquiryRepo.findById(inquiryNumber).orElse(null);
+		if (adAnswerRepo.findById(inquiryNumber) != null) {
+			inquiry.setInquiryProgress(1L);
+			adInquiryRepo.save(inquiry);
+		}
+	}
 }

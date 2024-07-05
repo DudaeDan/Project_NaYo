@@ -52,7 +52,7 @@ public class RecipeServiceImpl implements RecipeService {
             logger.warn("No recipes found in the response.");
         }
         return recipes;
-    }
+    } 
 
     @Override
     public int getTotalCount() {
@@ -63,19 +63,6 @@ public class RecipeServiceImpl implements RecipeService {
         RecipeResponse response = restTemplate.getForObject(url, RecipeResponse.class);
         return response != null ? response.getCookRcp().getTotalCount() : 0;
     }
-
-//    @Override
-//    public Recipe getRecipeById(String id) {
-//        String url = String.format("http://openapi.foodsafetykorea.go.kr/api/%s/%s/%s/%s/%s",
-//                                    apiKey, serviceId, dataType, id, id);
-//        logger.info("Fetching recipe by ID from URL: {}", url);
-//
-//        RecipeResponse response = restTemplate.getForObject(url, RecipeResponse.class);
-//        if (response != null && response.getCookRcp().getRecipes() != null && !response.getCookRcp().getRecipes().isEmpty()) {
-//            return response.getCookRcp().getRecipes().get(0);
-//        }
-//        return null;
-//    }
 
     @Override
     public Recipe getRecipeByName(String name) {

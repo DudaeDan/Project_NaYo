@@ -1,3 +1,4 @@
+@charset "utf-8";
 
 .member-view-box {
 	width: 50%;
@@ -7,8 +8,9 @@
 	margin-top: 50px;
 }
 
-/* 테이블  */
 
+
+/* 테이블  */
 .view-info {
 	position: absolute;
 	width: 100%;
@@ -46,8 +48,9 @@ td {
 	padding: 15px 0;
 }
 
-/* 버튼 */
 
+
+/* 버튼 */
 .view-btns {
 	position: relative;
 	margin-top: 25px;
