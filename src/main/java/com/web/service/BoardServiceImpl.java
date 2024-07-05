@@ -8,6 +8,8 @@ import com.web.repository.LikeRepository;
 import com.web.repository.StepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,6 +37,7 @@ public class BoardServiceImpl implements BoardService {
     @Autowired
     private StepRepository stepRepository;
 
+    
     @Override
     public Board saveBoard(Board board) {
         return boardRepository.save(board);
@@ -82,39 +85,36 @@ public class BoardServiceImpl implements BoardService {
 
 
 
-	@Override
-	public void saveBoard(Board board, MultipartFile mainImgFile, List<String> stepDescriptions, List<MultipartFile> stepImages) {
-	    // 조회수와 좋아요 수 초기화
-	    board.setBoardHit(0);
-	    board.setBoardLike(0);
-	
-	    // Save main image
-	    if (!mainImgFile.isEmpty()) {
-	        String mainImgName = saveFile(mainImgFile, MAIN_IMG_DIR);
-	        board.setMainImg(mainImgName); // 파일 경로를 엔티티에 설정
-	    }
-	
-	    // Save steps
-	    List<Step> steps = new ArrayList<>();
-	    for (int i = 0; i < stepDescriptions.size(); i++) {
-	        Step step = new Step();
-	        step.setStepNumber(i + 1); // 스텝 번호 설정 (1부터 시작)
-	        step.setStepDescription(stepDescriptions.get(i));
-	
-	        if (i < stepImages.size()) {
-	            MultipartFile stepImg = stepImages.get(i);
-	            if (stepImg != null && !stepImg.isEmpty()) {
-	                String stepImgName = saveFile(stepImg, STEP_IMG_DIR);
-	                step.setStepImage(stepImgName); // 파일 경로를 엔티티에 설정
-	            }
-	        }
-	        step.setBoard(board);
-	        steps.add(step);
-	    }
-	
-	    board.setSteps(steps);
-	    boardRepository.save(board);
-	}
+    @Override
+    public void saveBoard(Board board, MultipartFile mainImgFile, List<String> stepDescriptions, List<MultipartFile> stepImages) {
+        board.setBoardHit(0);
+        board.setBoardLike(0);
+
+        if (!mainImgFile.isEmpty()) {
+            String mainImgName = saveFile(mainImgFile, MAIN_IMG_DIR);
+            board.setMainImg(mainImgName);
+        }
+
+        List<Step> steps = new ArrayList<>();
+        for (int i = 0; i < stepDescriptions.size(); i++) {
+            Step step = new Step();
+            step.setStepNumber(i + 1);
+            step.setStepDescription(stepDescriptions.get(i));
+
+            if (i < stepImages.size()) {
+                MultipartFile stepImg = stepImages.get(i);
+                if (stepImg != null && !stepImg.isEmpty()) {
+                    String stepImgName = saveFile(stepImg, STEP_IMG_DIR);
+                    step.setStepImage(stepImgName);
+                }
+            }
+            step.setBoard(board);
+            steps.add(step);
+        }
+
+        board.setSteps(steps);
+        boardRepository.save(board);
+    }
 
     private String saveFile(MultipartFile file, String directory) {
         try {
@@ -133,6 +133,12 @@ public class BoardServiceImpl implements BoardService {
     public void save(Board board) {
         boardRepository.save(board);
     }
+
+    @Override
+    public Page<Board> findAllBoards(Pageable pageable) {
+        return boardRepository.findAll(pageable);
+    }
+
 
       
 }

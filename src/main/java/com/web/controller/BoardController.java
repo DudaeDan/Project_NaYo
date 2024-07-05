@@ -6,7 +6,10 @@ import com.web.service.BoardService;
 import com.web.service.LikeService;
 import com.web.service.UserService;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,15 +34,29 @@ public class BoardController {
     private UserService userService;
     
     @GetMapping("/list")
-    public String listBoards(Model model) {
-        List<Board> boards = boardService.findAllBoards();
-        model.addAttribute("boards", boards);
-        return "/board/boardlist";
+    public String listBoards(Model model, 
+                             @RequestParam(defaultValue = "0") int page, 
+                             @RequestParam(defaultValue = "10") int size) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "boardDate"));
+        Page<Board> boardPage = boardService.findAllBoards(pageRequest);
+
+        model.addAttribute("boards", boardPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", boardPage.getTotalPages());
+        model.addAttribute("totalItems", boardPage.getTotalElements());
+
+        return "board/boardlist";
     }
 
     @GetMapping("/ranking")
-    public String ranking() {
-
+    public String rankingBoards(Model model,
+                                @RequestParam(defaultValue = "1") int page,
+                                @RequestParam(defaultValue = "30") int size) {
+        PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "boardLike"));
+        Page<Board> boardPage = boardService.findAllBoards(pageRequest);
+        model.addAttribute("boards", boardPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", boardPage.getTotalPages());
         return "/board/ranking";
     }
     

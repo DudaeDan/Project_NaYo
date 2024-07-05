@@ -6,10 +6,14 @@ import com.web.domain.Step;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface BoardService {
 
+    Page<Board> findAllBoards(Pageable pageable); // 새로운 메서드 추가
+    
     Board saveBoard(Board board);
 
     List<Board> findAllBoards();
