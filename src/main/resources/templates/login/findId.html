@@ -5,42 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>레시피 웹 페이지</title>
     <link rel="stylesheet" th:href="@{/css/layout/login/findId.css}">
-    <!-- <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}"> -->
 </head>
 <body>
-    <!-- <header th:replace="fragments/header :: header"></header>
-    <div class="container">
-        <div th:replace="fragments/sidebar :: sidebar"></div>
-        <div class="main-content"> -->
-          <div class="login">
-            <div class="form">
-              <h2>아이디 찾기</h2>
+    <div class="login">
+        <div class="form">
+            <h2>아이디 찾기</h2>
               <form th:action="@{/login/findId}" method="post">
-                <div class="form-field">
-                  <label for="user-name"></label>
-                  <input id="user-name" type="text" name="user_name" placeholder="이름" required>
-                </div>
-                <div class="form-field">
-                  <label for="user-phone"></label>
-                  <input id="user-phone" type="text" name="user_phone" placeholder="전화번호" required>
-                </div>
-                <button type="submit" class="button">
-                  <div class="arrow-wrapper">
-                    <span class="arrow"></span>
-                  </div>
-                  <p class="button-text">확인</p>
-                </button>
+                 <div class="form-field">
+                    <label for="user-name"></label>
+                    <input id="user-name" type="text" name="user_name" placeholder="이름" required>
+                 </div>
+                 <div class="form-field">
+                    <label for="user-phone"></label>
+                    <input id="user-phone" type="text" name="user_phone" placeholder="전화번호" required>
+                 </div>
+                  <button type="submit" class="button">
+                    <div class="arrow-wrapper">
+                      <span class="arrow"></span>
+                    </div>
+                      <p class="button-text">확인</p>
+                  </button>
               </form>
-              <button type="button" class="button" th:onclick="|window.location.href='@{/login/login}'|">
-                <div class="arrow-wrapper">
-                  <span class="arrow"></span>
-                </div>
-                <p class="button-text">뒤로가기</p>
-              </button>
-            </div>
-          </div>
-        <!-- </div> -->
-    <!-- </div> -->
+               <button type="button" class="button" th:onclick="|window.location.href='@{/login/login}'|">
+                 <div class="arrow-wrapper">
+                   <span class="arrow"></span>
+                 </div>
+                  <p class="button-text">뒤로가기</p>
+               </button>
+           </div>
+     </div>
+      <div th:if="${findIdError}">
+        <script th:inline="javascript">
+            alert("존재하는 아이디가 없습니다");
+        </script>
+     </div>
     <script th:src="@{/script/layout/Layout_scripts.js}"></script>
 </body>
 </html>

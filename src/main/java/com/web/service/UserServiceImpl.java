@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
                 helper.setTo(userId);
                 helper.setSubject("임시 비밀번호 안내");
                 helper.setText(buildHtmlEmailContent(user.getUserName(), temporaryPw), true);
-//                helper.setFrom("dksekgp111@naver.com"); // spring.mail.username 값과 동일하게 설정
+                //helper.setFrom("dksekgp111@naver.com"); // spring.mail.username 값과 동일하게 설정
                 helper.setFrom("ahndaaa1230@gamil.com"); // spring.mail.username 값과 동일하게 설정
                 javaMailSender.send(message);
             } catch (MailException | MessagingException e) {

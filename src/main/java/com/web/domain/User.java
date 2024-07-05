@@ -42,4 +42,24 @@ public class User {
 
     @Column(nullable = false)
     private Integer userRole; // 0: 일반, 1: 관리자
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
