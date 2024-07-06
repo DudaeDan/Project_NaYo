@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레시피 수정 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
+    <link rel="stylesheet" th:href="@{/css/board/board_edit_style.css}">
+    <script th:src="@{/script/border/edit.js}"></script> <!-- edit.js 파일 추가 -->
+</head>
+<body>
+    <header th:replace="fragments/header :: header"></header>
+    <div class="container">
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+        <div class="main-content">
+            <div class="box title-image-section">
+                <h1>레시피 수정</h1>
+                <form id="recipeForm" th:action="@{'/board/update/' + ${board.boardNumber}}" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+                    <div class="form-group">
+                        <label for="boardTitle">제목</label>
+                        <input type="text" id="boardTitle" name="boardTitle" th:value="${board.boardTitle}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="boardContent">내용</label>
+                        <textarea id="boardContent" name="boardContent" rows="5" required th:text="${board.boardContent}"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="mainImgFile">대표 이미지</label>
+                        <input type="file" id="mainImgFile" name="mainImgFile" onchange="previewMainImage(event)">
+                        <div class="img-preview">
+                            <img id="mainImgPreview" th:src="@{'/Images/border/main/' + ${board.mainImg}}" alt="main_img" class="main-img">
+                        </div>
+                    </div>
+                    <div class="box ingredient-section">
+                        <h2>요리 재료 목록</h2>
+                        <div id="ingredientList" class="ingredient-list">
+                            <div th:each="ingredient, iterStat : ${board.ingredients}" class="ingredient-item">
+                                <input type="text" name="ingredientNames" th:value="${ingredient.name}" required>
+                                <input type="text" name="ingredientAmounts" th:value="${ingredient.amount}" required>
+                                <button type="button" class="btn btn-danger" onclick="removeIngredient(this)">삭제</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary" onclick="addIngredient()">재료 추가</button>
+                    </div>
+                    <div class="box steps-section">
+                        <h2>요리 과정</h2>
+                        <div id="stepList" class="step-list">
+                            <div th:each="step, iterStat : ${board.steps}" class="step-item">
+                                <img th:src="@{'/Images/border/step/' + ${step.stepImage}}" alt="step_img" class="step-img">
+                                <textarea name="stepDescriptions" rows="3" required th:text="${step.stepDescription}"></textarea>
+                                <input type="file" name="stepImages" onchange="previewStepImage(event, this)">
+                                <button type="button" class="btn btn-danger" onclick="removeStep(this)">삭제</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary" onclick="addStep()">과정 추가</button>
+                    </div>
+                    <div class="action-buttons">
+                        <button type="submit" class="btn btn-primary">수정 완료</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
+</body>
+</html>

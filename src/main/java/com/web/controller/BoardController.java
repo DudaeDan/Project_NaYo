@@ -5,20 +5,17 @@ import com.web.domain.User;
 import com.web.service.BoardService;
 import com.web.service.LikeService;
 import com.web.service.UserService;
-
-import org.springframework.data.domain.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.security.Principal;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/board")
@@ -64,7 +61,6 @@ public class BoardController {
     public String showCreateForm(Model model, HttpSession session) {
         User loggedInUser = (User) session.getAttribute("user");
         if (loggedInUser == null) {
-            // 로그인되지 않은 경우 alert 메시지와 함께 로그인 페이지로 이동
             model.addAttribute("WriteSession", true);
             return "login/login";
         }
@@ -75,15 +71,16 @@ public class BoardController {
     @PostMapping("/save")
     public String saveBoard(@ModelAttribute Board board,
                             @RequestParam("mainImgFile") MultipartFile mainImgFile,
-                            @RequestParam("stepDescription") List<String> stepDescriptions,
-                            @RequestParam("stepImage") List<MultipartFile> stepImages,
+                            @RequestParam("stepDescriptions") List<String> stepDescriptions,
+                            @RequestParam("stepImages") List<MultipartFile> stepImages,
+                            @RequestParam("ingredientNames") List<String> ingredientNames,
+                            @RequestParam("ingredientAmounts") List<String> ingredientAmounts,
                             HttpSession session) {
         User loggedInUser = (User) session.getAttribute("user");
         if (loggedInUser != null) {
             board.setUser(loggedInUser);
-            boardService.saveBoard(board, mainImgFile, stepDescriptions, stepImages);
+            boardService.saveBoard(board, mainImgFile, stepDescriptions, stepImages, ingredientNames, ingredientAmounts);
         } else {
-            // 사용자 인증 실패 시 로그인 페이지로 리다이렉트
             return "redirect:/login/login";
         }
         return "redirect:/board/list";
@@ -93,14 +90,14 @@ public class BoardController {
     public String viewBoard(@PathVariable Long id, Model model, HttpSession session) {
         Board board = boardService.findBoardById(id);
         if (board != null) {
-            // 조회수 증가
             board.setBoardHit(board.getBoardHit() + 1);
             boardService.save(board);
 
             model.addAttribute("board", board);
             model.addAttribute("steps", board.getSteps());
+            model.addAttribute("ingredients", board.getIngredients());
 
-            User user = (User) session.getAttribute("user"); // 로그인된 유저
+            User user = (User) session.getAttribute("user");
             boolean isLiked = false;
             if (user != null) {
                 isLiked = likeService.isUserLikedBoard(user, board);
@@ -127,9 +124,50 @@ public class BoardController {
         return "error";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteBoard(@PathVariable Long id) {
-        boardService.deleteBoard(id);
+    @PostMapping("/delete/{id}")
+    @ResponseBody
+    public String deleteBoard(@PathVariable Long id, @RequestParam("userPw") String userPw, HttpSession session) {
+        User loggedInUser = (User) session.getAttribute("user");
+        if (loggedInUser != null && loggedInUser.getUserPw().equals(userPw)) {
+            boardService.deleteBoardWithFiles(id);
+            return "deleted";
+        }
+        return "incorrectPassword";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Long id, Model model, HttpSession session) {
+        Board board = boardService.findBoardById(id);
+        User loggedInUser = (User) session.getAttribute("user");
+        if (loggedInUser != null && board != null && loggedInUser.getUserNumber().equals(board.getUser().getUserNumber())) {
+            model.addAttribute("board", board);
+            model.addAttribute("steps", board.getSteps());
+            model.addAttribute("ingredients", board.getIngredients());
+            return "/board/boardedit";
+        }
         return "redirect:/board/list";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateBoard(@PathVariable Long id,
+                              @ModelAttribute Board board,
+                              @RequestParam("mainImgFile") MultipartFile mainImgFile,
+                              @RequestParam("stepDescriptions") List<String> stepDescriptions,
+                              @RequestParam("stepImages") List<MultipartFile> stepImages,
+                              @RequestParam("ingredientNames") List<String> ingredientNames,
+                              @RequestParam("ingredientAmounts") List<String> ingredientAmounts,
+                              HttpSession session) {
+        User loggedInUser = (User) session.getAttribute("user");
+        if (loggedInUser == null) {
+            return "redirect:/login/login";
+        }
+
+        Board existingBoard = boardService.findBoardById(id);
+        if (existingBoard == null || !loggedInUser.getUserNumber().equals(existingBoard.getUser().getUserNumber())) {
+            return "redirect:/login/login";
+        }
+
+        boardService.updateBoard(id, board, mainImgFile, stepDescriptions, stepImages, ingredientNames, ingredientAmounts);
+        return "redirect:/board/view/" + id;
     }
 }

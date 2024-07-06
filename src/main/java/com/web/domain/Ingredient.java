@@ -23,9 +23,18 @@ public class Ingredient {
     @JoinColumn(name = "board_number", nullable = false)
     private Board board;
 
-    @Column(name = "ingredient_name", length = 255, nullable = false)
-    private String ingredientName;
+    @Column(name = "ingredient_name", nullable = false)
+    private String name;
 
-    @Column(name = "ingredient_quantity", length = 255, nullable = false)
-    private String ingredientQuantity;
+    @Column(name = "ingredient_amount", nullable = false)
+    private String amount;
+
+    // No-argument constructor
+    public Ingredient() {}
+
+    // Constructor
+    public Ingredient(String name, String amount) {
+        this.name = name;
+        this.amount = amount;
+    }
 }

@@ -6,7 +6,8 @@
     <title>레시피 웹페이지</title>
     <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
     <link rel="stylesheet" th:href="@{/css/board/board_view_style.css}">
-    <script th:src="@{/script/board/like.js}"></script>
+    <script th:src="@{/script/border/like.js}"></script>
+    <script th:src="@{/script/border/view.js}"></script> <!-- view.js 파일 추가 -->
 </head>
 <body>
     <header th:replace="fragments/header :: header"></header>
@@ -21,13 +22,14 @@
                     <span th:text="'작성일: ' + ${#temporals.format(board.boardDate, 'yyyy_MM_dd')}">board_date</span>
                 </div>
                 <img th:src="@{'/Images/border/main/' + ${board.mainImg}}" alt="main_img" class="main-img">
+                <div class="board-content" th:text="${board.boardContent}">board_content</div> <!-- 추가된 부분 -->
             </div>
             <div class="box ingredient-section">
                 <h2>요리재료목록</h2>
-                <ul>
-                    <li th:each="ingredient : ${board.ingredients}">
-                        <span th:text="${ingredient.ingredientName}">ingredient_name</span>: 
-                        <span th:text="${ingredient.ingredientQuantity}">ingredient_quantity</span>
+                <ul class="ingredient-list">
+                    <li th:each="ingredient : ${ingredients}">
+                        <span class="ingredient-name" th:text="${ingredient.name}">ingredient_name</span>
+                        <span class="ingredient-amount" th:text="${ingredient.amount}">ingredient_amount</span>
                     </li>
                 </ul>
             </div>
@@ -46,6 +48,11 @@
                          th:onclick="${session.user != null} ? 'toggleLike(' + ${board.boardNumber} + ')' : 'alertLogin()'"
                          class="like-icon">
                     <span id="like-count" th:text="${board.boardLike}">0</span>
+                </div>
+                <div class="action-buttons">
+                    <a th:if="${session.user != null and session.user.userNumber == board.user.userNumber}" th:href="@{'/board/edit/' + ${board.boardNumber}}" class="btn btn-primary">수정</a>
+                    <button th:if="${session.user != null and session.user.userNumber == board.user.userNumber}" th:onclick="'confirmDelete(' + ${board.boardNumber} + ')'" class="btn btn-danger">삭제</button>
+                    <a th:href="@{/board/list}" class="btn btn-secondary">목록 보기</a>
                 </div>
             </div>
         </div>
