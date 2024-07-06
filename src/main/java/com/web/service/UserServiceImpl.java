@@ -102,6 +102,17 @@ public class UserServiceImpl implements UserService {
         }
     	
     }
+    
+    @Override
+    public User findUserByUserId(String name) {
+    	// TODO Auto-generated method stub
+    	return null;
+    }
+    
+    public UserServiceImpl() {
+		// TODO Auto-generated constructor stub
+	}
+    
 }
     
 //    if(username==email==전화번호) {

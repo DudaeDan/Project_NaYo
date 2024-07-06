@@ -31,9 +31,6 @@ public class Board {
     @Column(name = "board_title", nullable = false, length = 255)
     private String boardTitle;
 
-    @Column(name = "board_ingredient", nullable = false, length = 255)
-    private String boardIngredient;
-
     @Column(name = "board_content", length = 1000, nullable = false)
     private String boardContent;
 
@@ -51,4 +48,7 @@ public class Board {
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Step> steps;
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
+    private List<Ingredient> ingredients;
 }
