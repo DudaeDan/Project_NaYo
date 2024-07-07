@@ -1,8 +1,10 @@
 package com.web.controller;
 
 import com.web.domain.Board;
+import com.web.domain.Comments;
 import com.web.domain.User;
 import com.web.service.BoardService;
+import com.web.service.CommentService;
 import com.web.service.LikeService;
 import com.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/board")
@@ -29,10 +34,13 @@ public class BoardController {
 
     @Autowired
     private UserService userService;
-    
+
+    @Autowired
+    private CommentService commentService;
+
     @GetMapping("/list")
-    public String listBoards(Model model, 
-                             @RequestParam(defaultValue = "0") int page, 
+    public String listBoards(Model model,
+                             @RequestParam(defaultValue = "0") int page,
                              @RequestParam(defaultValue = "10") int size) {
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "boardDate"));
         Page<Board> boardPage = boardService.findAllBoards(pageRequest);
@@ -56,7 +64,7 @@ public class BoardController {
         model.addAttribute("totalPages", boardPage.getTotalPages());
         return "/board/ranking";
     }
-    
+
     @GetMapping("/create")
     public String showCreateForm(Model model, HttpSession session) {
         User loggedInUser = (User) session.getAttribute("user");
@@ -67,7 +75,7 @@ public class BoardController {
         model.addAttribute("board", new Board());
         return "/board/boardinsert";
     }
-    
+
     @PostMapping("/save")
     public String saveBoard(@ModelAttribute Board board,
                             @RequestParam("mainImgFile") MultipartFile mainImgFile,
@@ -103,6 +111,21 @@ public class BoardController {
                 isLiked = likeService.isUserLikedBoard(user, board);
             }
             model.addAttribute("isLiked", isLiked);
+
+            // 댓글 목록 추가
+            List<Comments> comments = commentService.findCommentsByBoard(board);
+            model.addAttribute("comments", comments);
+
+            // 베스트 댓글 계산
+            int maxLikes = comments.stream().mapToInt(Comments::getLikes).max().orElse(0);
+            if (maxLikes > 0) {
+                List<Comments> bestComments = comments.stream()
+                        .filter(comment -> comment.getLikes() == maxLikes)
+                        .collect(Collectors.toList());
+                model.addAttribute("bestComments", bestComments);
+            } else {
+                model.addAttribute("bestComments", null);
+            }
         }
         return "/board/boardview";
     }

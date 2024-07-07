@@ -136,3 +136,66 @@
 .btn-secondary:hover {
     background-color: #5a6268;
 }
+
+/* 댓글 및 답글 CSS */
+.comments-section {
+    margin-top: 20px;
+}
+
+#commentForm,
+.reply-form {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#commentContent,
+.reply-form textarea {
+    width: 80%;
+    height: 80px;
+    resize: none; /* 크기 조절 불가 */
+}
+
+.reply-form button {
+    height: 40px;
+    margin-left: 10px;
+}
+
+.comment-item {
+    margin-bottom: 20px;
+}
+
+.comment-user {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.comment-content,
+.reply-content {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.comment-item .like-btn,
+.reply-item .like-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.best-comment {
+    background-color: lightpink;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    border-top: 1px solid lightgray;
+    padding: 10px 0;
+}

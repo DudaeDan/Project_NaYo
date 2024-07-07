@@ -6,8 +6,10 @@
     <title>레시피 웹페이지</title>
     <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
     <link rel="stylesheet" th:href="@{/css/board/board_view_style.css}">
+    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
+    <script th:src="@{/script/border/commentlike.js}"></script>
     <script th:src="@{/script/border/like.js}"></script>
-    <script th:src="@{/script/border/view.js}"></script> <!-- view.js 파일 추가 -->
+    <script th:src="@{/script/border/view.js}"></script>
 </head>
 <body>
     <header th:replace="fragments/header :: header"></header>
@@ -22,7 +24,7 @@
                     <span th:text="'작성일: ' + ${#temporals.format(board.boardDate, 'yyyy_MM_dd')}">board_date</span>
                 </div>
                 <img th:src="@{'/Images/border/main/' + ${board.mainImg}}" alt="main_img" class="main-img">
-                <div class="board-content" th:text="${board.boardContent}">board_content</div> <!-- 추가된 부분 -->
+                <div class="board-content" th:text="${board.boardContent}">board_content</div>
             </div>
             <div class="box ingredient-section">
                 <h2>요리재료목록</h2>
@@ -43,20 +45,89 @@
                 <div class="like-section">
                     <img id="like-icon"
                          th:src="${isLiked} ? '/Images/border/like.png' : '/Images/border/empty_like.png'"
-                         onmouseover="this.src='/Images/border/like_hover.png'"
-                         th:onmouseout="${isLiked} ? 'this.src=\'/Images/border/like.png\'' : 'this.src=\'/Images/border/empty_like.png\''"
-                         th:onclick="${session.user != null} ? 'toggleLike(' + ${board.boardNumber} + ')' : 'alertLogin()'"
+                         th:onclick="|toggleLike(${board.boardNumber})|"
                          class="like-icon">
                     <span id="like-count" th:text="${board.boardLike}">0</span>
                 </div>
                 <div class="action-buttons">
-                    <a th:if="${session.user != null and session.user.userNumber == board.user.userNumber}" th:href="@{'/board/edit/' + ${board.boardNumber}}" class="btn btn-primary">수정</a>
-                    <button th:if="${session.user != null and session.user.userNumber == board.user.userNumber}" th:onclick="'confirmDelete(' + ${board.boardNumber} + ')'" class="btn btn-danger">삭제</button>
+                    <a th:if="${session.user != null && session.user.userNumber == board.user.userNumber}" th:href="@{'/board/edit/' + ${board.boardNumber}}" class="btn btn-primary">수정</a>
+                    <button th:if="${session.user != null && session.user.userNumber == board.user.userNumber}" th:onclick="|confirmDelete(${board.boardNumber})|" class="btn btn-danger">삭제</button>
                     <a th:href="@{/board/list}" class="btn btn-secondary">목록 보기</a>
                 </div>
             </div>
+            <!-- 댓글 섹션 시작 -->
+            <div class="box comments-section">
+                <h2>댓글</h2>
+                <div id="commentForm">
+                    <textarea id="commentContent" placeholder="댓글을 입력하세요"></textarea>
+                    <button th:onclick="|addComment(${board.boardNumber})|">댓글 달기</button>
+                </div>
+                <!-- 베스트 댓글 -->
+                <div th:if="${bestComments != null && !bestComments.isEmpty()}" id="bestComments" style="background-color: lightpink;">
+                    <h3>베스트 댓글</h3>
+                    <div th:each="bestComment : ${bestComments}" class="comment-item best-comment" th:id="'comment-' + ${bestComment.id}">
+                        <div class="comment-user">
+                            <span th:text="${bestComment.user.userNickname}" style="font-weight: bold; font-size: larger;">유저 닉네임</span>
+                            <span th:text="${#temporals.format(bestComment.createdDate, 'yyyy-MM-dd HH:mm')}">작성일</span>
+                            <button th:if="${session.user != null && session.user.userNumber == bestComment.user.userNumber}"
+                                    th:onclick="|deleteComment(${bestComment.id})|" class="delete-btn">삭제</button>
+                            <img th:src="${commentLikes != null && commentLikes[bestComment.id] ? '/Images/border/like.png' : '/Images/border/empty_like.png'}"
+                                 th:onclick="|toggleCommentLike(${bestComment.id})|"
+                                 class="like-icon">
+                            <span th:text="${bestComment.likes}" class="like-count">0</span>
+                        </div>
+                        <div class="comment-content" th:text="${bestComment.content}" th:onclick="|scrollToComment(${bestComment.id})|"></div>
+                    </div>
+                </div>
+				<!-- 일반 댓글 -->
+				<div id="commentsList">
+				    <ul style="list-style-type: none;">
+				        <li th:each="comment : ${comments}" style="border-top: 1px solid lightgray;">
+				            <div class="comment-item" th:id="'comment-' + ${comment.id}">
+				                <div class="comment-user">
+				                    <span th:text="${comment.user.userNickname}" style="font-weight: bold; font-size: larger;">유저 닉네임</span>
+				                    <span th:text="${#temporals.format(comment.createdDate, 'yyyy-MM-dd HH:mm')}">작성일</span>
+				                    <button th:if="${session.user != null && session.user.userNumber == comment.user.userNumber}"
+				                            th:onclick="|deleteComment(${comment.id})|" class="delete-btn">삭제</button>
+				                    <button type="button" th:onclick="|showReplyForm(${comment.id})|" class="reply-btn">답글</button>
+				                    <img th:src="${commentLikes != null && commentLikes[comment.id] ? '/Images/border/like.png' : '/Images/border/empty_like.png'}"
+				                         th:onclick="|toggleCommentLike(${comment.id})|"
+				                         class="like-icon">
+				                    <span th:text="${comment.likes}" class="like-count">0</span>
+				                </div>
+				                <div class="comment-content">
+				                    <p th:text="${comment.content}">댓글 내용</p>
+				                </div>
+				                <div class="reply-form" th:id="'replyForm-' + ${comment.id}" style="display:none;">
+				                    <textarea th:id="'replyContent-' + ${comment.id}" placeholder="답글을 입력하세요"></textarea>
+				                    <button type="button" th:onclick="|addReply(${comment.id})|">답글 달기</button>
+				                </div>
+				                <div class="replies-list">
+				                    <div th:each="reply : ${comment.replies}">
+				                        <div class="reply-item" th:id="'reply-' + ${reply.id}">
+				                            <div class="reply-user">
+				                                <span th:text="${reply.user.userNickname}">유저 닉네임</span>
+				                                <span th:text="${#temporals.format(reply.createdDate, 'yyyy-MM-dd HH:mm')}">작성일</span>
+				                                <button th:if="${session.user != null && session.user.userNumber == reply.user.userNumber}"
+				                                        th:onclick="|deleteReply(${reply.id})|" class="delete-btn">삭제</button>
+				                                <img th:src="${replyLikes != null && replyLikes[reply.id] ? '/Images/border/like.png' : '/Images/border/empty_like.png'}"
+				                                     th:onclick="|toggleReplyLike(${reply.id})|"
+				                                     class="like-icon">
+				                                <span th:text="${reply.likes}" class="like-count">0</span>
+				                            </div>
+				                            <div class="reply-content">
+				                                <p th:text="${reply.content}">답글 내용</p>
+				                            </div>
+				                        </div>
+				                    </div>
+				                </div>
+				            </div>
+				        </li>
+				    </ul>
+				</div>
+            </div>
+            <!-- 댓글 섹션 끝 -->
         </div>
     </div>
-    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
 </body>
 </html>

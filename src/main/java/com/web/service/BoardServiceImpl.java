@@ -1,14 +1,17 @@
 package com.web.service;
 
 import com.web.domain.Board;
+import com.web.domain.Comments;
 import com.web.domain.Like;
+import com.web.domain.Reply;
 import com.web.domain.Step;
 import com.web.domain.Ingredient;
 import com.web.repository.BoardRepository;
+import com.web.repository.CommentRepository;
 import com.web.repository.LikeRepository;
+import com.web.repository.ReplyRepository;
 import com.web.repository.StepRepository;
 import com.web.repository.IngredientRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,6 +43,13 @@ public class BoardServiceImpl implements BoardService {
     @Autowired
     private FileService fileService;
 
+    @Autowired
+    private CommentRepository commentRepository;
+
+    @Autowired
+    private ReplyRepository replyRepository;
+
+    
     @Override
     public Board saveBoard(Board board) {
         return boardRepository.save(board);
@@ -218,6 +228,13 @@ public class BoardServiceImpl implements BoardService {
             fileService.deleteFile(board.getMainImg(), MAIN_IMG_DIR);
             for (Step step : board.getSteps()) {
                 fileService.deleteFile(step.getStepImage(), STEP_IMG_DIR);
+            }
+            // Comments 삭제
+            for (Comments comment : board.getComments()) {
+                for (Reply reply : comment.getReplies()) {
+                    replyRepository.delete(reply);
+                }
+                commentRepository.delete(comment);
             }
             boardRepository.delete(board);
         }
