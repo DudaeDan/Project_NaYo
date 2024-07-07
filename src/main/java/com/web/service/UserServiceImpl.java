@@ -102,6 +102,10 @@ public class UserServiceImpl implements UserService {
         }
     	
     }
+
+    
+    
+    
 }
     
 //    if(username==email==전화번호) {

@@ -3,6 +3,7 @@ package com.web.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.web.util.AdminLoginInterceptor;
@@ -18,4 +19,10 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addInterceptor(adminLoginInterceptor).addPathPatterns("/admin/**");
 	}
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/images/**")
+                .addResourceLocations("file:src/main/resources/static/Images/");
+    }
+	
 }

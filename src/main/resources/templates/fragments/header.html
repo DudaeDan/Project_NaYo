@@ -7,7 +7,9 @@
     <div class="header" th:fragment="header">
         <div class="search-container">
             <div class="logo-container">
-                <img th:src="@{/images/layout/MainLogo.png}" alt="Main Logo">
+				<a th:href="@{/board/ranking}">
+                	<img th:src="@{/images/layout/MainLogo.png}" alt="Main Logo">
+				</a>
             </div>
             <div class="search">
                 <input type="text" placeholder="검색">
@@ -20,7 +22,7 @@
                 <a th:href="@{/login/login}">Login</a>
             </div>
             <div th:if="${session.user != null}">
-                <a th:href="@{/mypage}">My Page</a> <!-- My Page 링크는 추후 수정 -->
+                <a th:href="@{/mypage/mypage}">My Page</a> <!-- My Page 링크는 추후 수정 -->
                 <a th:href="@{/login/logout}">Logout</a>
             </div>
         </div>

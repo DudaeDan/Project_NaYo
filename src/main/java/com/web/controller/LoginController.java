@@ -128,7 +128,7 @@ public class LoginController {
     public String checkId(@RequestParam String userId) {
         boolean isAvailable = userService.isUserIdAvailable(userId);
         return isAvailable ? "사용 가능한 아이디입니다." : "아이디가 이미 존재합니다.";
-    }
+    } 
   
     
 }
