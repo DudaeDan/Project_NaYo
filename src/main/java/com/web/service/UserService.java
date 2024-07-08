@@ -12,4 +12,6 @@ public interface UserService {
 	String generateTemporaryPassword();
 	void sendTemporaryPassword(String userId, String temporaryPw);
 	void updatePassword(String userId, String newPassword);
+	
+
 }

@@ -51,6 +51,12 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Like> likes;
 
+    @OneToMany(mappedBy = "user")
+    private List<Comments> comments; // 댓글 추가
+
+    @OneToMany(mappedBy = "user")
+    private List<Reply> replies; // 답글 추가
+    
     public boolean checkPassword(String userPw){
         return this.userPw.equals(userPw);
     }

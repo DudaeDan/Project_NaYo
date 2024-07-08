@@ -22,7 +22,7 @@
                 <a th:href="@{/login/login}">Login</a>
             </div>
             <div th:if="${session.user != null}">
-                <a th:href="@{/mypage/mypage}">My Page</a> <!-- My Page 링크는 추후 수정 -->
+                <a th:href="@{/mypage/boardlist}">My Page</a> <!-- My Page 링크는 추후 수정 -->
                 <a th:href="@{/login/logout}">Logout</a>
             </div>
         </div>

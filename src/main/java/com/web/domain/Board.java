@@ -31,9 +31,6 @@ public class Board {
     @Column(name = "board_title", nullable = false, length = 255)
     private String boardTitle;
 
-    @Column(name = "board_ingredient", nullable = false, length = 255)
-    private String boardIngredient;
-
     @Column(name = "board_content", length = 1000, nullable = false)
     private String boardContent;
 
@@ -46,9 +43,15 @@ public class Board {
     @Column(name = "board_like", columnDefinition = "NUMBER DEFAULT 0")
     private Integer boardLike;
 
-    @OneToMany(mappedBy = "board")
-    private List<Like> likes; //NullPointerException 뜨면 = new ArrayList<>(); 추가
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Like> likes;
 
-    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Step> steps;
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ingredient> ingredients;
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comments> comments;
 }
