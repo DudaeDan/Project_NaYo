@@ -14,7 +14,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @Entity
-@Table(name = "COMMENTS")
+@Table(name = "NY_COMMENTS")
 public class Comments {
 
     @Id

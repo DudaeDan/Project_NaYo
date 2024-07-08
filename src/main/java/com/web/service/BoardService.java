@@ -45,5 +45,7 @@ public interface BoardService {
 
     void deleteBoardWithFiles(Long id);
 
-    void updateBoard(Long id, Board board, MultipartFile mainImgFile, List<String> stepDescriptions, List<MultipartFile> stepImages, List<String> ingredientNames, List<String> ingredientAmounts);
+    public void updateBoard(Long id, Board board, MultipartFile mainImgFile, List<String> stepDescriptions, List<MultipartFile> stepImages, List<String> ingredientNames, List<String> ingredientAmounts, String existingMainImg, List<String> existingStepImages);
+
+
 }

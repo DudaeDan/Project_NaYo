@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Entity
-@Table(name = "COMMENT_LIKE", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_number", "comment_id"})})
+@Table(name = "NY_COMMENT_LIKE", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_number", "comment_id"})})
 public class CommentLike {
 
     @Id

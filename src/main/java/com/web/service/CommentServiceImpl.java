@@ -1,10 +1,13 @@
 package com.web.service;
 
 import com.web.domain.Comments;
+import com.web.domain.Reply;
+import com.web.domain.ReplyLike;
 import com.web.domain.CommentLike;
 import com.web.domain.Board;
 import com.web.domain.User;
 import com.web.repository.CommentRepository;
+import com.web.repository.ReplyLikeRepository;
 import com.web.repository.CommentLikeRepository;
 import com.web.repository.ReplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,9 @@ public class CommentServiceImpl implements CommentService {
 
     @Autowired
     private ReplyRepository replyRepository;
+    
+    @Autowired
+    private ReplyLikeRepository replyLikeRepository;
 
     @Override
     public List<Comments> findCommentsByBoard(Board board) {
@@ -42,17 +48,37 @@ public class CommentServiceImpl implements CommentService {
     public void deleteComment(Long id) {
         Comments comment = commentRepository.findById(id).orElse(null);
         if (comment != null) {
-            replyRepository.deleteAll(comment.getReplies());
-            commentRepository.delete(comment);
+            // 댓글과 연결된 좋아요 레코드 삭제
+            List<CommentLike> likes = commentLikeRepository.findByComment(comment);
+            for (CommentLike like : likes) {
+                commentLikeRepository.delete(like);
+            }
+            commentRepository.deleteById(id);
         }
     }
 
     @Override
     @Transactional
     public void deleteComment(Comments comment) {
-        replyRepository.deleteAll(comment.getReplies());
+        // 댓글과 연결된 답글과 좋아요 레코드 삭제
+        List<Reply> replies = replyRepository.findByComment(comment);
+        for (Reply reply : replies) {
+            // 답글에 연결된 좋아요 삭제
+            List<ReplyLike> replyLikes = replyLikeRepository.findByReply(reply);
+            for (ReplyLike replyLike : replyLikes) {
+                replyLikeRepository.delete(replyLike);
+            }
+            replyRepository.delete(reply);
+        }
+        // 댓글에 연결된 좋아요 삭제
+        List<CommentLike> likes = commentLikeRepository.findByComment(comment);
+        for (CommentLike like : likes) {
+            commentLikeRepository.delete(like);
+        }
+        // 댓글 삭제
         commentRepository.delete(comment);
     }
+
 
     @Override
     @Transactional

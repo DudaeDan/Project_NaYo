@@ -179,6 +179,8 @@ public class BoardController {
                               @RequestParam("stepImages") List<MultipartFile> stepImages,
                               @RequestParam("ingredientNames") List<String> ingredientNames,
                               @RequestParam("ingredientAmounts") List<String> ingredientAmounts,
+                              @RequestParam("existingMainImg") String existingMainImg,
+                              @RequestParam("existingStepImages") List<String> existingStepImages,
                               HttpSession session) {
         User loggedInUser = (User) session.getAttribute("user");
         if (loggedInUser == null) {
@@ -190,7 +192,7 @@ public class BoardController {
             return "redirect:/login/login";
         }
 
-        boardService.updateBoard(id, board, mainImgFile, stepDescriptions, stepImages, ingredientNames, ingredientAmounts);
+        boardService.updateBoard(id, board, mainImgFile, stepDescriptions, stepImages, ingredientNames, ingredientAmounts, existingMainImg, existingStepImages);
         return "redirect:/board/view/" + id;
     }
 }

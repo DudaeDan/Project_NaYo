@@ -90,10 +90,10 @@ public class LoginController {
         User user = userService.validateUser(userId, userPw);
         if (user != null) {
             session.setAttribute("user", user);
-            return "redirect:/recipes/recipes"; // 로그인 성공 후 메인 페이지로 리다이렉트 나중에 메인 페이지로 변경!!!!!!!!!!!!!!
+            return "redirect:/board/ranking";
         } else {
-            model.addAttribute("loginError", true); // 로그인 실패 플래그 설정
-            return "login/login"; // 로그인 폼에 에러 메시지와 함께 다시 표시
+            model.addAttribute("loginError", true);
+            return "login/login";
         }
     }
     
@@ -101,7 +101,7 @@ public class LoginController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate(); // 세션 무효화
-        return "redirect:/layout"; // 로그아웃 후 로그인 페이지로 리다이렉트
+        return "redirect:/board/ranking"; // 로그아웃 후 로그인 페이지로 리다이렉트
     }
     
     @GetMapping("/register")
