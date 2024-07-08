@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>재료 추가</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/refrigerator/refrigerator.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/refrigerator/refrigerator_add.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/layout/Layout_styles.css}">
+</head>
+
+<body>
+
+	<header th:replace="fragments/header :: header"></header>
+	<aside th:replace="fragments/sidebar :: sidebar"></aside>
+
+
+	<div class="refri-content-box">
+
+		<div class="ingredient-select"> <!-- 분류, 재료 선택 -->
+			<div class="classification"> <!-- 분류 -->
+				<table class="classification-table">
+					<tr>
+						<td>
+							<button class="classification-btn" th:onclick="changeCategory('meat')">육류</button>
+						</td>
+						<td>
+							<button class="classification-btn" th:onclick="changeCategory('vegetable')">채소</button>
+						</td>
+						<td>
+							<button class="classification-btn" th:onclick="changeCategory('fruit')">과일</button>
+						</td>
+						<td>
+							<button class="classification-btn" th:onclick="changeCategory('sauce')">소스</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button class="classification-btn" th:onclick="changeCategory('grain')">곡류</button>
+						</td>
+						<td>
+							<button class="classification-btn" th:onclick="changeCategory('processed')">가공식품</button>
+						</td>
+						<td>
+							<button class="classification-btn" th:onclick="changeCategory('seafood')">해산물</button>
+						</td>
+						<td>
+							<button class="classification-btn" th:onclick="changeCategory('dairy')">유제품</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="ingredient-list">
+
+				<span id="ingredientCategory">
+					<div id="all" class="category">
+						<span th:each="category : ${getAll}">
+							<button class="ingredient-btn" onclick="addIngredient(this)">
+								<span class="btnName" th:text="${category.refIngredientName}"></span>
+								<input type="hidden" class="btnCategory" th:value="${category.refIngredientCategory}">
+								<input type="hidden" class="btnIngreNum" th:value="${category.refIngredientNumber}">
+							</button>
+						</span>
+					</div>
+					<div id="meat" class="category" style="display: none;">
+						<span th:each="category : ${getMeat}">
+							<button class="ingredient-btn" onclick="addIngredient(this)">
+								<span class="btnName" th:text="${category.refIngredientName}"></span>
+								<input type="hidden" class="btnCategory" th:value="${category.refIngredientCategory}">
+								<input type="hidden" class="btnIngreNum" th:value="${category.refIngredientNumber}">
+							</button>
+						</span>
+					</div>
+					<div id="vegetable" class="category" style="display: none;">
+						<span th:each="category : ${getVegetable}">
+							<button class="ingredient-btn" onclick="addIngredient(this)">
+								<span class="btnName" th:text="${category.refIngredientName}"></span>
+								<input type="hidden" class="btnCategory" th:value="${category.refIngredientCategory}">
+								<input type="hidden" class="btnIngreNum" th:value="${category.refIngredientNumber}">
+							</button>
+						</span>
+					</div>
+					<div id="fruit" class="category" style="display: none;">
+						<span th:each="category : ${getFruit}">
+							<button class="ingredient-btn" onclick="addIngredient(this)">
+								<span class="btnName" th:text="${category.refIngredientName}"></span>
+								<input type="hidden" class="btnCategory" th:value="${category.refIngredientCategory}">
+								<input type="hidden" class="btnIngreNum" th:value="${category.refIngredientNumber}">
+							</button>
+						</span>
+					</div>
+					<div id="sauce" class="category" style="display: none;">
+						<span th:each="category : ${getSauce}">
+							<button class="ingredient-btn" onclick="addIngredient(this)">
+								<span class="btnName" th:text="${category.refIngredientName}"></span>
+								<input type="hidden" class="btnCategory" th:value="${category.refIngredientCategory}">
+								<input type="hidden" class="btnIngreNum" th:value="${category.refIngredientNumber}">
+							</button>
+						</span>
+					</div>
+					<div id="grain" class="category" style="display: none;">
+						<span th:each="category : ${getGrains}">
+							<button class="ingredient-btn" onclick="addIngredient(this)">
+								<span class="btnName" th:text="${category.refIngredientName}"></span>
+								<input type="hidden" class="btnCategory" th:value="${category.refIngredientCategory}">
+								<input type="hidden" class="btnIngreNum" th:value="${category.refIngredientNumber}">
+							</button>
+						</span>
+					</div>
+					<div id="processed" class="category" style="display: none;">
+						<span th:each="category : ${getProcessed}">
+							<button class="ingredient-btn" onclick="addIngredient(this)">
+								<span class="btnName" th:text="${category.refIngredientName}"></span>
+								<input type="hidden" class="btnCategory" th:value="${category.refIngredientCategory}">
+								<input type="hidden" class="btnIngreNum" th:value="${category.refIngredientNumber}">
+							</button>
+						</span>
+					</div>
+					<div id="seafood" class="category" style="display: none;">
+						<span th:each="category : ${getSeafood}">
+							<button class="ingredient-btn" onclick="addIngredient(this)">
+								<span class="btnName" th:text="${category.refIngredientName}"></span>
+								<input type="hidden" class="btnCategory" th:value="${category.refIngredientCategory}">
+								<input type="hidden" class="btnIngreNum" th:value="${category.refIngredientNumber}">
+							</button>
+						</span>
+					</div>
+					<div id="dairy" class="category" style="display: none;">
+						<span th:each="category : ${getDairy}">
+							<button class="ingredient-btn" onclick="addIngredient(this)">
+								<span class="btnName" th:text="${category.refIngredientName}"></span>
+								<input type="hidden" class="btnCategory" th:value="${category.refIngredientCategory}">
+								<input type="hidden" class="btnIngreNum" th:value="${category.refIngredientNumber}">
+							</button>
+						</span>
+					</div>
+				</span>
+			</div>
+		</div>
+
+		<div class="selected-list">
+			<!-- 선택한 재료들 리스트 테이블 -->
+			<table class="selected-table">
+				<thead>
+					<tr>
+						<th style="width: 20%;">분류</th>
+						<th style="width: 55%;">재료명</th>
+						<th style="width: 25%;">유통기한</th>
+					</tr>
+				</thead>
+				<tbody id="selectedTableBody">
+				</tbody>
+			</table>
+
+		</div>
+		<input type="button" class="refri_btn" value="돌아가기" th:onclick="|location.href='@{/refrigerator}'|">
+		<input type="button" name="" id="" class="refri_btn" value="저장">
+
+	</div>
+
+
+</body>
+<script>
+
+
+	function addIngredient(button) {
+		var ingredientName = button.querySelector('.btnName').textContent.trim();
+		var category = button.querySelector('.btnCategory').value.trim();
+		var IngreNum = button.querySelector('.btnIngreNum').value.trim();
+		var rowId = category + ingredientName;
+
+		var tableBody = document.getElementById("selectedTableBody");
+		var rowCheck = document.querySelector(`#${rowId}`);
+
+		if (rowCheck) {
+			rowCheck.remove();
+			button.classList.remove('btn-selected');
+		} else {
+			// 새로운 행의 HTML 생성
+			var newRowHtml = `
+	            <tr id='${rowId}'>
+	                <td>${category}</td>
+	                <td>${ingredientName} , ${IngreNum}</td>
+	                <td><input type='date' class='ingredientExp' /></td>
+	            </tr>
+	        `;
+
+			button.classList.add('btn-selected');
+
+			// 새로운 행을 테이블 바디에 추가
+			tableBody.insertAdjacentHTML('beforeend', newRowHtml);
+
+			//유통기한 기본값 설정
+			var newRow = tableBody.lastElementChild;
+			var expDate = newRow.querySelector('.ingredientExp');
+			setExpDate(expDate);
+		}
+	}
+
+	function setExpDate(element) {
+		let now = new Date();
+		//기본 7일 뒤
+		element.value = new Date(now.setDate(now.getDate() + 7)).toISOString().substring(0, 10);
+	}
+
+	document.addEventListener('DOMContentLoaded', function () {
+		var expElements = document.getElementsByClassName('ingredientExp');
+		for (var i = 0; i < expElements.length; i++) {
+			setExpDate(expElements[i]);
+		}
+	});
+
+
+	function changeCategory(category) {
+		var categories = document.querySelectorAll('.category');
+		categories.forEach(function (cat) {
+			cat.style.display = 'none';
+		});
+		document.getElementById(category).style.display = 'block';
+	}
+
+
+</script>
+
+</html>
