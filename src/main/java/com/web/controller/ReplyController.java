@@ -46,15 +46,15 @@ public class ReplyController {
         return "error";
     }
 
-    @PostMapping("/delete/{id}")
+    @PostMapping("/delete/{replyId}")
     @ResponseBody
-    public String deleteReply(@PathVariable Long id, HttpSession session) {
+    public String deleteReply(@PathVariable Long replyId, HttpSession session) {
         User loggedInUser = (User) session.getAttribute("user");
         if (loggedInUser == null) {
             return "notLoggedIn";
         }
 
-        Reply reply = replyService.findReplyById(id);
+        Reply reply = replyService.findReplyById(replyId);
         if (reply != null && reply.getUser().getUserNumber().equals(loggedInUser.getUserNumber())) {
             replyService.deleteReply(reply);
             return "deleted";

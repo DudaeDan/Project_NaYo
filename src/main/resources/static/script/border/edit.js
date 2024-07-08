@@ -49,7 +49,7 @@ function addStep() {
     newStep.innerHTML = `
         <img src="#" alt="step_img" class="step-img" style="display: none;">
         <textarea name="stepDescriptions" rows="5" placeholder="예) 물 1L기준 설탕 1숟가락을 넣고 고기를 담가 30분간 핏물을 제거해주세요" required style="resize: none;"></textarea>
-        <input type="file" name="stepImages" accept="image/*" onchange="previewStepImage(event, this)" required>
+        <input type="file" name="stepImages" accept="image/*" onchange="previewStepImage(event, this)">
         <button type="button" class="btn btn-danger" onclick="removeStep(this)">삭제</button>
     `;
     stepList.appendChild(newStep);
@@ -64,6 +64,7 @@ function validateForm() {
     const stepList = document.getElementById('stepList');
     const ingredientList = document.getElementById('ingredientList');
     const mainImgFile = document.getElementById('mainImgFile');
+    const existingMainImg = document.getElementById('existingMainImg').value;
 
     if (stepList.children.length === 0) {
         alert("요리 과정을 입력해주세요");
@@ -75,14 +76,15 @@ function validateForm() {
         return false;
     }
 
-    if (!mainImgFile.value) {
+    if (!mainImgFile.value && !existingMainImg) {
         alert("대표 이미지를 선택해주세요");
         return false;
     }
 
     const stepImages = document.querySelectorAll('input[name="stepImages"]');
-    for (let stepImage of stepImages) {
-        if (!stepImage.value) {
+    const existingStepImages = document.querySelectorAll('input[name="existingStepImages"]');
+    for (let i = 0; i < stepImages.length; i++) {
+        if (!stepImages[i].value && !existingStepImages[i].value) {
             alert("과정 이미지를 추가해주세요");
             return false;
         }

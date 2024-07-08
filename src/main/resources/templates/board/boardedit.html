@@ -27,6 +27,7 @@
                     <div class="form-group">
                         <label for="mainImgFile">대표 이미지</label>
                         <input type="file" id="mainImgFile" name="mainImgFile" onchange="previewMainImage(event)">
+                        <input type="hidden" id="existingMainImg" name="existingMainImg" th:value="${board.mainImg}"/>
                         <div class="img-preview">
                             <img id="mainImgPreview" th:src="@{'/Images/border/main/' + ${board.mainImg}}" alt="main_img" class="main-img">
                         </div>
@@ -47,6 +48,7 @@
                         <div id="stepList" class="step-list">
                             <div th:each="step, iterStat : ${board.steps}" class="step-item">
                                 <img th:src="@{'/Images/border/step/' + ${step.stepImage}}" alt="step_img" class="step-img">
+                                <input type="hidden" name="existingStepImages" th:value="${step.stepImage}"/>
                                 <textarea name="stepDescriptions" rows="3" required th:text="${step.stepDescription}"></textarea>
                                 <input type="file" name="stepImages" onchange="previewStepImage(event, this)">
                                 <button type="button" class="btn btn-danger" onclick="removeStep(this)">삭제</button>

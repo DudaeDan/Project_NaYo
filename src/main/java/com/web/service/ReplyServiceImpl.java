@@ -7,6 +7,9 @@ import com.web.domain.User;
 import com.web.repository.ReplyRepository;
 import com.web.repository.ReplyLikeRepository;
 import com.web.repository.CommentRepository;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,6 +71,11 @@ public class ReplyServiceImpl implements ReplyService {
     @Override
     @Transactional
     public void deleteReply(Reply reply) {
+        // 답글과 연결된 좋아요 레코드 삭제
+        List<ReplyLike> likes = replyLikeRepository.findByReply(reply);
+        for (ReplyLike like : likes) {
+            replyLikeRepository.delete(like);
+        }
         replyRepository.delete(reply);
     }
 }
