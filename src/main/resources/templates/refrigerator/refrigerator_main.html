@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>나의 냉장고</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/refrigerator/refrigerator.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/refrigerator/refrigerator_main.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/layout/Layout_styles.css}">
+</head>
+
+<body>
+
+	<header th:replace="fragments/header :: header"></header>
+	<aside th:replace="fragments/sidebar :: sidebar"></aside>
+
+	<div class="refri-content-box">
+
+		<div class="refri_main_top">
+			<div class="refri_title">
+				<span>재료 목록</span>
+			</div>
+			<div class="refri_btn_container">
+				<input type="button" class="refri_search_btn" name="" id="" value="레시피 검색">
+				<input type="button" class="refri_main_btn" value="추가"
+					th:onclick="|location.href='@{/refrigerator/addIngredient}'|">
+			</div>
+			<div class="refri_sort_container">
+				<input type="button" class="refri_sort" name="" id="" value="이름순"> /
+				<input type="button" class="refri_sort" name="" id="" value="유통기한순">
+			</div>
+		</div>
+
+		<div class="refri_main_tables_container">
+			<table class="refri_main_tables">
+				<thead>
+					<tr>
+						<th>분류</th>
+						<th>재료명</th>
+						<th>유통기한</th>
+						<th><!-- 삭제 체크박스? --></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>
+						</td>
+					</tr>
+					<!--<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>
+						</td>
+					</tr>-->
+				</tbody>
+			</table>
+
+			<div class="refri_paging">
+				< 1 2 3 4 5>
+				<!-- 나중에 페이지 처리 -->
+			</div>
+		</div>
+
+	</div>
+
+</body>
+
+</html>

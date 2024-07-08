@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+/* 재료부분 */
+.ingredient-select {
+	width: 40%;
+	height: 640px;
+	margin: 30px;
+	position: relative;
+	float: inline-start;
+}
+
+/* 분류 */
+.classification {
+	width: 100%;
+	height: 150px;
+}
+
+.classification-table {
+	border: 1px solid black;
+	border-radius: 5px;
+	margin: auto;
+}
+
+.classification-btn {
+	width: 65px;
+	height: 65px;
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid black;
+	align-items: center;
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: end;
+	font-size: 12px;
+	font-weight: bold;
+	margin: 5px;
+}
+
+/* 선택부분 */
+.ingredient-list {
+	width: 100%;
+	height: 450px;
+	border: 1px solid black;
+	margin-top: 35px;
+	border-radius: 5px;
+	overflow-y: auto;
+	text-align: center;
+}
+
+.ingredient-list::-webkit-scrollbar {
+	width: 10px;
+}
+
+.ingredient-list::-webkit-scrollbar-thumb {
+	background-color: #c1c1c1;
+	border-radius: 5px;
+}
+
+.ingredient-list::-webkit-scrollbar-track {
+	background-color: #f1f1f1;
+	border-radius: 5px;
+}
+
+.ingredient-btn {
+	width: 90px;
+	height: 55px;
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid black;
+	margin: 10px 5px 0 0;
+}
+
+.btn-selected {
+	background-color: #f1f1f1;
+}
+
+/* 선택완료 */
+.selected-list {
+	width: 50%;
+	height: 580px;
+	/* border-bottom: 1px solid black; */
+	margin: 30px 10px 10px 10px;
+	position: relative;
+	display: inline-block;
+	overflow-y: auto;
+}
+
+.selected-list::-webkit-scrollbar {
+	width: 10px;
+}
+
+.selected-list::-webkit-scrollbar-thumb {
+	background-color: #c1c1c1;
+}
+
+.selected-list::-webkit-scrollbar-track {
+	background-color: #f1f1f1;
+}
+
+/* 선택 재료 리스트 테이블 */
+.selected-table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+.selected-table,
+.selected-table th,
+.selected-table td {
+	border: 1px solid black;
+}
+
+.selected-table tr {
+	height: 35px;
+}
+
+/* 세이브 버튼 */
+.refri_btn {
+	width: 80px;
+	height: 40px;
+	background-color: #ffffff;
+	border-radius: 5px;
+	border: 1px solid #c1c1c1;
+	float: right;
+	margin-top: 5px;
+	margin-right: 45px;
+}
+
+.refri_btn:hover {
+	background-color: #c1c1c1;
+}
