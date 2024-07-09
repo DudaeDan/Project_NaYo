@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isUserIdAvailable(String userId) {
-        return userRepository.findByUserId(userId) == null;
+    	return !userRepository.existsByUserId(userId);
     }
 
     @Override
@@ -101,6 +101,10 @@ public class UserServiceImpl implements UserService {
             System.out.println("Temporary password: " + newPassword);
         }
     	
+    }
+    @Override
+    public boolean isNicknameAvailable(String nickname) {
+    	return !userRepository.existsByUserNickname(nickname);
     }
 
   

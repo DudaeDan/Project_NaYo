@@ -22,11 +22,82 @@ public class LoginController {
     @Autowired
     private UserService userService;
     
+    
 
     @GetMapping("/login")
     public String joinForm() {
         return "login/login";
     }
+    
+    //로그인
+    @PostMapping("/login")
+    public String login(@RequestParam String userId, @RequestParam String userPw, HttpSession session, Model model) {
+        User user = userService.validateUser(userId, userPw);
+        if (user != null) {
+            session.setAttribute("user", user);
+            return "redirect:/board/ranking";
+        } else {
+            model.addAttribute("loginError", true);
+            return "login/login";
+        }
+    }
+    
+    //로그아웃
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // 세션 무효화
+        return "redirect:/board/ranking"; // 로그아웃 후 로그인 페이지로 리다이렉트
+    }
+    
+//------------------------------------------------------------------------------------------------------------------------------ 
+    //회원가입 폼
+    @GetMapping("/register")
+    public String registerForm() {
+        return "login/register"; // 회원가입 폼을 보여주는 뷰 이름
+    }
+    
+
+    // 회원가입
+    @PostMapping("/register")
+    public String join(@ModelAttribute User user, Model model) {
+        if (userService.isUserIdAvailable(user.getUserId())) {
+            userService.saveUser(user);
+            model.addAttribute("registerSuccess","회원가입이 완료되었습니다");
+            return "redirect:/login/login"; // 회원가입 성공 후 로그인 페이지로 리다이렉트 나중에 메인 페이지로 변경!!!!!!!!!!!!!!
+        } else {
+            model.addAttribute("joinError", "아이디가 이미 존재합니다.");
+            return "login/register"; // 회원가입 폼에 에러 메시지와 함께 다시 표시
+        }
+    }
+    
+    
+    //아이디 중복 확인
+    @ResponseBody
+    @GetMapping("/check-id")
+    public String checkId(@RequestParam String userId) {
+        boolean isAvailable = userService.isUserIdAvailable(userId);
+        return isAvailable ? "사용 가능한 아이디입니다." : "아이디가 이미 존재합니다.";
+    }
+    
+    
+    //닉네임 중복 확인
+    @ResponseBody
+    @GetMapping("/check-nickname")
+    public String checkNickname(@RequestParam String nickname) {
+        boolean isAvailable = userService.isNicknameAvailable(nickname);
+        return isAvailable ? "사용 가능한 닉네임입니다." : "닉네임이 이미 존재합니다.";
+    }
+    
+    
+    @PostMapping("/clear-register-success")
+    public void clearRegisterSuccess(HttpSession session) {
+        session.removeAttribute("registerSuccess");
+    }
+
+    
+    
+    
+  //------------------------------------------------------------------------------------------------------------------------------ 
     
     @GetMapping("findId")
     public String findId() {
@@ -79,56 +150,6 @@ public class LoginController {
         }
     }
 
-    
-
-
-
-    
-    //로그인
-    @PostMapping("/login")
-    public String login(@RequestParam String userId, @RequestParam String userPw, HttpSession session, Model model) {
-        User user = userService.validateUser(userId, userPw);
-        if (user != null) {
-            session.setAttribute("user", user);
-            return "redirect:/board/ranking";
-        } else {
-            model.addAttribute("loginError", true);
-            return "login/login";
-        }
-    }
-    
-    //로그아웃
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate(); // 세션 무효화
-        return "redirect:/board/ranking"; // 로그아웃 후 로그인 페이지로 리다이렉트
-    }
-    
-    @GetMapping("/register")
-    public String registerForm() {
-        return "login/register"; // 회원가입 폼을 보여주는 뷰 이름
-    }
-    
-
-    // 회원가입
-    @PostMapping("/register")
-    public String join(@ModelAttribute User user, Model model) {
-        if (userService.isUserIdAvailable(user.getUserId())) {
-            userService.saveUser(user);
-            model.addAttribute("registerSuccess","회원가입이 완료되었습니다");
-            return "redirect:/login/login"; // 회원가입 성공 후 로그인 페이지로 리다이렉트 나중에 메인 페이지로 변경!!!!!!!!!!!!!!
-        } else {
-            model.addAttribute("joinError", "아이디가 이미 존재합니다. 고쳐보세요 잘");
-            return "login/register"; // 회원가입 폼에 에러 메시지와 함께 다시 표시
-        }
-    }
-
-    @ResponseBody
-    @GetMapping("/check-id")
-    public String checkId(@RequestParam String userId) {
-        boolean isAvailable = userService.isUserIdAvailable(userId);
-        return isAvailable ? "사용 가능한 아이디입니다." : "아이디가 이미 존재합니다.";
-    }
   
     
 }

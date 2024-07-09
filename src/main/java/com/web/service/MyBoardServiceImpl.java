@@ -1,6 +1,7 @@
 package com.web.service;
 
 import com.web.domain.Board;
+import com.web.domain.User;
 import com.web.repository.MyBoardRepository;
 
 import java.util.List;
@@ -21,7 +22,11 @@ public class MyBoardServiceImpl implements MyBoardService {
     }
     
    
- 
+    @Override
+    public void updateUser(User user) {
+    	// TODO Auto-generated method stub
+    	
+    }
     
     
 }
