@@ -1,11 +1,8 @@
 package com.web.service;
 
-import com.web.domain.Board;
 import com.web.domain.User;
-import java.util.List;
 
-public interface MyBoardService {
-    List<Board> findPostsByUserNumber(Long userNumber);
+public interface MyUserService {
     void updateUser(User user);
     void deleteUser(Long userNumber);
     boolean isNicknameAvailable(String nickname);

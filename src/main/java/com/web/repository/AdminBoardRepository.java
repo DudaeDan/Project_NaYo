@@ -20,14 +20,13 @@ import com.web.domain.TmpBoard;
 //	Page<Board> findByUserUserNicknameContainingOrderByBoardNumberDesc(String userNickname, Pageable pageable);
 //
 //}
-public interface AdminBoardRepository extends JpaRepository<TmpBoard, Long> {
+public interface AdminBoardRepository extends JpaRepository<Board, Long> {
 	
-	List<TmpBoard> findTop6ByOrderByBoardNumberDesc();
-	
-	Page<TmpBoard> findAllByOrderByBoardNumberDesc(Pageable pageable);
-	
-	Page<TmpBoard> findByBoardTitleContainingOrderByBoardNumberDesc(String boardTitle, Pageable pageable);
-	
-	Page<TmpBoard> findByUserUserNicknameContainingOrderByBoardNumberDesc(String userNickname, Pageable pageable);
-	
+    List<Board> findTop6ByOrderByBoardNumberDesc();
+
+    Page<Board> findByBoardTitleContainingOrderByBoardNumberDesc(String boardTitle, Pageable pageable);
+
+    Page<Board> findByUserUserNicknameContainingOrderByBoardNumberDesc(String userNickname, Pageable pageable);
+
+    Page<Board> findAllByOrderByBoardNumberDesc(Pageable pageable);
 }
