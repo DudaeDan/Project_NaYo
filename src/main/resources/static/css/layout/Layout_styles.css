@@ -1,129 +1,144 @@
 /* 기본 스타일 */
 body {
-    font-family: Arial, sans-serif;
+	font-family: Arial, sans-serif;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-    padding: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #ccc;
+	padding: 10px;
 }
 
 .logo-container {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .header img {
-    height: 90px;
-    width: 210px;
+	height: 90px;
+	width: 210px;
 }
 
 .search-container {
-    display: flex;
-    align-items: center;
-    margin-left: 33%;
+	display: flex;
+	align-items: center;
+	margin-left: 33%;
 }
 
 .header .search {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
+	display: flex;
+	align-items: center;
+	margin-left: 10px;
 }
 
 .header button {
-    background: url('../../Images/layout/search.png') no-repeat center center;
-    background-size: contain;
-    width: 30px;
-    height: 30px;
-    border: none;
-    cursor: pointer;
+	background: url('../../Images/layout/search.png') no-repeat center center;
+	background-size: contain;
+	width: 30px;
+	height: 30px;
+	border: none;
+	cursor: pointer;
 }
 
 .header .search input[type="text"] {
-    width: 290px;
-    height: 20px;
-    padding: 5px;
+	width: 290px;
+	height: 20px;
+	padding: 5px;
 }
 
 .menu-button {
-    position: absolute;
-    left: 10px;
-    top: 120px;
-    width: 70px;
-    height: 70px;
-    background: url('../../Images/layout/Menu.png') no-repeat center center;
-    background-size: contain;
-    border: none;
-    cursor: pointer;
+	position: absolute;
+	left: 10px;
+	top: 120px;
+	width: 70px;
+	height: 70px;
+	background: url('../../Images/layout/Menu.png') no-repeat center center;
+	background-size: contain;
+	border: none;
+	cursor: pointer;
 }
 
 .login {
-    position: absolute;
-    right: 200px;
-    padding: 5px 10px;
+	position: absolute;
+	right: 200px;
+	padding: 5px 10px;
 }
 
 /* 사이드바 스타일 */
 .sidebar {
-    width: 250px;
-    padding: 10px;
-    border-right: 1px solid #ccc;
-    position: fixed;
-    left: -550px; /* 사이드바를 화면 밖에 위치시킴 */
-    top: 120px; /* 헤더 아래로 위치 */
-    height: calc(100% - 120px); /* 헤더 높이를 제외한 전체 높이 */
-    background-color: white;
-    transition: left 0.3s ease; /* 애니메이션 효과 */
+	width: 250px;
+	padding: 10px;
+	border-right: 1px solid #ccc;
+	position: fixed;
+	left: -550px;
+	/* 사이드바를 화면 밖에 위치시킴 */
+	top: 120px;
+	/* 헤더 아래로 위치 */
+	height: calc(100% - 120px);
+	/* 헤더 높이를 제외한 전체 높이 */
+	background-color: white;
+	transition: left 0.3s ease;
+	/* 애니메이션 효과 */
 }
 
 .sidebar.show {
-    left: 0; /* 사이드바를 화면 안으로 이동 */
+	left: 0;
+	/* 사이드바를 화면 안으로 이동 */
 }
 
 .sidebar .close-button {
-    background: url('../../Images/layout/Menu.png') no-repeat center center;
-    background-size: contain;
-    width: 70px;
-    height: 70px;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    top: 10px;
-    left: 10px; /* 닫기 버튼을 왼쪽으로 이동 */
+	background: url('../../Images/layout/Menu.png') no-repeat center center;
+	background-size: contain;
+	width: 70px;
+	height: 70px;
+	border: none;
+	cursor: pointer;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	/* 닫기 버튼을 왼쪽으로 이동 */
 }
 
 .sidebar .content {
-    margin-top: 90px; /* 닫기 버튼과 겹치지 않도록 아래로 이동 */
-    border: none; /* 선 제거 */
+	margin-top: 90px;
+	/* 닫기 버튼과 겹치지 않도록 아래로 이동 */
+	border: none;
+	/* 선 제거 */
 }
 
 .sidebar .content div {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: none; /* 선 제거 */
-    cursor: pointer;
+	margin-bottom: 10px;
+	padding: 10px;
+	border: none;
+	/* 선 제거 */
+	cursor: pointer;
 }
 
-.fridge img {
-    max-width: 250px; /* 원하는 최대 너비로 설정 */
+/*.fridge img {
+    max-width: 250px;  원하는 최대 너비로 설정 
     width: 100%;
     height: auto;
+}*/
+.refrigerator-img {
+	vertical-align: middle;
 }
 
 /* 메인 콘텐츠 스타일 */
 .main-content {
-    padding: 10px;
-    transition: margin-left 0.3s ease; /* 애니메이션 효과 */
-    margin: 0 auto; /* 가운데 정렬 */
-    max-width: 1200px; /* 최대 너비 설정 */
+	padding: 10px;
+	transition: margin-left 0.3s ease;
+	/* 애니메이션 효과 */
+	margin: 0 auto;
+	/* 가운데 정렬 */
+	max-width: 1200px;
+	/* 최대 너비 설정 */
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 20px;
 }
