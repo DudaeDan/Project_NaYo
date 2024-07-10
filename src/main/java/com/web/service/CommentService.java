@@ -17,4 +17,5 @@ public interface CommentService {
     boolean isUserLikedComment(User user, Comments comment);
     boolean addCommentLike(User user, Comments comment);
     boolean removeCommentLike(User user, Comments comment);
+	List<Comments> findCommentsByUserNumber(Long userNumber);
 }

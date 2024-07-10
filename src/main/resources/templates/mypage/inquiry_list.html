@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의 글 목록</title>
+    <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
+    <link rel="stylesheet" th:href="@{/css/board/board_list_style.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
+</head>
+<body>
+    <header th:replace="fragments/header :: header"></header>
+    <div class="container">
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+        <div class="main-content">
+            <div class="mypage-header">
+                <a th:href="@{/mypage/comment}">작성댓글</a>
+                <a th:href="@{/mypage/boardlist}">작성 글 목록</a>
+                <a th:href="@{/mypage/profile}">개인정보 수정</a>
+                <a th:href="@{/mypage/inquiry_list}">문의 글 목록</a>
+            </div>
+            <h2>문의 글 목록</h2>
+            <a href="#" th:href="@{/mypage/inquiries}" class="btn btn-primary mb-3">문의하기</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>제목</th>
+                        <th>내용</th>
+                        <th>작성일</th>
+                        <th>진행상황</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="inquiry : ${inquiries}">
+                        <td th:text="${inquiry.inquiryTitle}">제목</td>
+                        <td><a th:href="@{/mypage/inquiry/view/{id}(id=${inquiry.inquiryNumber})}" th:text="${inquiry.inquiryContent}">내용</a></td>
+                        <td th:text="${#dates.format(inquiry.inquiryDate, 'yyyy-MM-dd')}">작성일</td>
+                        <td th:text="${inquiry.inquiryProgress == 0 ? '진행 중' : '완료'}">진행상황</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
