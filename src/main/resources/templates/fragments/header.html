@@ -1,52 +1,31 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
 </head>
-
 <body>
-	<div class="header" th:fragment="header">
-		<div class="search-container">
-			<div class="logo-container">
-				<a th:href="@{/board/ranking}">
-					<img th:src="@{/images/layout/MainLogo.png}" alt="Main Logo">
-				</a>
-			</div>
-			<div class="search">
-				<input type="text" placeholder="검색">
-				<button></button>
-			</div>
-		</div>
-		<div class="login">
-			<!-- 로그인 상태 확인 후 버튼 표시 -->
-			<!--
-				<div th:if="${session.user == null}">
-				<a th:href="@{/login/login}">Login</a>
-			</div>
-			<div th:if="${session.user != null}">
-				<a th:href="@{/mypage/boardlist}">My Page</a>  My Page 링크는 추후 수정 
-				<a th:href="@{/login/logout}">Logout</a>
-			</div>
-			-->
-
-			<th:block th:if="${loginMember == null}">
-				<div>
-					<a th:href="@{/login/login}">Login</a>
-				</div>
-			</th:block>
-			<th:block th:if="${loginMember != null}">
-				<div>
-					<p><span th:text="${loginMember.userNickname}"></span></p>
-					<p><span th:text="${loginMember.userNumber}"></span></p>
-					<a th:href="@{//mypage/boardlist}">My Page</a> <!-- My Page 링크는 추후 수정 -->
-					<a th:href="@{/login/logout}">Logout</a>
-				</div>
-			</th:block>
-
-
-		</div>
-	</div>
+    <div class="header" th:fragment="header">
+        <div class="search-container">
+            <div class="logo-container">
+            <a th:href="@{/board/ranking}">
+                   <img th:src="@{/images/layout/MainLogo.png}" alt="Main Logo">
+            </a>
+            </div>
+            <div class="search">
+                <input type="text" placeholder="검색">
+                <button></button>
+            </div>
+        </div>
+        <div class="login">
+            <!-- 로그인 상태 확인 후 버튼 표시 -->
+            <div th:if="${session.user == null}">
+                <a th:href="@{/login/login}">Login</a>
+            </div>
+            <div th:if="${session.user != null}">
+                <a th:href="@{/mypage/boardlist}">My Page</a> <!-- My Page 링크는 추후 수정 -->
+                <a th:href="@{/login/logout}">Logout</a>
+            </div>
+        </div>
+    </div>
 </body>
-
 </html>
