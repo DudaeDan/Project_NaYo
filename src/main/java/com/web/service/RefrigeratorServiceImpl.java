@@ -6,10 +6,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.web.domain.Ingredient;
 import com.web.domain.Refrigerator;
 import com.web.domain.RefrigeratorIngredient;
+import com.web.domain.SearchRecipe;
 import com.web.repository.RefrigeratorIngredientRepository;
 import com.web.repository.RefrigeratorRepository;
+import com.web.repository.SearchRecipeRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +24,20 @@ public class RefrigeratorServiceImpl implements RefrigeratorService {
 	RefrigeratorIngredientRepository refIngreRepo;
 	@Autowired
 	RefrigeratorRepository refriRepo;
+	@Autowired
+	SearchRecipeRepository SRRepo;
+
+	@Override
+	public Page<Refrigerator> getRefriList(Pageable pageable, Long userNumber) {
+		return refriRepo.findByUserNumberOrderByExpDateAsc(pageable, userNumber);
+	}
+
+	@Override
+	public void ingredientDelete(List<Long> refrigeratorNumbers) {
+		for (Long number : refrigeratorNumbers) {
+			refriRepo.deleteById(number);
+		}
+	}
 
 	@Override
 	public List<RefrigeratorIngredient> getAllCategory() {
@@ -38,15 +55,19 @@ public class RefrigeratorServiceImpl implements RefrigeratorService {
 	}
 
 	@Override
-	public Page<Refrigerator> getRefriList(Pageable pageable, Long userNumber) {
-		return refriRepo.findByUserNumberOrderByExpDateAsc(pageable, userNumber);
+	public List<String> getIngreName(Long userNumber) {
+		return refriRepo.findIngredientNamesByUserNumber(userNumber);
 	}
 
 	@Override
-	public void ingredientDelete(List<Long> refrigeratorNumbers) {
-		for (Long number : refrigeratorNumbers) {
-			refriRepo.deleteById(number);
-        }
+	public List<SearchRecipe> getRecipe(List<String> ingre) {
+		String pattern = makePattern(ingre);
+		return SRRepo.findByIngredientPattern(pattern);
 	}
-	
+
+	private String makePattern(List<String> ingre) {
+		String regexPattern = String.join("|", ingre);
+		return regexPattern;
+	}
+
 }

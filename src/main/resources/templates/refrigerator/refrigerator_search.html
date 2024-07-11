@@ -13,7 +13,34 @@
 	<header th:replace="fragments/header :: header"></header>
 	<aside th:replace="fragments/sidebar :: sidebar"></aside>
 	<div class="refri-content-box">
-	
+
+		<span th:each="item : ${ingre}">
+			<span th:text="${item}"></span>
+		</span> 검색중
+
+
+		<div>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Recipe Name</th>
+						<th>recipeNumber</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- recipe 리스트를 반복하여 테이블 행으로 생성 -->
+					<tr th:each="recipe : ${recipe}">
+						<td>
+							<a th:href="@{'https://www.10000recipe.com/recipe/' + ${recipe.recipeNumber}}" target="_blank" th:text="${recipe.recipeName}"></a>
+						</td>
+						<td th:text="${recipe.recipeNumber}">
+						
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
 	</div>
 
 </body>
