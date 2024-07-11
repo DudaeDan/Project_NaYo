@@ -53,6 +53,7 @@ public class BoardController {
         return "board/boardlist";
     }
 
+    
     @GetMapping("/ranking")
     public String rankingBoards(Model model,
                                 @RequestParam(defaultValue = "1") int page,

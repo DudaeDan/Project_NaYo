@@ -14,18 +14,6 @@ import com.web.domain.Inquiry;
 @RequestMapping("search")
 public class SearchController {
 	
-	@GetMapping("/")
-    public String mainPage() {
-        return "index";
-    }
-
-//    @GetMapping("/search")
-//    public String search(@RequestParam String keyword, Model model) {
-//        List<Inquiry> searchResults = inquiryService.searchInquiries(keyword);
-//        searchResults.sort(Comparator.comparing(Inquiry::getLikes).reversed()); // 좋아요 순으로 정렬
-//        model.addAttribute("inquiries", searchResults);
-//        return "search_results";
-//    }
-
+	
 	
 }

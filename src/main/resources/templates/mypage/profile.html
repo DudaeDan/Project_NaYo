@@ -49,8 +49,8 @@
                     <span><input type="button" value="주소검색" onclick="execDaumPostcode()" class="check-button"/></span>
                 </div>
                 <div class="form-field">
-                    <label for="userPhonenumber">전화번호</label>
-                    <input type="text" id="userPhonenumber" name="userPhonenumber" th:value="${user.userPhonenumber}" required pattern="\d{11}">
+                    <label for="userPhonenumber">핸드폰번호</label>
+                    <input type="text" id="userPhonenumber" name="userPhonenumber" th:value="${user.userPhonenumber}" size="11" maxlength="11" placeholder="핸드폰번호('-'빼고 입력)" required />
                     <span id="phoneMessage" class="error-message"></span>
                 </div>
                 <button type="submit">수정하기</button>
