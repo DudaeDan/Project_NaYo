@@ -17,6 +17,7 @@
             </div>
         </div>
         <div class="login">
+            
             <!-- 로그인 상태 확인 후 버튼 표시 -->
             <div th:if="${session.user == null}">
                 <a th:href="@{/login/login}">Login</a>

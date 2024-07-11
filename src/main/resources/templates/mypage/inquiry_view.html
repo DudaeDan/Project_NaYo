@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의 글 상세</title>
+    <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
+    <link rel="stylesheet" th:href="@{/css/board/board_list_style.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
+</head>
+<body>
+    <header th:replace="fragments/header :: header"></header>
+    <div class="container">
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+        <div class="main-content">
+            <h2>문의 글 상세</h2>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${inquiry.inquiryTitle}">제목</h5>
+                    <p class="card-text" th:text="${inquiry.inquiryContent}">내용</p>
+                    <p class="card-text"><small class="text-muted" th:text="${#dates.format(inquiry.inquiryDate, 'yyyy-MM-dd HH:mm')}">작성일</small></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">관리자 답변</h5>
+                    <p class="card-text" th:text="${answer != null ? answer.answerContent : '아직 답변이 없습니다.'}">아직 답변이 없습니다.</p>
+                    <p class="card-text" th:if="${answer != null}"><small class="text-muted" th:text="${#dates.format(answer.answerDate, 'yyyy-MM-dd HH:mm')}">답변일</small></p>
+                </div>
+            </div>
+            <a href="#" th:href="@{/mypage/inquiry_list}" class="btn btn-secondary mt-3">목록으로</a>
+        </div>
+    </div>
+</body>
+</html>

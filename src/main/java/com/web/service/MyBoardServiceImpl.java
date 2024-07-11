@@ -1,17 +1,9 @@
 package com.web.service;
 
 import com.web.domain.Board;
+import com.web.domain.Comments;
 import com.web.domain.User;
-import com.web.repository.CommentLikeRepository;
-import com.web.repository.CommentRepository;
-import com.web.repository.IngredientRepository;
-import com.web.repository.LikeRepository;
-import com.web.repository.MyBoardRepository;
-import com.web.repository.MyUserRepository;
-import com.web.repository.ReplyLikeRepository;
-import com.web.repository.ReplyRepository;
-import com.web.repository.StepRepository;
-
+import com.web.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,12 +44,11 @@ public class MyBoardServiceImpl implements MyBoardService {
     public void updateUser(User user) {
         myUserRepository.save(user);
     }
+    
     @Override
     public List<Board> findPostsByUserNumber(Long userNumber) {
         return myBoardRepository.findByUser_UserNumber(userNumber);
     }
-
-
 
     @Override
     @Transactional
@@ -96,6 +87,16 @@ public class MyBoardServiceImpl implements MyBoardService {
 
     @Override
     public boolean isNicknameAvailable(String nickname) {
-        return myUserRepository.existsByUserNickname(nickname);
+        return !myUserRepository.existsByUserNickname(nickname);
+    }
+    
+    @Override
+    public List<Comments> findCommentsByUserNumber(Long userNumber) {
+        return commentRepository.findByUser_UserNumber(userNumber);
+    }
+
+    @Override
+    public List<Board> findBoardsByUserComments(Long userNumber) {
+        return myBoardRepository.findBoardsByUserComments(userNumber);
     }
 }

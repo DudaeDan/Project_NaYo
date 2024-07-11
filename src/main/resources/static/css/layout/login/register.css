@@ -2,10 +2,10 @@ body {
     height: 80vh;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
-  }
-  
-  .login {
-    width: 420px;
+}
+
+.register {
+    width: 500px; /* 넓이를 더 넓힘 */
     background: #ffffff;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
@@ -14,9 +14,9 @@ body {
     top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-  
-  .login:before {
+}
+
+.register:before {
     content: "";
     position: absolute;
     background: transparent;
@@ -26,14 +26,14 @@ body {
     height: 55px;
     z-index: 5;
     transition: all .6s ease-in-out, background 0s ease;
-  }
-  
-  .login .form {
+}
+
+.register .form {
     display: block;
     position: relative;
-  }
-  
-  .login .form h2  {
+}
+
+.register .form h2  {
     background: #f5f5fa;
     display: block;
     box-sizing: border-box;
@@ -43,32 +43,44 @@ body {
     font-weight: 200;
     color: #9596A2;
     font-size: 19px;
-  }
-  
-  .login .form .form-field {
+}
+
+.register .form .form-field {
     display: flex;
     align-items: center;
     height: 55px;
     margin: 0 40px 30px 40px;
     border-bottom: 1px solid #9596A2;
-  }
-  
-  .login .form .form-field label form {
-    width: 10px;
+}
+
+.register .form .form-field label {
+    width: 150px; /* 넓이를 더 넓힘 */
     padding: 0 15px 0 0;
     color: #9596A2;
-  }
-  
-  .login .form .form-field input {
-    width: 100%;
+}
+
+.register .form .form-field input[type="text"],
+.register .form .form-field input[type="email"],
+.register .form .form-field input[type="password"] {
+    width: calc(100% - 150px - 100px); /* 입력 필드 넓이를 조정 */
     background: transparent;
     color: #9596A2;
     padding: 17px;
     border: 0;
     margin: 0;
-  }
-  
-  .login .form .form-field input+svg {
+}
+
+.register .form .form-field .check-button {
+    width: 80px; /* 중복 체크 버튼의 넓이 */
+    height: 40px;
+    background: #04DFBD;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.register .form .form-field input+svg {
     width: 35px;
     fill: none;
     stroke: #00FCD1;
@@ -77,21 +89,21 @@ body {
     stroke-dasharray: 1000;
     stroke-dashoffset: -100;
     transition: all .3s ease-in-out;
-  }
-  
-  .login .form .form-field input:valid+svg {
+}
+
+.register .form .form-field input:valid+svg {
     stroke-dashoffset: 0;
-  }
-  
-  .login .form .form-field input:focus {
+}
+
+.register .form .form-field input:focus {
     outline: none;
-  }
-  
-  .login .form .form-field *::placeholder {
+}
+
+.register .form .form-field *::placeholder {
     color: #9596A2;
-  }
-  
-  .login .form .button {
+}
+
+.register .form .button {
     width: 100%;
     position: relative;
     cursor: pointer;
@@ -101,24 +113,25 @@ body {
     border: 0;
     background: transparent;
     outline: none;
-  }
-  .form-find a {
+}
+
+.form-find a {
     color: #9596A2;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
-    
-   
-  }
-  .form-find {
+}
+
+.form-find {
     text-align: center;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
-  }
-  .form-find a:hover {
+}
+
+.form-find a:hover {
     color: blue;
-  }
-  
-  .login .form .button .arrow-wrapper {
+}
+
+.register .form .button .arrow-wrapper {
     transition: all 0.45s ease-in-out;
     position: relative;
     margin: 0;
@@ -129,9 +142,9 @@ body {
     background: linear-gradient(90deg, #04DFBD, #00FCD1);
     box-shadow: 0 3px 20px rgba(0, 252, 209, 0.4);
     border-radius: 12px;
-  }
-  
-  .login .form .button .arrow-wrapper .arrow {
+}
+
+.register .form .button .arrow-wrapper .arrow {
     position: absolute;
     top: 50%;
     margin: auto;
@@ -141,9 +154,9 @@ body {
     height: 2px;
     background: none;
     transform: translateY(-50%);
-  }
-  
-  .login .form .button .arrow-wrapper .arrow:before {
+}
+
+.register .form .button .arrow-wrapper .arrow:before {
     position: absolute;
     content: '';
     top: -4px;
@@ -153,9 +166,9 @@ body {
     border-top: 2px solid #fff;
     border-right: 2px solid #fff;
     transform: rotate(45deg);
-  }
-  
-  .login .form .button .button-text {
+}
+
+.register .form .button .button-text {
     transition: all 0.45s ease-in-out;
     position: absolute;
     top: 0;
@@ -167,17 +180,17 @@ body {
     line-height: 55px;
     text-align: center;
     text-transform: uppercase;
-  }
-  
-  .login .finished {
+}
+
+.register .finished {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 7;
-  }
-  
-  .login .finished svg {
+}
+
+.register .finished svg {
     width: 100px;
     fill: none;
     stroke: #fff;
@@ -186,42 +199,42 @@ body {
     stroke-dasharray: 1000;
     stroke-dashoffset: -100;
     transition: all .3s ease-in-out .5s;
-  }
-  
-  .login.loading .form .button .arrow-wrapper {
+}
+
+.register.loading .form .button .arrow-wrapper {
     width: 55px;
     animation: sk-rotateplane 1.2s infinite ease-in-out .5s;
-  }
-  
-  .login.loading .form .button .arrow-wrapper .arrow {
+}
+
+.register.loading .form .button .arrow-wrapper .arrow {
     background: #fff;
     transform: translate(15px, 0);
     opacity: 0;
     transition: opacity 0.3s ease-in-out .5s;
-  }
-  
-  .login.loading .form .button .button-text {
+}
+
+.register.loading .form .button .button-text {
     color: #9596A2;
-  }
-  
-  .login.active:before {
+}
+
+.register.active:before {
     bottom: 0;
     right: 0;
     background: linear-gradient(90deg, #04DFBD, #00FCD1);
     border-radius: 12px;
     height: 100%;
     width: 100%;
-  }
-  
-  .login.active .form .button .arrow-wrapper {
+}
+
+.register.active .form .button .arrow-wrapper {
     animation-iteration-count: 1;
-  }
-  
-  .login.active .finished svg {
+}
+
+.register.active .finished svg {
     stroke-dashoffset: 0;
-  }
-  
-  @-webkit-keyframes sk-rotateplane {
+}
+
+@-webkit-keyframes sk-rotateplane {
     0% {
       transform: perspective(120px)
     }
@@ -231,5 +244,4 @@ body {
     100% {
       transform: perspective(120px) rotateY(180deg) rotateX(180deg)
     }
-  }
-  
+}

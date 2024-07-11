@@ -142,4 +142,9 @@ public class CommentServiceImpl implements CommentService {
     public boolean isUserLikedComment(User user, Comments comment) {
         return commentLikeRepository.findByUserAndComment(user, comment) != null;
     }
+    
+    @Override
+    public List<Comments> findCommentsByUserNumber(Long userNumber) {
+    	return commentRepository.findByUser_UserNumber(userNumber);
+    }
 }

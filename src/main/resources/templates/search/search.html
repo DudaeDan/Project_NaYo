@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
+    <link rel="stylesheet" th:href="@{/css/board/board_list_style.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
+</head>
+<body>
+    <header th:replace="fragments/header :: header"></header>
+    <div class="container">
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+        <div class="main-content">
+            <h2>메인 페이지</h2>
+            <form action="#" th:action="@{/search/search}" method="get" class="form-inline mb-3">
+                <input type="text" name="keyword" class="form-control" placeholder="검색어" />
+                <button type="submit" class="btn btn-primary">
+                    <img src="/Images/search_icon.png" alt="검색 아이콘">
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -18,7 +18,7 @@
                 <a th:href="@{/mypage/comment}">작성댓글</a>
                 <a th:href="@{/mypage/boardlist}">작성 글 목록</a>
                 <a th:href="@{/mypage/profile}">개인정보 수정</a>
-                <a th:href="@{/mypage/inquiry}">문의 글 목록</a>
+                <a th:href="@{/mypage/inquiry_list}">문의 글 목록</a>
             </div>
             <div class="board-list">
                 <div th:each="board : ${boards}" class="board-item">
@@ -31,7 +31,6 @@
                         <h3>
                             <a th:href="@{/board/view/{id}(id=${board.boardNumber})}" th:text="${board.boardTitle}">board_title</a>
                         </h3>
-                        <p th:text="'작성자 : '+${board.user.userNickname}">user_nickname</p>
                         <div class="stats">
                             <span th:text="'조회수 : ' + ${board.boardHit}">조회수 : board_hit</span>
                             <span>
