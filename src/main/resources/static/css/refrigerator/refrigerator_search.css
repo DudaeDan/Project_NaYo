@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+
+.search-result {
+	padding: 50px;
+}
+
+.search-result-title {
+	font-size: 24px;
+	font-weight: bold;
+	margin-left: 50px;
+	padding-top:20px;
+}
+
+
+.recipe-list {
+	padding: 20px;
+}
+
+.recipe-list {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.recipe-list th {
+	padding: 10px;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+}
+
+.recipe-list td {
+	padding: 10px;
+	border-bottom: 1px solid #eaeaea;
+}
+
+.recipe-title {
+	text-align: center;
+	font-weight: bold;
+}
+
+.recipe-ingredients {
+	font-size: 12px;
+}

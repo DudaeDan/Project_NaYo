@@ -25,5 +25,8 @@ public class SearchRecipe {
 
 	@Column(insertable = false, updatable = false)
 	private String recipeIngredient;
+	
+	@Column(insertable = false, updatable = false)
+	private String recipeTitle;
 
 }

@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<title>레시피 검색</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/refrigerator/refrigerator.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/refrigerator/refrigerator_search.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/layout/Layout_styles.css}">
 </head>
 
@@ -13,32 +14,33 @@
 	<header th:replace="fragments/header :: header"></header>
 	<aside th:replace="fragments/sidebar :: sidebar"></aside>
 	<div class="refri-content-box">
+		<div class="search-result-title">
+			<span>레시피 목록</span>
+		</div>
 
-		<span th:each="item : ${ingre}">
-			<span th:text="${item}"></span>
-		</span> 검색중
+		<div class="search-result">
 
 
-		<div>
-			<table border="1">
+			<table class="recipe-list">
 				<thead>
 					<tr>
-						<th>Recipe Name</th>
-						<th>recipeNumber</th>
+						<th style="width: 30%;">글 제목</th>
+						<th style="width: 15%;">요리명</th>
+						<th style="width: 55%;">재료</th>
 					</tr>
 				</thead>
 				<tbody>
-					<!-- recipe 리스트를 반복하여 테이블 행으로 생성 -->
 					<tr th:each="recipe : ${recipe}">
-						<td>
-							<a th:href="@{'https://www.10000recipe.com/recipe/' + ${recipe.recipeNumber}}" target="_blank" th:text="${recipe.recipeName}"></a>
+						<td class="recipe-title">
+							<a th:href="@{'https://www.10000recipe.com/recipe/' + ${recipe.recipeNumber}}"
+								target="_blank" th:text="${recipe.recipeTitle}"></a>
 						</td>
-						<td th:text="${recipe.recipeNumber}">
-						
-						</td>
+						<td th:text="${recipe.recipeName}"></td>
+						<td th:text="${recipe.recipeIngredient}" class="recipe-ingredients"></td>
 					</tr>
 				</tbody>
 			</table>
+
 		</div>
 
 	</div>
