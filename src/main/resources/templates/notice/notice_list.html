@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항 리스트</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .notice-title {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+	<link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
+
+</head>
+<body>
+    <header th:replace="fragments/header :: header"></header>
+    <div class="container">
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+        <div class="main-content">
+            <h2 class="notice-title">공지사항</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="notice : ${notices}">
+                        <td th:text="${notice.noticeNumber}">1</td>
+                        <td>
+                            <a th:href="@{/notice/view/{id}(id=${notice.noticeNumber})}" th:text="${notice.noticeTitle}">공지사항 제목</a>
+                        </td>
+                        <td th:text="${notice.user.userNickname}">작성자</td>
+                        <td th:text="${#dates.format(notice.noticeDate, 'yyyy-MM-dd')}">2024-01-01</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination-container">
+                <div class="pagination">
+                    <button th:if="${currentPage > 1}" th:onclick="'changePage(' + (${currentPage} - 1) + ')'">&lt;</button>
+                    <span th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 > totalPages ? totalPages : currentPage + 2)}">
+                        <button th:text="${page}" th:classappend="${page == currentPage} ? 'active'" th:onclick="'changePage(' + ${page} + ')'"></button>
+                    </span>
+                    <button th:if="${currentPage < totalPages}" th:onclick="'changePage(' + (${currentPage} + 1) + ')'">&gt;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function changePage(page) {
+            const size = /*[@requestParam('size') or default value]*/ 10;
+            window.location.href = '/notice/list?page=' + page + '&size=' + size;
+        }
+    </script>
+	<script th:src="@{/script/layout/Layout_scripts.js}"></script>
+
+</body>
+</html>

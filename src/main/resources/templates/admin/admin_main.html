@@ -40,7 +40,7 @@
                                         <td th:text="${member.userName}"></td>
                                         <td th:text="${member.userId}"></td>
                                         <td th:text="${member.userNickname}"></td>
-                                        <td th:text="${#dates.format(member.userRegistdate.toLocalDate(), 'yyyy-MM-dd')}"></td>
+                                        <td th:text="${#dates.format(member.userRegistdate, 'yyyy-MM-dd')}"></td>
                                         <th:block th:if="${member.userRole == 0}">
                                             <td>일반회원</td>
                                         </th:block>
@@ -104,7 +104,7 @@
                                     <tr th:each="notice : ${mainNotice}">
                                         <td th:text="${notice.noticeNumber}"></td>
                                         <td th:text="${notice.noticeTitle}"></td>
-                                        <td th:text="${#dates.format(notice.noticeDate.toLocalDate(), 'yyyy-MM-dd')}"></td>
+                                        <td th:text="${#dates.format(notice.noticeDate, 'yyyy-MM-dd')}"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -132,7 +132,7 @@
                                     <tr th:each="inquiry : ${mainInquiry}">
                                         <td th:text="${inquiry.user.userNickname}"></td>
                                         <td th:text="${inquiry.inquiryTitle}"></td>
-                                        <td th:text="${#dates.format(inquiry.inquiryDate.toLocalDate(), 'yyyy-MM-dd')}"></td>
+                                        <td th:text="${#dates.format(inquiry.inquiryDate, 'yyyy-MM-dd')}"></td>
                                         <th:block th:if="${inquiry.inquiryProgress == 0}">
                                             <td style="color: red; font-weight: bold;">답변 대기</td>
                                         </th:block>

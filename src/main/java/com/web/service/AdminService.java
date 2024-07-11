@@ -29,6 +29,8 @@ public interface AdminService {
 	Page<User> getMemberList(Pageable pageable, String searchType, String searchKeyword);
 
 	User getMember(Long userNumber);
+	
+	void deleteMember(Long userNumber);
 
 	// 게시판
 	Page<Board> getBoardList(Pageable pageable);
@@ -39,7 +41,11 @@ public interface AdminService {
 
 	void modifyBoard(Board board);
 
-	void deleteBoard(Long boardNumber);
+    void deleteBoardWithFiles(Long id);
+    
+    void deleteComment(Long id);
+
+    void deleteReply(Long id);
 
 	// 공지
 	Page<Notice> getNoticeList(Pageable pageable);

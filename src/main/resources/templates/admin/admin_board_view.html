@@ -1,100 +1,200 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>게시글</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin_post.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin_post.css}">
 </head>
 
 <body>
-	<main>
+    <main>
+        <header th:replace="fragments/admin_header :: admin_header"></header>
+        <aside th:replace="fragments/admin_sidebar :: admin_sidebar"></aside>
 
-		<header th:replace="fragments/admin_header :: admin_header"></header>
-		<aside th:replace="fragments/admin_sidebar :: admin_sidebar"></aside>
+        <section>
+            <div class="post-box">
+                <div class="admin-post-content">
+                    <div class="post-info">
+                        <table class="admin-post">
+                            <tr>
+                                <th>제목</th>
+                                <td class="post-title" th:text="${board.boardTitle}">board_title</td>
+                                <th>작성자</th>
+                                <td th:text="${board.user.userNickname}">user_nickname</td>
+                                <th>작성일</th>
+                                <td th:text="${#temporals.format(board.boardDate, 'yyyy-MM-dd')}">board_date</td>
+                                <th>조회수</th>
+                                <td th:text="${board.boardHit}">board_hit</td>
+                            </tr>
+                            <tr>
+                                <th>재료</th>
+                                <td colspan="7">
+                                    <ul>
+                                        <li th:each="ingredient : ${board.ingredients}">
+                                            <span th:text="${ingredient.name}">ingredient_name</span>:
+                                            <span th:text="${ingredient.amount}">ingredient_amount</span>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>내용</th>
+                                <td colspan="7">
+                                    <img th:src="@{'/Images/border/main/' + ${board.mainImg}}" alt="main_img" class="main-img">
+                                    <div th:each="step : ${board.steps}">
+                                        <img th:src="@{'/Images/border/step/' + ${step.stepImage}}" alt="step_image" class="step-img">
+                                        <p th:text="${step.stepDescription}" class="step-description">step_description</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
 
-		<section>
+                    <!-- 댓글 섹션 시작 -->
+                    <div class="post-btns">
+                        <form th:action="@{/admin/boardDelete}" name="boardDelete" method="post">
+                            <input type="hidden" name="boardNumber" th:value="${board.boardNumber}">
+                            <input type="button" value="삭제" class="second_btn" th:onclick="|deleteSubmit()|">
+                        </form>
+                        <input type="button" value="글 목록" th:onclick="|location.href='@{/admin/boardList}'|">
+                    </div>
 
-			<div class="post-box">
-				<div class="admin-post-content">
-					<div class="post-btns">
-						<form th:action="@{/admin/boardModifyForm}" name="boardModify" method="get">
-							<input type="hidden" name="boardNumber" th:value="${boardDetail.boardNumber}">
-							<input type="button" value="수정" class="third_btn" onclick="modifySubmit()">
-						</form>
-						<form th:action="@{/admin/boardDelete}" name="boardDelete" method="post">
-							<input type="hidden" name="boardNumber" th:value="${boardDetail.boardNumber}">
-							<input type="button" value="삭제" class="second_btn" onclick="deleteSubmit()">
-						</form>
-						<input type="button" value="글 목록" th:onclick="|location.href='@{/admin/boardList}'|">
-					</div>
+                    <div class="post-info" style="margin-top: 20px;">
+                        <table class="admin-post">
+                            <tr>
+                                <th colspan="8">댓글</th>
+                            </tr>
+                            <!-- 베스트 댓글 -->
+                            <tr th:if="${bestComments != null && !bestComments.isEmpty()}">
+                                <td colspan="8" style="background-color: lightpink;">
+                                    <h3>베스트 댓글</h3>
+                                    <div th:each="bestComment : ${bestComments}" class="comment-item best-comment" th:id="'comment-' + ${bestComment.id}">
+                                        <div class="comment-user">
+                                            <span th:text="${bestComment.user.userNickname}" style="font-weight: bold; font-size: larger;">유저 닉네임</span>
+                                            <span th:text="${#temporals.format(bestComment.createdDate, 'yyyy-MM-dd HH:mm')}">작성일</span>
+                                            <button th:onclick="|deleteComment(${bestComment.id})|" class="delete-btn">삭제</button>
+                                            <span class="like-count" th:text="'좋아요: ' + ${bestComment.likes}">좋아요 수</span>
+                                        </div>
+                                        <div class="comment-content" th:text="${bestComment.content}" th:onclick="|scrollToComment(${bestComment.id})|"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 일반 댓글 -->
+                            <tr>
+                                <td colspan="8">
+                                    <ul style="list-style-type: none;">
+                                        <li th:each="comment : ${comments}" style="border-top: 1px solid lightgray;">
+                                            <div class="comment-item" th:id="'comment-' + ${comment.id}">
+                                                <div class="comment-user">
+                                                    <span th:text="${comment.user.userNickname}" style="font-weight: bold; font-size: larger;">유저 닉네임</span>
+                                                    <span th:text="${#temporals.format(comment.createdDate, 'yyyy-MM-dd HH:mm')}">작성일</span>
+                                                    <button th:onclick="|deleteComment(${comment.id})|" class="delete-btn">삭제</button>
+                                                    <span class="like-count" th:text="'좋아요: ' + ${comment.likes}">좋아요 수</span>
+                                                </div>
+                                                <div class="comment-content">
+                                                    <p th:text="${comment.content}">댓글 내용</p>
+                                                </div>
+                                                <div class="replies-list">
+                                                    <div th:each="reply : ${comment.replies}">
+                                                        <div class="reply-item" th:id="'reply-' + ${reply.id}">
+                                                            <div class="reply-user">
+                                                                <span th:text="${reply.user.userNickname}">유저 닉네임</span>
+                                                                <span th:text="${#temporals.format(reply.createdDate, 'yyyy-MM-dd HH:mm')}">작성일</span>
+                                                                <button th:onclick="|deleteReply(${reply.id})|" class="delete-btn">삭제</button>
+                                                                <span class="like-count" th:text="'좋아요: ' + ${reply.likes}">좋아요 수</span>
+                                                            </div>
+                                                            <div class="reply-content">
+                                                                <p th:text="${reply.content}">답글 내용</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- 댓글 섹션 끝 -->
 
-					<div class="post-info">
-						<table class="admin-post">
-							<tr>
-								<th>제목</th>
-								<td class="post-title" th:text="${boardDetail.boardTitle}"></td>
-								<th>작성자</th>
-								<td th:text="${boardDetail.User.userNickname}"></td>
-								<th>작성일</th>
-								<td th:text="${#dates.format(boardDetail.boardDate, 'yyyy-MM-dd')}"></td>
-								<th>조회수</th>
-								<td th:text="${boardDetail.boardHit}"></td>
-							</tr>
-							<tr>
-								<th>재료</th>
-								<td colspan="7" class="post-content" th:text="${boardDetail.boardIngredient}"></td>
-							</tr>
-							<tr>
-								<th rowspan="10">내용</th>
-								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent1}"></td>
-							</tr>
-							<tr>
-								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent2}"></td>
-							</tr>
-							<tr>
-								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent3}"></td>
-							</tr>
-							<tr>
-								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent4}"></td>
-							</tr>
-							<tr>
-								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent5}"></td>
-							</tr>
-							<tr>
-								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent6}"></td>
-							</tr>
-							<tr>
-								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent7}"></td>
-							</tr>
-							<tr>
-								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent8}"></td>
-							</tr>
-							<tr>
-								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent9}"></td>
-							</tr>
-
-							<tr>
-								<td colspan="7" class="post-content" th:text="${boardDetail.boardContent10}"></td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-
-		</section>
-
-	</main>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
 <script>
-	function modifySubmit() {
-		document.boardModify.submit();
-	}
-	function deleteSubmit() {
-		document.boardDelete.submit();
-	}
+    function deleteSubmit() {
+        const boardNumber = document.boardDelete.boardNumber.value;
+        fetch(`/admin/boardDelete`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `boardNumber=${boardNumber}`
+        })
+        .then(response => response.text())
+        .then(result => {
+            if (result === 'deleted') {
+                alert('게시글이 삭제되었습니다.');
+                location.href = '/admin/boardList';
+            } else if (result === 'incorrectPassword') {
+                alert('올바른 권한이 있는지 확인하세요.');
+            } else {
+                alert('게시글 삭제에 실패하였습니다. 관리자에게 문의하세요.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('오류가 발생하였습니다.');
+        });
+    }
+
+    function deleteComment(commentId) {
+        fetch(`/admin/deleteComment/${commentId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            }
+        })
+        .then(response => response.text())
+        .then(result => {
+            if (result === 'deleted') {
+                alert('댓글이 삭제되었습니다.');
+                document.getElementById(`comment-${commentId}`).remove();
+            } else {
+                alert('댓글 삭제에 실패하였습니다. 관리자에게 문의하세요.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('오류가 발생하였습니다.');
+        });
+    }
+
+    function deleteReply(replyId) {
+        fetch(`/admin/deleteReply/${replyId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            }
+        })
+        .then(response => response.text())
+        .then(result => {
+            if (result === 'deleted') {
+                alert('답글이 삭제되었습니다.');
+                document.getElementById(`reply-${replyId}`).remove();
+            } else {
+                alert('답글 삭제에 실패하였습니다. 관리자에게 문의하세요.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('오류가 발생하였습니다.');
+        });
+    }
 </script>
 <script th:src="@{/script/admin/adminScript.js}"></script>
 

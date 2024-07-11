@@ -12,13 +12,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-	
+   
     User findByUserId(String userId);
-    // 유저 아이디를 찾는다.
-    User findByUserNameAndUserPhonenumber(String userName, String userPhonenumber);
-	User findByUserNameAndUserIdAndUserPhonenumber(String userName, String userId, String userPhonenumber);
-
-    User findUserByUserId(String userId);
-
+   boolean existsByUserId(String userId);
+   User findByUserNameAndUserPhonenumber(String userName, String userPhonenumber);
+   User findByUserNameAndUserIdAndUserPhonenumber(String userName, String userId, String userPhonenumber);
+   User findUserByUserId(String userId);
+   boolean existsByUserNickname(String nickname);
+   
 }
 

@@ -3,27 +3,27 @@
 .post-box {
     width: 90%;
     margin: 0 auto;
-    height: 80%;
+    height: auto;
     position: relative;
-	margin-top: 100px;
+    margin-top: 100px;
+    padding-bottom: 50px; /* 추가: 버튼과 테이블 간격을 위해 패딩 추가 */
 }
 
 .admin-post-content {
     width: 80%;
     margin: 0 auto;
-    height: 80%;
+    height: auto;
     position: relative;
+    padding-bottom: 50px; /* 추가: 버튼과 테이블 간격을 위해 패딩 추가 */
 }
 
-
-
 /* 테이블 */
-.post-info{
-    position: absolute;
+.post-info {
+    position: relative;
     width: 100%;
-    height: 100%;
-    top: 70px;
+    height: auto;
     margin: auto;
+    margin-top: 20px; /* 추가: 버튼과 테이블 간격을 위해 마진 추가 */
 }
 
 table {
@@ -42,6 +42,7 @@ th, td {
 td.post-title {
     width: 50%;
 }
+
 td.notice-title {
     width: 70%;
 }
@@ -50,7 +51,7 @@ td.post-content {
     padding: 20px 30px;
 }
 
-th{
+th {
     width: 6%;
     padding: 15px 0;
 }
@@ -62,48 +63,41 @@ td textarea {
     border: none;
 }
 
-table  input {
+table input {
     width: 95%;
     height: 30px;
     border: none;
 }
 
-
-
 /* 버튼 */
 .post-btns {
-    position: relative;    
-    margin-top: 70px;
-    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px; /* 버튼과 댓글 섹션 사이의 간격 추가 */
 }
 
-.post-btns > input, form > input{
+.post-btns > input, form > input {
     background-color: white;
     border: 1px solid #cdcdcd;
     padding: 10px;
     width: 100px;
-    position: absolute;
-    border-radius: 5px;
-    right: 0px;
-    cursor: pointer;
-}
+    margin-left: 10px; /*	버튼 사이의 간격 추가 */
+	border-radius: 5px;
+	cursor: pointer;
+	}
 
-.second_btn {
-    right: 110px !important;
-}
+	.second_btn {
+	margin-left: 10px; /* 간격 추가 */
+	}
 
-.third_btn {
-    right: 220px !important;
-}
+	.inquiry_answer {
+	height: 200px;
+	}
 
-.inquiry_answer {
-    height: 200px;
-}
+	.post-modify {
+	height: 300px;
+	}
 
-.post-modify{
-height: 300px;
-}
-
-.board-modify {
-height: 80px;
-}
+	.board-modify {
+	height: 80px;
+	}

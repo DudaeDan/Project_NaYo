@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.web.domain.Ingredient;
 import com.web.domain.Refrigerator;
+import com.web.domain.SearchRecipe;
 import com.web.domain.User;
 import com.web.service.RefrigeratorService;
 import com.web.util.SessionConst;
@@ -80,10 +83,15 @@ public class RefrigeratorController {
 		return "redirect:/refrigerator";
 	}
 
+	//레시피 검색
 	@GetMapping("searchRecipe")
 	public String searchRecipe(Model model) {
 		Object loginMember = session.getAttribute(SessionConst.LOGIN_MEMBER);
 		Long userNumber = ((User) loginMember).getUserNumber();
+		List<String> ingre = refService.getIngreName(userNumber);
+		List<SearchRecipe> recipe = refService.getRecipe(ingre);
+		model.addAttribute("ingre", ingre);
+		model.addAttribute("recipe", recipe);
 		return "refrigerator/refrigerator_search";
 	}
 

@@ -5,21 +5,58 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.web.domain.Answer;
 import com.web.domain.Board;
+import com.web.domain.Comments;
 import com.web.domain.Inquiry;
 import com.web.domain.Notice;
+import com.web.domain.Reply;
 import com.web.domain.User;
 import com.web.repository.AdminAnswerRepository;
 import com.web.repository.AdminBoardRepository;
 import com.web.repository.AdminInquiryRepository;
 import com.web.repository.AdminNoticeRepository;
 import com.web.repository.AdminUserRepository;
+import com.web.repository.BoardRepository;
+import com.web.repository.CommentLikeRepository;
+import com.web.repository.CommentRepository;
+import com.web.repository.IngredientRepository;
+import com.web.repository.LikeRepository;
+import com.web.repository.ReplyLikeRepository;
+import com.web.repository.ReplyRepository;
+import com.web.repository.StepRepository;
+import com.web.repository.UserRepository;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
+    private static final String MAIN_IMG_DIR = "src/main/resources/static/Images/border/main/";
+    private static final String STEP_IMG_DIR = "src/main/resources/static/Images/border/step/";
+
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private ReplyLikeRepository replyLikeRepository;
+    @Autowired
+    private CommentLikeRepository commentLikeRepository;
+    @Autowired
+    private LikeRepository likeRepository;
+    @Autowired
+    private ReplyRepository replyRepository;
+    @Autowired
+    private CommentRepository commentRepository;
+    @Autowired
+    private BoardRepository boardRepository;
+    @Autowired
+    private StepRepository stepRepository;
+    @Autowired
+    private IngredientRepository ingredientRepository;
+    @Autowired
+    private FileService fileService;
 
 	@Autowired
 	private AdminUserRepository adUserRepo;
@@ -85,6 +122,73 @@ public class AdminServiceImpl implements AdminService {
 		return adUserRepo.findById(userNumber).orElse(null);
 	}
 
+    @Override
+    @Transactional
+    public void deleteMember(Long userNumber) {
+        User user = userRepository.findById(userNumber).orElse(null);
+        if (user != null) {
+            // 유저가 남긴 좋아요 삭제 (댓글, 답글, 게시글 등)
+            replyLikeRepository.deleteByUser_UserNumber(userNumber);
+            commentLikeRepository.deleteByUser_UserNumber(userNumber);
+            likeRepository.deleteByUser_UserNumber(userNumber);
+
+            // 유저가 작성한 답글 삭제
+            replyRepository.findByUser_UserNumber(userNumber).forEach(reply -> {
+                replyLikeRepository.deleteByReply_Id(reply.getId());
+                replyRepository.delete(reply);
+            });
+
+            // 유저가 작성한 댓글 삭제
+            commentRepository.findByUser_UserNumber(userNumber).forEach(comment -> {
+                replyRepository.findByComment_Id(comment.getId()).forEach(reply -> {
+                    replyLikeRepository.deleteByReply_Id(reply.getId());
+                    replyRepository.delete(reply);
+                });
+                commentLikeRepository.deleteByComment_Id(comment.getId());
+                commentRepository.delete(comment);
+            });
+
+            // 유저가 작성한 게시글의 답글 삭제
+            boardRepository.findByUser_UserNumber(userNumber).forEach(board -> {
+                commentRepository.findByBoard_BoardNumber(board.getBoardNumber()).forEach(comment -> {
+                    replyRepository.findByComment_Id(comment.getId()).forEach(reply -> {
+                        replyLikeRepository.deleteByReply_Id(reply.getId());
+                        replyRepository.delete(reply);
+                    });
+                });
+            });
+
+            // 유저가 작성한 게시글의 댓글 삭제
+            boardRepository.findByUser_UserNumber(userNumber).forEach(board -> {
+                commentRepository.findByBoard_BoardNumber(board.getBoardNumber()).forEach(comment -> {
+                    commentLikeRepository.deleteByComment_Id(comment.getId());
+                    commentRepository.delete(comment);
+                });
+            });
+
+            // 유저가 작성한 게시글의 스텝과 재료 삭제
+            boardRepository.findByUser_UserNumber(userNumber).forEach(board -> {
+                board.getSteps().forEach(step -> {
+                    fileService.deleteFile(step.getStepImage(), STEP_IMG_DIR);
+                    stepRepository.delete(step);
+                });
+
+                board.getIngredients().forEach(ingredient -> {
+                    ingredientRepository.delete(ingredient);
+                });
+            });
+
+            // 유저가 작성한 게시글 삭제
+            boardRepository.findByUser_UserNumber(userNumber).forEach(board -> {
+                fileService.deleteFile(board.getMainImg(), MAIN_IMG_DIR);
+                boardRepository.delete(board);
+            });
+
+            // 유저 정보 삭제
+            userRepository.delete(user);
+        }
+    }
+	
 	// admin board
 	@Override
 	public Page<Board> getBoardList(Pageable pageable) {
@@ -104,7 +208,16 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Board getBoard(Long boardNumber) {
-		return adBoardRepo.findById(boardNumber).orElse(null);
+	    Board board = adBoardRepo.findById(boardNumber).orElse(null);
+	    if (board != null) {
+	        // Fetch comments and replies
+	        List<Comments> comments = board.getComments();
+	        for (Comments comment : comments) {
+	            List<Reply> replies = comment.getReplies(); // 댓글의 답글을 로드
+	            comment.setReplies(replies); // 댓글 객체에 답글 세팅
+	        }
+	    }
+	    return board;
 	}
 
 	@Override
@@ -117,11 +230,67 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 
-	@Override
-	public void deleteBoard(Long boardNumber) {
-		adBoardRepo.deleteById(boardNumber);
-	}
+    @Override
+    @Transactional
+    public void deleteBoardWithFiles(Long id) {
+        Board board = boardRepository.findById(id).orElse(null);
+        if (board != null) {
+            // 이미지 파일 삭제
+            fileService.deleteFile(board.getMainImg(), MAIN_IMG_DIR);
+            board.getSteps().forEach(step -> fileService.deleteFile(step.getStepImage(), STEP_IMG_DIR));
 
+            // 댓글 및 관련된 답글, 좋아요 삭제
+            board.getComments().forEach(comment -> {
+                // 답글 및 답글 좋아요 삭제
+                comment.getReplies().forEach(reply -> {
+                    replyLikeRepository.deleteAll(replyLikeRepository.findByReply(reply));
+                    replyRepository.delete(reply);
+                });
+
+                // 댓글 좋아요 삭제
+                commentLikeRepository.deleteAll(commentLikeRepository.findByComment(comment));
+
+                // 댓글 삭제
+                commentRepository.delete(comment);
+            });
+
+            // 보드 삭제
+            boardRepository.delete(board);
+        }
+    }
+    
+    @Override
+    @Transactional
+    public void deleteComment(Long id) {
+        Comments comment = commentRepository.findById(id).orElse(null);
+        if (comment != null) {
+            // 댓글 좋아요 삭제
+            commentLikeRepository.deleteByComment(comment);
+
+            // 댓글의 답글과 답글 좋아요 삭제
+            for (Reply reply : comment.getReplies()) {
+                replyLikeRepository.deleteByReply(reply);
+                replyRepository.delete(reply);
+            }
+
+            // 댓글 삭제
+            commentRepository.delete(comment);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void deleteReply(Long id) {
+        Reply reply = replyRepository.findById(id).orElse(null);
+        if (reply != null) {
+            // 답글 좋아요 삭제
+            replyLikeRepository.deleteByReply(reply);
+
+            // 답글 삭제
+            replyRepository.delete(reply);
+        }
+    }
+    
 	// admin notice
 	@Override
 	public Page<Notice> getNoticeList(Pageable pageable) {

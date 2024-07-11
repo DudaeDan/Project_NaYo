@@ -1,5 +1,8 @@
 package com.web.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +17,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import com.web.domain.Answer;
 import com.web.domain.Board;
+import com.web.domain.Comments;
 import com.web.domain.Inquiry;
 import com.web.domain.Notice;
+import com.web.domain.Reply;
 import com.web.domain.TmpBoard;
 import com.web.domain.User;
 import com.web.service.AdminService;
+import com.web.service.BoardService;
+import com.web.service.CommentService;
+import com.web.service.ReplyService;
 import com.web.util.SessionConst;
 
 @Controller
@@ -34,7 +43,15 @@ public class AdminController {
 
     @Autowired
     private HttpSession session;
+    @Autowired
+    private BoardService boardService;
 
+    @Autowired
+    private CommentService commentService;
+    
+    @Autowired
+    private ReplyService replyService;
+    
     // 로그인 페이지
     @GetMapping("/login")
     public String adminLoginForm() {
@@ -46,6 +63,8 @@ public class AdminController {
     @PostMapping("login")
     public String login(@RequestParam String userId, @RequestParam String userPw, Model model, HttpServletRequest request) {
         User user = adminService.adminLogin(userId, userPw);
+        System.out.println(userId);
+        System.out.println(userPw);
         if (user == null) {
             model.addAttribute("loginError", true); // 로그인 에러 메시지 설정
             return "admin/admin_login"; // 로그인 페이지로 이동
@@ -124,6 +143,17 @@ public class AdminController {
         return "admin/admin_member_view";
     }
 
+    // 회원탈퇴
+    @PostMapping("/deleteMember/{id}")
+    @ResponseBody
+    public String deleteMember(@PathVariable Long id) {
+        try {
+            adminService.deleteMember(id);
+            return "deleted";
+        } catch (Exception e) {
+            return "error";
+        }
+    }
     // 게시판 리스트
     @GetMapping("boardList")
     public String adminBoardList(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
@@ -147,16 +177,59 @@ public class AdminController {
         return "admin/admin_board";
     }
 
-    // 게시글 상세보기
-    @GetMapping("boardView/{id}")
-    public String viewBoard(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
+    @GetMapping("/boardView/{id}")
+    public String viewAdminBoard(@PathVariable Long id, Model model, HttpServletRequest request ) {
+        // 관리자 로그인 여부 확인
         if (!isAdminLoggedIn(request)) {
-            return "redirect:/admin/admin_login";
+            return "redirect:/admin/admin_login"; // 관리자 로그인 페이지로 리디렉션
         }
-        model.addAttribute("boardDetail", adminService.getBoard(id));
-        return "admin/admin_board_view";
+
+        Board board = boardService.findBoardById(id);
+        if (board != null) {
+            model.addAttribute("board", board);
+            model.addAttribute("steps", board.getSteps());
+            model.addAttribute("ingredients", board.getIngredients());
+
+            // 댓글 목록 추가
+            List<Comments> comments = commentService.findCommentsByBoard(board);
+            model.addAttribute("comments", comments);
+
+            // 베스트 댓글 계산
+            int maxLikes = comments.stream().mapToInt(Comments::getLikes).max().orElse(0);
+            if (maxLikes > 0) {
+                List<Comments> bestComments = comments.stream()
+                        .filter(comment -> comment.getLikes() == maxLikes)
+                        .collect(Collectors.toList());
+                model.addAttribute("bestComments", bestComments);
+            } else {
+                model.addAttribute("bestComments", null);
+            }
+        }
+        return "/admin/admin_board_view";
+    }
+    	
+    @PostMapping("/deleteComment/{id}")
+    @ResponseBody
+    public String deleteComment(@PathVariable Long id) {
+        try {
+            adminService.deleteComment(id);
+            return "deleted";
+        } catch (Exception e) {
+            return "error";
+        }
     }
 
+    @PostMapping("/deleteReply/{id}")
+    @ResponseBody
+    public String deleteReply(@PathVariable Long id) {
+        try {
+            adminService.deleteReply(id);
+            return "deleted";
+        } catch (Exception e) {
+            return "error";
+        }
+    }
+	    
     // 게시글 수정 페이지
     @GetMapping("boardModifyForm")
     public String boardModify(@RequestParam("boardNumber") Long boardNumber, Model model, HttpServletRequest request) {
@@ -180,12 +253,20 @@ public class AdminController {
 
     // 게시글 삭제
     @PostMapping("boardDelete")
+    @ResponseBody
     public String boardDelete(@RequestParam("boardNumber") Long boardNumber, HttpServletRequest request) {
         if (!isAdminLoggedIn(request)) {
             return "redirect:/admin/admin_login";
         }
-        adminService.deleteBoard(boardNumber);
-        return "redirect:/admin/boardList";
+        try {
+            adminService.deleteBoardWithFiles(boardNumber);
+            return "redirect:/admin/boardList";        
+        	} catch (Exception e) {
+            // 로그에 오류 메시지 출력
+            System.err.println("Error deleting board: " + e.getMessage());
+            e.printStackTrace();
+            return "error";
+        }
     }
 
     // 공지 리스트

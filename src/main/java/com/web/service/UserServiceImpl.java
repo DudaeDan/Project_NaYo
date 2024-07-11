@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isUserIdAvailable(String userId) {
-        return userRepository.findByUserId(userId) == null;
+       return !userRepository.existsByUserId(userId);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
     
     @Override
     public String generateTemporaryPassword() {
-    	 return UUID.randomUUID().toString().substring(0, 8);
+        return UUID.randomUUID().toString().substring(0, 8);
     }
     
     @Override
@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
                 helper.setFrom("ahndaaa1230@gamil.com"); // spring.mail.username 값과 동일하게 설정
                 javaMailSender.send(message);
             } catch (MailException | MessagingException e) {
-            	e.printStackTrace();
+               e.printStackTrace();
                 throw new RuntimeException("메일 전송 중 오류가 발생했습니다.", e);
             }
         }
@@ -92,15 +92,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updatePassword(String userId, String newPassword) {
-    	
-    	User user = userRepository.findByUserId(userId);
+       
+       User user = userRepository.findByUserId(userId);
         if (user != null) {
-        	user.setUserPw(newPassword);
+           user.setUserPw(newPassword);
             userRepository.save(user);
             System.out.println("Sending email to: " + userId);
             System.out.println("Temporary password: " + newPassword);
         }
-    	
+       
+    }
+    @Override
+    public boolean isNicknameAvailable(String nickname) {
+       return !userRepository.existsByUserNickname(nickname);
     }
 
   

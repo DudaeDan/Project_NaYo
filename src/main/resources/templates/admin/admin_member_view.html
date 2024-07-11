@@ -1,76 +1,95 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>회원정보</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin_member_view.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원정보</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin_member_view.css}">
 </head>
 
 <body>
-	<main>
+    <main>
+        <header th:replace="fragments/admin_header :: admin_header"></header>
+        <aside th:replace="fragments/admin_sidebar :: admin_sidebar"></aside>
 
-		<header th:replace="fragments/admin_header :: admin_header"></header>
-		<aside th:replace="fragments/admin_sidebar :: admin_sidebar"></aside>
+        <section>
+            <div class="member-view-box">
+                <div class="view-info">
+                    <table>
+                        <tr>
+                            <th class="table-title" colspan="2">
+                                <span th:text="${memberDetail.userName}"></span> 님의 회원정보
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>이름</th>
+                            <td th:text="${memberDetail.userName}"></td>
+                        </tr>
+                        <tr>
+                            <th>ID</th>
+                            <td th:text="${memberDetail.userId}"></td>
+                        </tr>
+                        <tr>
+                            <th>닉네임</th>
+                            <td th:text="${memberDetail.userNickname}"></td>
+                        </tr>
+                        <tr>
+                            <th>전화번호</th>
+                            <td th:text="${memberDetail.userPhonenumber}"></td>
+                        </tr>
+                        <tr>
+                            <th>주소</th>
+                            <td th:text="${memberDetail.userAddress}"></td>
+                        </tr>
+                        <tr>
+                            <th>가입일자</th>
+                            <td th:text="${#dates.format(memberDetail.userRegistdate, 'yyyy-MM-dd')}"></td>
+                        </tr>
+                        <tr>
+                            <th>역할</th>
+                            <th:block th:if="${memberDetail.userRole == 0}">
+                                <td>일반회원</td>
+                            </th:block>
+                            <th:block th:if="${memberDetail.userRole == 1}">
+                                <td>관리자</td>
+                            </th:block>
+                        </tr>
+                    </table>
 
-		<section>
-
-			<div class="member-view-box">
-				<div class="view-info">
-					<table>
-						<tr>
-							<th class="table-title" colspan="2">
-								<span th:text="${memberDetail.userName}"></span> 님의 회원정보
-							</th>
-						</tr>
-						<tr>
-							<th>이름</th>
-							<td th:text="${memberDetail.userName}"></td>
-						</tr>
-						<tr>
-							<th>ID</th>
-							<td th:text="${memberDetail.userId}"></td>
-						</tr>
-						<tr>
-							<th>닉네임</th>
-							<td th:text="${memberDetail.userNickname}"></td>
-						</tr>
-						<tr>
-							<th>전화번호</th>
-							<td th:text="${memberDetail.userPhonenumber}"></td>
-						</tr>
-						<tr>
-							<th>주소</th>
-							<td th:text="${memberDetail.userAddress}"></td>
-						</tr>
-						<tr>
-							<th>가입일자</th>
-							<td th:text="${#dates.format(memberDetail.userRegistdate, 'yyyy-MM-dd')}"></td>
-						</tr>
-						<tr>
-							<th>역할</th>
-							<th:block th:if="${memberDetail.userRole == 0}">
-								<td>일반회원</td>
-							</th:block>
-							<th:block th:if="${memberDetail.userRole == 1}">
-								<td>관리자</td>
-							</th:block>
-						</tr>
-					</table>
-
-					<div class="view-btns">
-						<input type="button" value="회원목록"
-							th:onclick="|location.href='@{/admin/memberList}'|">
-					</div>
-				</div>
-			</div>
-
-		</section>
-
-	</main>
+                    <div class="view-btns">
+                        <input type="button" value="회원목록" th:onclick="|location.href='@{/admin/memberList}'|">
+                        <input type="button" value="회원 탈퇴" th:onclick="|deleteMember(${memberDetail.userNumber})|">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
 <script th:src="@{/script/admin/adminScript.js}"></script>
-
+<script>
+    function deleteMember(userNumber) {
+        if (confirm('정말로 회원을 탈퇴시키겠습니까?')) {
+            fetch(`/admin/deleteMember/${userNumber}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            })
+            .then(response => response.text())
+            .then(result => {
+                if (result === 'deleted') {
+                    alert('회원이 성공적으로 탈퇴되었습니다.');
+                    location.href = '/admin/memberList';
+                } else {
+                    alert('회원 탈퇴에 실패하였습니다. 관리자에게 문의하세요.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('오류가 발생하였습니다.');
+            });
+        }
+    }
+</script>
 </html>

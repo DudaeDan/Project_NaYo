@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -54,7 +54,7 @@
                                         th:href="@{/admin/boardView/{id}(id=${board.boardNumber})}"></a>
                                 </td>
                                 <td th:text="${board.user.userNickname}"></td>
-                                <td th:text="${#dates.format(board.boardDate, 'yyyy-MM-dd')}"></td>
+                                <td th:text="${#temporals.format(board.boardDate, 'yyyy-MM-dd')}"></td>
                                 <td th:text="${board.boardHit}"></td>
                             </tr>
                         </table>
