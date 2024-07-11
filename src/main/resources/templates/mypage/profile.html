@@ -6,6 +6,7 @@
     <title>개인정보 수정</title>
     <link rel="stylesheet" th:href="@{/css/layout/mypage/profile.css}">
     <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 다음 주소 API 추가 -->
 </head>
 <body>
     <header th:replace="fragments/header :: header"></header>
@@ -44,7 +45,8 @@
                 </div>
                 <div class="form-field">
                     <label for="userAddress">주소</label>
-                    <input type="text" id="userAddress" name="userAddress" th:value="${user.userAddress}">
+                    <input type="text" id="userAddress" name="userAddress" th:value="${user.userAddress}" required readonly>
+                    <span><input type="button" value="주소검색" onclick="execDaumPostcode()" class="check-button"/></span>
                 </div>
                 <div class="form-field">
                     <label for="userPhonenumber">전화번호</label>
