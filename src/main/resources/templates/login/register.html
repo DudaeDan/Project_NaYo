@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
     <link rel="stylesheet" th:href="@{/css/layout/login/register.css}">
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 다음 주소 API 추가 -->
 </head>
 <body>
     <div class="register">
@@ -41,7 +42,8 @@
                 </div>
                 <div class="form-field">
                     <label for="addr">주소</label>
-                    <input type="text" class="info" name="userAddress" size="50" placeholder="주소" required  />
+                    <input type="text" class="info" name="userAddress" id="userAddress" size="50" placeholder="주소" required readonly/>
+                    <span><input type="button" value="주소검색" onclick="execDaumPostcode()" class="check-button"/></span>
                 </div>
                 <input type="hidden" name="userRole" value="0" />
                 <button type="submit" class="button">
@@ -60,5 +62,6 @@
         </div>
     </div>
     <script th:src="@{/script/layout/login/register.js}"></script>
+    
 </body>
 </html>
