@@ -15,10 +15,6 @@
 	float: right;
 }
 
-.refri_sort_container {
-	margin-right: 20px;
-}
-
 
 .refri_search_btn,
 .refri_main_btn {
@@ -27,26 +23,23 @@
 	background-color: #ffffff;
 	border-radius: 5px;
 	border: 1px solid #c1c1c1;
-	margin-right: 55px;
+	margin-right: 10px;
 	cursor: pointer;
+}
+
+.refri_main_btn:nth-child(3) {
+	margin-right: 55px ; 
+	
 }
 
 .refri_search_btn {
 	width: 95px;
-	margin-right: 10px;
+	margin-right: 20px;
 }
 
 .refri_search_btn:hover,
 .refri_main_btn:hover {
 	background-color: #c1c1c1;
-}
-
-.refri_sort {
-	background-color: white;
-	border: none;
-	padding: 5px 0;
-	margin-top: 15px;
-	cursor: pointer;
 }
 
 .refri_main_tables_container {
@@ -75,7 +68,24 @@
 	border-bottom: 1px solid #eaeaea;
 }
 
+.expired {
+	background-color: #c5c5c5;
+	color: gray;
+	font-weight: bold;
+}
+
+
 .refri_paging {
 	padding-top: 30px;
+	font-size: 30px;
 	text-align: center;
+}
+
+
+.page-button {
+	height: 25px;
+	width: 20px;
+	background-color: white;
+	border: 1px solid #c1c1c1;
+	border-radius: 5px;
 }

@@ -17,6 +17,7 @@
             </div>
         </div>
         <div class="login">
+            
             <!-- 로그인 상태 확인 후 버튼 표시 -->
             <div th:if="${session.user == null}">
                 <a th:href="@{/login/login}">Login</a>
@@ -25,6 +26,20 @@
                 <a th:href="@{/mypage/boardlist}">My Page</a> <!-- My Page 링크는 추후 수정 -->
                 <a th:href="@{/login/logout}">Logout</a>
             </div>
+          
+           	<!-- 	<th:block th:if="${loginMember == null}">
+				<div>
+					<a th:href="@{/login/login}">Login</a>
+				</div>
+			</th:block>
+			<th:block th:if="${loginMember != null}">
+				<div>
+					<p><span th:text="${loginMember.userNickname}"></span></p>
+					<p><span th:text="${loginMember.userNumber}"></span></p>
+					<a th:href="@{/mypage/boardlist}">My Page</a> My Page 링크는 추후 수정
+					<a th:href="@{/login/logout}">Logout</a>
+				</div>
+			</th:block>   -->
         </div>
     </div>
 </body>

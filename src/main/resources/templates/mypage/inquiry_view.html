@@ -25,7 +25,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">관리자 답변</h5>
-                    <p class="card-text" th:text="${answer != null ? answer.answerContent : '아직 답변이 없습니다.'}"></p>
+                    <p class="card-text" th:text="${answer != null ? answer.answerContent : '아직 답변이 없습니다.'}">아직 답변이 없습니다.</p>
                     <p class="card-text" th:if="${answer != null}"><small class="text-muted" th:text="${#dates.format(answer.answerDate, 'yyyy-MM-dd HH:mm')}">답변일</small></p>
                 </div>
             </div>

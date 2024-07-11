@@ -15,7 +15,7 @@
 	<header th:replace="fragments/header :: header"></header>
 	<aside th:replace="fragments/sidebar :: sidebar"></aside>
 
-
+	<input type='hidden' class='userNumber' th:value='${loginMember.userNumber}' />
 	<div class="refri-content-box">
 
 		<div class="ingredient-select"> <!-- 분류, 재료 선택 -->
@@ -52,7 +52,6 @@
 				</table>
 			</div>
 			<div class="ingredient-list">
-
 				<span id="ingredientCategory">
 					<div id="all" class="category">
 						<span th:each="category : ${getAll}">
@@ -149,78 +148,23 @@
 						<th style="width: 25%;">유통기한</th>
 					</tr>
 				</thead>
+
 				<tbody id="selectedTableBody">
 				</tbody>
+
 			</table>
 
 		</div>
 		<input type="button" class="refri_btn" value="돌아가기" th:onclick="|location.href='@{/refrigerator}'|">
-		<input type="button" name="" id="" class="refri_btn" value="저장">
+		<input type="button" name="" id="" class="refri_btn" value="저장" th:onclick="ingredientAddConfirm()">
 
 	</div>
 
-
 </body>
-<script>
-
-
-	function addIngredient(button) {
-		var ingredientName = button.querySelector('.btnName').textContent.trim();
-		var category = button.querySelector('.btnCategory').value.trim();
-		var IngreNum = button.querySelector('.btnIngreNum').value.trim();
-		var rowId = category + ingredientName;
-
-		var tableBody = document.getElementById("selectedTableBody");
-		var rowCheck = document.querySelector(`#${rowId}`);
-
-		if (rowCheck) {
-			rowCheck.remove();
-			button.classList.remove('btn-selected');
-		} else {
-			// 새로운 행의 HTML 생성
-			var newRowHtml = `
-	            <tr id='${rowId}'>
-	                <td>${category}</td>
-	                <td>${ingredientName} , ${IngreNum}</td>
-	                <td><input type='date' class='ingredientExp' /></td>
-	            </tr>
-	        `;
-
-			button.classList.add('btn-selected');
-
-			// 새로운 행을 테이블 바디에 추가
-			tableBody.insertAdjacentHTML('beforeend', newRowHtml);
-
-			//유통기한 기본값 설정
-			var newRow = tableBody.lastElementChild;
-			var expDate = newRow.querySelector('.ingredientExp');
-			setExpDate(expDate);
-		}
-	}
-
-	function setExpDate(element) {
-		let now = new Date();
-		//기본 7일 뒤
-		element.value = new Date(now.setDate(now.getDate() + 7)).toISOString().substring(0, 10);
-	}
-
-	document.addEventListener('DOMContentLoaded', function () {
-		var expElements = document.getElementsByClassName('ingredientExp');
-		for (var i = 0; i < expElements.length; i++) {
-			setExpDate(expElements[i]);
-		}
-	});
-
-
-	function changeCategory(category) {
-		var categories = document.querySelectorAll('.category');
-		categories.forEach(function (cat) {
-			cat.style.display = 'none';
-		});
-		document.getElementById(category).style.display = 'block';
-	}
-
-
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script th:src="@{/script/refrigerator/refrigeratorAddScript.js}"></script>
+<script th:src="@{/script/layout/Layout_scripts.js}"></script>
 
 </html>

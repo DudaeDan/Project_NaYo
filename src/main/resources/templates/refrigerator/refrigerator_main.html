@@ -21,13 +21,11 @@
 				<span>재료 목록</span>
 			</div>
 			<div class="refri_btn_container">
-				<input type="button" class="refri_search_btn" name="" id="" value="레시피 검색">
+				<input type="button" class="refri_search_btn" name="" id="" value="레시피 검색"
+					th:onclick="|location.href='@{/refrigerator/searchRecipe}'|">
 				<input type="button" class="refri_main_btn" value="추가"
 					th:onclick="|location.href='@{/refrigerator/addIngredient}'|">
-			</div>
-			<div class="refri_sort_container">
-				<input type="button" class="refri_sort" name="" id="" value="이름순"> /
-				<input type="button" class="refri_sort" name="" id="" value="유통기한순">
+				<input type="button" class="refri_main_btn" value="삭제" onclick="refriDeleteConfirm()">
 			</div>
 		</div>
 
@@ -35,94 +33,51 @@
 			<table class="refri_main_tables">
 				<thead>
 					<tr>
+						<th style="width: 5%;">
+							<input type="checkbox" id="allCheckbox" onclick="allCheck()">
+						</th>
 						<th>분류</th>
 						<th>재료명</th>
 						<th>유통기한</th>
-						<th><!-- 삭제 체크박스? --></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
+					<tr class="refriListRow" th:each="list : ${refriList}">
 						<td>
+							<input type="checkbox" class="listCheckbox" name="listCheckbox" onclick="boxCheck()">
+							<input type="hidden" class="refrigeratorNumber" th:value="${list.refrigeratorNumber}">
 						</td>
+						<td th:text="${list.RefrigeratorIngredient.refIngredientCategory}"></td>
+						<td th:text="${list.RefrigeratorIngredient.refIngredientName}"></td>
+						<td class="list_exp_date" th:text="${#dates.format(list.expDate, 'yyyy-MM-dd')}"></td>
 					</tr>
-					<!--<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>
-						</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>
-						</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>
-						</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>
-						</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>
-						</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>
-						</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>
-						</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>
-						</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>
-						</td>
-					</tr>-->
+
 				</tbody>
 			</table>
 
-			<div class="refri_paging">
-				< 1 2 3 4 5>
-				<!-- 나중에 페이지 처리 -->
+			<div class="refri_paging" th:if="${totalPages > 0}">
+				<button type="button" class="page-button" onclick="navigateToPage(1)">&lt;&lt;</button>
+				<button type="button" class="page-button" th:onclick="'navigateToPage(' + (${currentPage} - 1) + ')'"
+					th:if="${currentPage > 1}">&lt;</button>
+				<span th:each="i : ${#numbers.sequence(1, totalPages)}">
+					<button type="button" class="page-button" th:onclick="'navigateToPage(' + ${i} + ')'" th:text="${i}"
+						th:classappend="${currentPage == i} ? 'active' : ''"></button>
+				</span>
+				<button type="button" class="page-button" th:onclick="'navigateToPage(' + (${currentPage} + 1) + ')'"
+					th:if="${currentPage < totalPages}">&gt;</button>
+				<button type="button" class="page-button"
+					th:onclick="'navigateToPage(' + ${totalPages} + ')'">&gt;&gt;</button>
 			</div>
+
 		</div>
 
 	</div>
 
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script th:src="@{/script/layout/Layout_scripts.js}"></script>
+<script th:src="@{/script/refrigerator/refrigeratorMainScript.js}"></script>
 
 </html>

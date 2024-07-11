@@ -1,10 +1,12 @@
 package com.web.controller;
 
+import com.web.domain.Answer;
 import com.web.domain.Board;
 import com.web.domain.Comments;
 import com.web.domain.Inquiry;
 import com.web.domain.User;
 import com.web.service.MyBoardService;
+import com.web.service.AnswerService;
 import com.web.service.CommentService;
 import com.web.service.InquiryService;
 import com.web.service.MyUserService;
@@ -33,6 +35,9 @@ public class MyPageController {
     
     @Autowired
     private InquiryService inquiryService;
+    
+    @Autowired
+    private AnswerService answerService;
     
 
     // 작성 글 목록
@@ -157,21 +162,17 @@ public class MyPageController {
         return "redirect:/mypage/inquiry_list";
     }
 
-    // 문의 상세 뷰
+ // 문의 상세 뷰
     @GetMapping("/inquiry/view/{id}")
-    public String viewInquiry(@PathVariable Long id, Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user != null) {
-            Inquiry inquiry = inquiryService.findInquiryById(id);
-            if (inquiry.getUserNumber().equals(user.getUserNumber())) {
-                model.addAttribute("inquiry", inquiry);
-                return "mypage/inquiry_view";
-            } else {
-                return "redirect:/mypage/inquiry_list"; // 문의 글이 사용자의 글이 아닐 경우 목록으로 리다이렉트
-            }
-        } else {
-            return "redirect:/login/login";
+    public String viewInquiry(@PathVariable Long id, Model model) {
+        Inquiry inquiry = inquiryService.findInquiryById(id);
+        if (inquiry != null) {
+            Answer answer = answerService.findAnswerByInquiryNumber(inquiry.getInquiryNumber());
+            model.addAttribute("inquiry", inquiry);
+            model.addAttribute("answer", answer);
         }
+        return "mypage/inquiry_view";
     }
+    
     
 }

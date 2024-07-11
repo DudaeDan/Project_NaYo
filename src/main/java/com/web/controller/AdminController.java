@@ -338,4 +338,10 @@ public class AdminController {
         adminService.AnswerDone(inquiryNumber);
         return "redirect:/admin/inquiryList";
     }
+    
+    // 세션 적용
+    private boolean isUserLoggedIn() {
+        User loginUser = (User) session.getAttribute("user");
+        return loginUser != null;
+    }
 }
