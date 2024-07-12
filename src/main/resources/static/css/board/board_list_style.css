@@ -1,3 +1,5 @@
+
+
 .container {
     display: flex;
 }
@@ -39,17 +41,24 @@
 
 .board-details {
     padding: 10px;
+    background-color: white;
 }
 
 .board-details h3 {
     margin: 0 0 10px;
     font-size: 1.2em;
-    color: #333;
+    font-family: 'MangoDdobak-B';
+    color: black;
+}
+
+.board-title a {
+    color: black !important;
 }
 
 .board-details p {
     margin: 0 0 10px;
-    color: #666;
+    font-size: 0.9em;
+    color: #999;
 }
 
 .board-details .stats {
@@ -74,18 +83,25 @@
     margin: 0 5px;
     padding: 5px 10px;
     border: none;
-    background-color: #ddd;
+    background-color: 	#fff5d9
+
+;
     cursor: pointer;
+    color: black;
 }
 
 .pagination button.active {
-    background-color: #007bff;
-    color: #fff;
+    background-color: 	#fff5d9
+
+;
+    color: black;
 }
 
 .pagination button:hover {
-    background-color: #007bff;
-    color: #fff;
+    background-color: 	#fff5d9
+
+;
+    color: black;
 }
 
 .write-button {
@@ -95,4 +111,20 @@
 
 .write-button .btn {
     padding: 5px 10px;
+    background-color: 	#fff5d9
+
+;
+    border-color: 	#ffe5c5
+
+;
+    color:black;
+}
+
+.write-button .btn:hover {
+    background-color: 	#fff5d9
+
+;
+    border-color: 	#ffe5c5
+
+;
 }

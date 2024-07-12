@@ -24,16 +24,9 @@ public class RecipeController {
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
-
-    @GetMapping("/layout")
-    public String getRecipes() {
-    		
-        return "layout";
-    }
-
     
     @GetMapping("/recipes")
-    public String getRecipes(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "30") int size) {
+    public String getRecipes(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "8") int size) {
         List<Recipe> recipes = recipeService.fetchRecipes((page - 1) * size + 1, page * size);
         int totalRecipes = recipeService.getTotalCount();
         int totalPages = (int) Math.ceil((double) totalRecipes / size);
