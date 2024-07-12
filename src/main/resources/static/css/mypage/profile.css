@@ -1,0 +1,138 @@
+body {
+    height: 80vh;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.main-content {
+    width: calc(100% - 200px); /* 사이드바 넓이 빼기 */
+    padding: 20px;
+    box-sizing: border-box;
+    max-width: 650px; /* profile 클래스 넓이와 동일하게 설정 */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mypage-header {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* 간격을 줄임 */
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.mypage-header .nav-item {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #fff5d9;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    flex: 1;
+    max-width: 150px; /* 각 항목의 최대 넓이 설정 */
+}
+
+.mypage-header .nav-item:hover, .mypage-header .nav-item:focus {
+    background-color: #d4d4d4;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.profile {
+    width: 650px;
+    background: #ffffff;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 40px;
+    box-sizing: border-box;
+    border: 1px solid #ccc; /* 폼의 테두리 추가 */
+    margin: 0 auto;
+}
+
+.form-field {
+    display: flex;
+    align-items: center;
+    height: 55px;
+    margin: 0 20px 30px 20px;
+    border-bottom: 1px solid #9596A2;
+}
+
+.form-field label {
+    width: 150px; 
+    padding-right: 15px;
+    color: #2b2b31;
+}
+
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field input[type="password"] {
+    width: calc(100% - 150px - 100px); /* 입력 필드 넓이를 조정 */
+    background: transparent;
+    color: #9596A2;
+    padding: 17px;
+    border: 0;
+    margin: 0;
+}
+
+.form-field .check-button {
+    width: 70px; /* 버튼의 넓이 */
+    height: 40px;
+    background: #fff5d9;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.form-field input:focus {
+    outline: none;
+}
+
+.form-field *::placeholder {
+    color: #9596A2;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+button {
+    width: 70px; /* 버튼의 넓이 */
+    height: 40px;
+    background: #fff5d9;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+button:hover {
+    background: #fff0c6;
+}
+
+.form-field input[readonly] {
+    background-color: #f5f5f5;
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}

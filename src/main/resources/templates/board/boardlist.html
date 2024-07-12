@@ -7,13 +7,21 @@
     <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
     <link rel="stylesheet" th:href="@{/css/board/board_list_style.css}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        @font-face {
+            font-family: 'MangoDdobak-B';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/MangoDdobak-B.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+    </style>
     <script th:src="@{/script/layout/Layout_scripts.js}"></script>
 </head>
 <body>
     <header th:replace="fragments/header :: header"></header>
     <div class="container">
         <div th:replace="fragments/sidebar :: sidebar"></div>
-        <div class="main-content">
+        <div class="main-content"> <!-- 배경색 변경 -->
             <div class="board-grid">
                 <div th:each="board : ${boards}" class="board-item">
                     <div class="thumbnail">
@@ -21,11 +29,11 @@
                             <img th:src="@{'/Images/border/main/' + ${board.mainImg}}" alt="Main image" class="main-img">
                         </a>
                     </div>
-                    <div class="board-details">
-                        <h3>
+                    <div class="board-details" style="background-color: white;">
+                        <h3 class="board-title">
                             <a th:href="@{/board/view/{id}(id=${board.boardNumber})}" th:text="${board.boardTitle}">board_title</a>
                         </h3>
-                        <p th:text="'작성자 : '+${board.user.userNickname}">user_nickname</p>
+                        <p style="font-size: 0.9em; color: #999;" th:text="'작성자 : '+${board.user.userNickname}">user_nickname</p>
                         <div class="stats">
                             <span th:text="'조회수 : ' + ${board.boardHit}">조회수 : board_hit</span>
                             <span>
@@ -46,7 +54,7 @@
                     <button th:if="${currentPage < totalPages}" th:onclick="'changePage(' + (${currentPage} + 1) + ')'">&gt;</button>
                 </div>
                 <div class="write-button">
-                    <a href="/board/create" class="btn btn-primary">글 작성</a>
+                    <a href="/board/create" class="btn btn-primary" style="background-color: #fff5d9; border-color: #fff5d9; color: black;">글 작성</a>
                 </div>
             </div>
         </div>
@@ -55,7 +63,15 @@
 </html>
 <script>
     function changePage(page) {
-        const size = /*[@requestParam('size') or default value]*/ 30; // 페이지 당 항목 수를 설정합니다.
+        const size = /*[@requestParam('size') or default value]*/ 8; // 페이지 당 항목 수를 설정합니다.
         window.location.href = '/board/list?page=' + page + '&size=' + size;
     }
+    document.querySelector('.btn-primary').addEventListener('mouseover', function() {
+        this.style.backgroundColor = '#fff5d9';
+        this.style.borderColor = '#ffe5c5';
+    });
+    document.querySelector('.btn-primary').addEventListener('mouseout', function() {
+        this.style.backgroundColor = '#fff5d9';
+        this.style.borderColor = '#ffe5c5';
+    });
 </script>
