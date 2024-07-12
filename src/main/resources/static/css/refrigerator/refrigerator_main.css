@@ -20,9 +20,9 @@
 .refri_main_btn {
 	width: 80px;
 	height: 40px;
-	background-color: #ffffff;
+	background-color: #fff5d9;
 	border-radius: 5px;
-	border: 1px solid #c1c1c1;
+	border: 1px solid #f7cc53;
 	margin-right: 10px;
 	cursor: pointer;
 }
@@ -39,7 +39,7 @@
 
 .refri_search_btn:hover,
 .refri_main_btn:hover {
-	background-color: #c1c1c1;
+	background-color: #f7cc53;
 }
 
 .refri_main_tables_container {
@@ -81,11 +81,12 @@
 	text-align: center;
 }
 
-
 .page-button {
+	font-weight: bold;
 	height: 25px;
 	width: 20px;
 	background-color: white;
-	border: 1px solid #c1c1c1;
+	border: none;
+/*	border: 1px solid #c1c1c1;*/
 	border-radius: 5px;
 }

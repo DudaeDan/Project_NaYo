@@ -33,6 +33,10 @@
 	border-bottom: 1px solid #eaeaea;
 }
 
+.recipe-link {
+	color: black;
+}
+
 .recipe-title {
 	text-align: center;
 	font-weight: bold;
