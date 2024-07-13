@@ -71,7 +71,7 @@
 }
 
 .btn-selected {
-	background-color: #f1f1f1;
+	background-color: #fff5d9;
 }
 
 /* 선택완료 */
@@ -83,6 +83,10 @@
 	position: relative;
 	display: inline-block;
 	overflow-y: auto;
+}
+
+.selected-list-first {
+	background-color: #fff5d9;
 }
 
 .selected-list::-webkit-scrollbar {
@@ -118,14 +122,14 @@
 .refri_btn {
 	width: 80px;
 	height: 40px;
-	background-color: #ffffff;
+	background-color: #fff5d9;
 	border-radius: 5px;
-	border: 1px solid #c1c1c1;
+	border: 1px solid #f7cc53;
 	float: right;
 	margin-top: 5px;
 	margin-right: 45px;
 }
 
 .refri_btn:hover {
-	background-color: #c1c1c1;
+	background-color: #f7cc53;
 }

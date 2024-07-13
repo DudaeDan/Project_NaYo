@@ -32,7 +32,7 @@
 				<tbody>
 					<tr th:each="recipe : ${recipe}">
 						<td class="recipe-title">
-							<a th:href="@{'https://www.10000recipe.com/recipe/' + ${recipe.recipeNumber}}"
+							<a class="recipe-link" th:href="@{'https://www.10000recipe.com/recipe/' + ${recipe.recipeNumber}}"
 								target="_blank" th:text="${recipe.recipeTitle}"></a>
 						</td>
 						<td th:text="${recipe.recipeName}"></td>

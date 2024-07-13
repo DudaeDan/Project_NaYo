@@ -72,7 +72,7 @@ body {
   .login .form .form-field input+svg {
 	width: 35px;
 	fill: none;
-	stroke: #00FCD1;
+	stroke: #f7cc53;
 	stroke-width: 7;
 	stroke-linecap: round;
 	stroke-dasharray: 1000;
@@ -127,8 +127,8 @@ body {
 	height: 55px;
 	right: 0;
 	float: right;
-	background: linear-gradient(90deg, #04DFBD, #00FCD1);
-	box-shadow: 0 3px 20px rgba(0, 252, 209, 0.4);
+	border: 1px solid #f7cc53;
+	background-color: #fff5d9;
 	border-radius: 12px;
   }
   
@@ -151,8 +151,8 @@ body {
 	right: 0;
 	width: 8px;
 	height: 8px;
-	border-top: 2px solid #fff;
-	border-right: 2px solid #fff;
+	border-top: 2px solid black;
+	border-right: 2px solid black;
 	transform: rotate(45deg);
   }
   
@@ -164,7 +164,7 @@ body {
 	right: 0;
 	padding: 0;
 	margin: 0;
-	color: #fff;
+	color: black;
 	line-height: 55px;
 	text-align: center;
 	text-transform: uppercase;
