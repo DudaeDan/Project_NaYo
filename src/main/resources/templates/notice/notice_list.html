@@ -5,28 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>공지사항 리스트</title>
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
         }
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
+        .container {
+            display: flex;
         }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #f5f5f5;
+        .main-content {
+            flex: 1;
+            padding: 20px;
         }
         .notice-title {
             text-align: center;
             margin-top: 20px;
+            color: #f7cc53;
+            font-size: 2em;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #fff5d9;
+            color: #333;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+        td a {
+            color: #4a90e2;
+            text-decoration: none;
+        }
+        td a:hover {
+            text-decoration: underline;
+        }
+        .pagination-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .pagination button {
+            background-color: #fff5d9;
+            border: 1px solid #ddd;
+            color: black;
+            padding: 8px 16px;
+            margin: 0 2px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .pagination button:hover {
+            background-color: #f7cc53;
+            color: black;
+        }
+        .pagination .active {
+            background-color: #fff5d9;
+            color: #fff;
+            border: none;
         }
     </style>
-	<link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
-
+    <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
 </head>
 <body>
     <header th:replace="fragments/header :: header"></header>
@@ -50,7 +96,7 @@
                             <a th:href="@{/notice/view/{id}(id=${notice.noticeNumber})}" th:text="${notice.noticeTitle}">공지사항 제목</a>
                         </td>
                         <td th:text="${notice.user.userNickname}">작성자</td>
-                        <td th:text="${#dates.format(notice.noticeDate, 'yyyy-MM-dd')}">2024-01-01</td>
+                        <td th:text="${#dates.format(notice.noticeDate, 'yyyy.MM.dd')}">2024-01-01</td>
                     </tr>
                 </tbody>
             </table>
@@ -71,7 +117,6 @@
             window.location.href = '/notice/list?page=' + page + '&size=' + size;
         }
     </script>
-	<script th:src="@{/script/layout/Layout_scripts.js}"></script>
-
+    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
 </body>
 </html>

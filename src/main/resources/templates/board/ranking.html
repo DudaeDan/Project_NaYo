@@ -60,7 +60,7 @@
 </html>
 <script>
     function changePage(page) {
-        const size = /*[@requestParam('size') or default value]*/ 30; // 페이지 당 항목 수를 설정합니다.
+        const size = /*[@requestParam('size') or default value]*/ 8; // 페이지 당 항목 수를 설정합니다.
         window.location.href = '/board/ranking?page=' + page + '&size=' + size;
     }
 </script>

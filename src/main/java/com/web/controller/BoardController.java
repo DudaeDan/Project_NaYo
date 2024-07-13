@@ -211,4 +211,18 @@ public class BoardController {
         boardService.updateBoard(id, board, mainImgFile, stepDescriptions, stepImages, ingredientNames, ingredientAmounts, existingMainImg, existingStepImages);
         return "redirect:/board/view/" + id;
     }
+    
+    @GetMapping("/index")
+    public String index(Model model) {
+        List<Board> bestBoards = boardService.findBestBoards(); // 좋아요 순
+        List<Board> recentBoards = boardService.findRecentBoards(); // 최신순
+        List<Board> weeklyBestBoards = boardService.findWeeklyBestBoards(); // 금주의 베스트
+
+        model.addAttribute("bestBoards", bestBoards);
+        model.addAttribute("recentBoards", recentBoards);
+        model.addAttribute("weeklyBestBoards", weeklyBestBoards);
+
+        return "board/index";
+    }
+
 }

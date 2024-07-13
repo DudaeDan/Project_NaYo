@@ -11,6 +11,11 @@
     border-radius: 8px; /* 둥근 모서리 */
 }
 
+.main-img{
+	width: 100%;
+	max-width: 450px;
+}
+
 .box {
     padding: 20px;
     margin-bottom: 20px; /* 박스 간격 */
@@ -81,8 +86,8 @@
 }
 
 .like-icon {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     cursor: pointer;
 }
 
@@ -114,7 +119,7 @@
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #f7cc53;
 }
 
 .btn-danger {
@@ -124,17 +129,18 @@
 }
 
 .btn-danger:hover {
-    background-color: #c82333;
+    background-color: #f7cc53;
+    text-decoration: underline;
 }
 
 .btn-secondary {
-    background-color: #6c757d;
-    color: white;
+    background-color: #fff5d9;
+    color: black;
     border: none;
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268;
+    background-color: #f7cc53;
 }
 
 /* 댓글 및 답글 CSS */
@@ -147,7 +153,6 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 10px;
 }
 
 #commentContent,
@@ -155,11 +160,25 @@
     width: 80%;
     height: 80px;
     resize: none; /* 크기 조절 불가 */
+    margin-right: 10px; /* 버튼과의 간격 추가 */
 }
 
+#commentForm button,
 .reply-form button {
-    height: 40px;
-    margin-left: 10px;
+    background-color: #fff5d9;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: flex-end; /* 버튼을 textarea의 하단에 위치 */
+}
+
+#commentForm button:hover,
+.reply-form button:hover {
+    background-color: #f7cc53;
 }
 
 .comment-item {
@@ -185,9 +204,9 @@
 }
 
 .best-comment {
-    background-color: lightpink;
+    background-color: #fff5d9;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 ul {
@@ -198,4 +217,20 @@ ul {
 li {
     border-top: 1px solid lightgray;
     padding: 10px 0;
+    margin-left: 20px; /* 댓글의 들여쓰기 */
+}
+
+.reply-item {
+    margin-left: 20px; /* 답글의 들여쓰기 */
+}
+
+.delete-btn, .reply-btn {
+    background-color: white;
+    color: gray;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-btn:hover, .reply-btn:hover {
+    text-decoration: underline;
 }
