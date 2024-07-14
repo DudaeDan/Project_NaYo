@@ -8,7 +8,17 @@ window.onload = function() {
 	const today = new Date();
 	rows.forEach(row => {
 		const expDateCell = row.querySelector('.list_exp_date');
+		const daysLeftCell = row.querySelector('.days-left');
 		const expDate = new Date(expDateCell.textContent.trim());
+
+		const daysLeft = Math.ceil((expDate - today) / (1000 * 60 * 60 * 24));
+
+		if (daysLeft < 0) {
+			daysLeftCell.textContent = '-';
+		} else {
+			daysLeftCell.textContent = `D-${daysLeft}`;
+		}
+
 		if (expDate < today) {
 			row.classList.add('expired');
 		}
