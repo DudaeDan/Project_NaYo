@@ -7,27 +7,40 @@
 </head>
 
 <body>
-	<div th:fragment="sidebar">
-		<div>
-			<button class="menu-button" onclick="toggleSidebar()"></button>
-		</div>
-		<div class="sidebar">
-			<button class="close-button" onclick="toggleSidebar()"></button>
+	<div th:fragment="sidebar" class="sidebar-container">
+		<button class="sidebar-button" onclick="toggleSidebar()">
+			<img src="https://cdn0.iconfinder.com/data/icons/heroicons-ui/24/icon-menu-48.png">
+		</button>
+		<div class="sidebar show">
 			<div class="content">
-				<div onclick="location.href='/board/ranking'">랭킹 게시판</div>
-				<div onclick="location.href='/board/list'">일반 게시판</div>
-				<div onclick="location.href='/recipes/recipes'">레시피 게시판</div>
-				<div onclick="location.href='/notice/list'">공지사항 게시판</div>
+				<div onclick="location.href='/board/ranking'">
+					<img src="https://cdn4.iconfinder.com/data/icons/core-ui-outlined/32/outlined_like-48.png"
+						class="sidebar-img">
+					<span> 베스트 레시피 </span>
+				</div>
+				<div onclick="location.href='/board/list'">
+					<img src="https://cdn1.iconfinder.com/data/icons/kitchen-item/300/Spoon_Fork-48.png"
+						class="sidebar-img">
+					<span> 모두의 레시피 </span>
+				</div>
+				<div onclick="location.href='/recipes/recipes'">
+					<img src="https://cdn3.iconfinder.com/data/icons/streamline-icon-set-free-pack/48/Streamline-94-48.png"
+						class="sidebar-img">
+					<span> NaYo 레시피 </span>
+				</div>
+				<div onclick="location.href='/notice/list'">
+					<img src="https://cdn0.iconfinder.com/data/icons/free-daily-icon-set/512/Comments-48.png"
+						class="sidebar-img">
+					<span> 공지사항 </span>
+				</div>
 				<div class="fridge" th:onclick="|location.href='@{/refrigerator}'|">
-					<!--<img th:src="@{/images/layout/fridge.png}" alt="냉장고 이미지">-->
 					<img src="https://cdn3.iconfinder.com/data/icons/outline-amenities-icon-set/64/Refrigerator-48.png"
-						alt="냉장고" class="refrigerator-img">
-					<span>냉장고 관리</span>
+						class="sidebar-img">
+					<span>나의 냉장고</span>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script th:src="@{/script/layout/Layout_scripts.js}"></script>
 </body>
 
 </html>

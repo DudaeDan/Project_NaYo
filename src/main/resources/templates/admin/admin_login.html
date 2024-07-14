@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>관리자 로그인</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/admin.css}">
+	<meta charset="UTF-8">
+	<title>관리자 로그인</title>
+	<link rel="stylesheet" th:href="@{/css/layout/login/login.css}">
 </head>
+
 <body>
-    <div class="login-form">
+
+	<div class="login">
+		<div class="form">
+			<h2>관리자 로그인</h2>
+			<form th:action="@{/admin/login}" method="post">
+				<div class="form-field">
+					<input type="text" id="userId" name="userId" placeholder="아이디" required>
+				</div>
+				<div class="form-field">
+					<input type="password" id="userPw" name="userPw" placeholder="비밀번호" required>
+				</div>
+				<button type="submit" class="button">
+					<div class="arrow-wrapper">
+						<span class="arrow"></span>
+					</div>
+					<p class="button-text">로그인</p>
+				</button>
+			</form>
+			<div th:if="${loginError}">
+				<p style="color: red;">아이디 또는 비밀번호가 올바르지 않습니다.</p>
+			</div>
+			<div th:if="${adminOnlyError}">
+				<p style="color: red;">관리자 아이디로 로그인 하세요.</p>
+			</div>
+		</div>
+	</div>
+
+	<!--    <div class="login-form">
         <h2>관리자 로그인</h2>
         <form th:action="@{/admin/login}" method="post">
             <div>
@@ -27,7 +56,9 @@
                 <p style="color: red;">관리자 아이디로 로그인 하세요.</p>
             </div>
         </form>
-    </div>
+    </div>-->
+
 </body>
 <script th:src="@{/script/admin/adminScript.js}"></script>
+
 </html>

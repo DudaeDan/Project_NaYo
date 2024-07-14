@@ -1,14 +1,20 @@
 /* 기본 스타일 */
 body {
 	font-family: Arial, sans-serif;
+	margin: 0;
 }
 
+
+/* 헤더 */
 .header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	border-bottom: 1px solid #ccc;
-	padding: 10px;
+	padding-top: 10px;
+	position: relative;
+	z-index: 2;
+	background-color: white;
 }
 
 .logo-container {
@@ -16,9 +22,16 @@ body {
 	align-items: center;
 }
 
-.header img {
-	height: 90px;
-	width: 210px;
+.Main-Logo {
+	height: 100px;
+	width: 160px;
+}
+
+.header-search-img {
+	width: 17px;
+	top: 10px;
+	right: 12px;
+	margin: 0;
 }
 
 .search-container {
@@ -27,78 +40,109 @@ body {
 	margin-left: 33%;
 }
 
-.header .search {
+.header .header-search {
 	display: flex;
 	align-items: center;
 	margin-left: 10px;
 }
 
-.header button {
-	background: url('../../Images/layout/search.png') no-repeat center center;
+.header .header-search-btn {
 	background-size: contain;
-	width: 30px;
-	height: 30px;
-	border: none;
+	width: 45px;
+	height: 33px;
+	border: 1px solid #f7cc53;
+	background-color: #fff5d9;
+	border-radius: 5px;
 	cursor: pointer;
+	outline: none;
 }
 
-.header .search input[type="text"] {
-	width: 290px;
-	height: 20px;
+.header-search-btn:hover {
+	background-color: #f7cc53;
+}
+
+.header-search-input {
+	border-radius: 5px;
+	width: 290px !important;
+	height: 20px !important;
 	padding: 5px;
+	border: 1px solid #ccc;
+	outline: none;
+	box-sizing: unset !important;
 }
 
-.menu-button {
-	position: absolute;
-	left: 10px;
-	top: 120px;
-	width: 70px;
-	height: 70px;
-	background: url('../../Images/layout/Menu.png') no-repeat center center;
-	background-size: contain;
-	border: none;
-	cursor: pointer;
-}
 
 .login {
-	position: absolute;
-	right: 200px;
 	padding: 5px 10px;
+	margin-right: 100px;
 }
 
-/* 사이드바 스타일 */
+.header-login-btn {
+	width: 70px;
+	height: 40px;
+	border: 1px solid #f7cc53;
+	background-color: #fff5d9;
+	cursor: pointer;
+	border-radius: 8px;
+	font-size: 13px;
+}
+
+.mypage-btn {
+	width: 80px !important;
+}
+
+.header-login-btn:hover {
+	background-color: #f7cc53;
+}
+
+
+.login a {
+	color: #007bff;
+	text-decoration: none;
+	background-color: transparent;
+}
+
+/* 사이드바 */
+.sidebar-container {
+	top: 0;
+	position: fixed;
+	z-index: 1;
+	height: 100vh;
+}
+
+.sidebar-button {
+	position: fixed;
+	left: 7px;
+	top: 130px;
+	width: 70px;
+	height: 70px;
+	cursor: pointer;
+	border: none !important;
+	background-color: transparent;
+	z-index: 2;
+	outline: none !important;
+
+}
+
 .sidebar {
-	width: 250px;
+	width: 220px !important;
 	padding: 10px;
 	border-right: 1px solid #ccc;
 	position: fixed;
 	left: -550px;
 	/* 사이드바를 화면 밖에 위치시킴 */
-	top: 120px;
-	/* 헤더 아래로 위치 */
-	height: calc(100% - 120px);
-	/* 헤더 높이를 제외한 전체 높이 */
+	padding-top: 130px;
+	height: 100vh !important;
 	background-color: white;
 	transition: left 0.3s ease;
 	/* 애니메이션 효과 */
+	box-sizing: unset;
+
 }
 
 .sidebar.show {
 	left: 0;
 	/* 사이드바를 화면 안으로 이동 */
-}
-
-.sidebar .close-button {
-	background: url('../../Images/layout/Menu.png') no-repeat center center;
-	background-size: contain;
-	width: 70px;
-	height: 70px;
-	border: none;
-	cursor: pointer;
-	position: absolute;
-	top: 10px;
-	left: 10px;
-	/* 닫기 버튼을 왼쪽으로 이동 */
 }
 
 .sidebar .content {
@@ -110,20 +154,16 @@ body {
 
 .sidebar .content div {
 	margin-bottom: 10px;
-	padding: 10px;
+	padding: 5px 10px;
 	border: none;
-	/* 선 제거 */
 	cursor: pointer;
 }
 
-/*.fridge img {
-    max-width: 250px;  원하는 최대 너비로 설정 
-    width: 100%;
-    height: auto;
-}*/
-.refrigerator-img {
+.sidebar-img {
 	vertical-align: middle;
 }
+
+
 
 /* 메인 콘텐츠 스타일 */
 .main-content {
