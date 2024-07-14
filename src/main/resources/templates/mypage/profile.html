@@ -63,13 +63,13 @@
                         <span id="phoneMessage" class="error-message"></span>
                     </div>
                     <div class="form-field">
-                        <label for="currentPw">현재 비밀번호</label>
-                        <input type="password" id="currentPw" name="currentPw" required>
                         <button type="submit" form="updateForm" class="check-button">수정하기</button>
                     </div>
                 </form>
                 <form id="deleteForm" th:action="@{/mypage/delete}" method="post">
                     <div class="button-group">
+						<label for="currentPw">현재 비밀번호</label>
+						<input type="password" id="currentPw" name="currentPw" required>
                         <button type="submit" form="deleteForm" class="check-button">탈퇴하기</button>
                     </div>
                 </form>

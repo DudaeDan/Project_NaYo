@@ -16,6 +16,9 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     List<Board> findTop20ByOrderByBoardDateDesc();
     List<Board> findTop20ByBoardDateAfterOrderByBoardHitDesc(LocalDateTime date);
 
-    
+ 
+    List<Board> findByBoardTitleContaining(String title);
+    List<Board> findByBoardContentContaining(String content);
+
 }
 

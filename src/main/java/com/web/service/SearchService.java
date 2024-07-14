@@ -1,5 +1,9 @@
 package com.web.service;
 
-public interface SearchService {
+import com.web.domain.Board;
 
+import java.util.List;
+
+public interface SearchService {
+    List<Board> search(String type, String keyword);
 }

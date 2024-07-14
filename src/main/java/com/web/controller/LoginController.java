@@ -35,7 +35,7 @@ public class LoginController {
         User user = userService.validateUser(userId, userPw);
         if (user != null) {
             session.setAttribute("user", user);
-            return "redirect:/board/ranking";
+            return "redirect:/";
         } else {
             model.addAttribute("loginError", true);
             return "login/login";

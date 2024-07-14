@@ -14,6 +14,8 @@ import com.web.repository.ReplyRepository;
 import com.web.repository.StepRepository;
 import com.web.repository.UserRepository;
 import com.web.repository.MyUserRepository;
+import com.web.repository.RefrigeratorIngredientRepository;
+import com.web.repository.RefrigeratorRepository;
 import com.web.repository.ReplyLikeRepository;
 import com.web.repository.MyBoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +57,13 @@ public class MyUserServiceImpl implements MyUserService {
 
     @Autowired
     private FileService fileService;
+    
+    @Autowired
+    private RefrigeratorRepository refrigeratorRepository;
+
+    @Autowired
+    private RefrigeratorIngredientRepository refrigeratorIngredientRepository;
+
 
     private static final String MAIN_IMG_DIR = "src/main/resources/static/Images/border/main/";
     private static final String STEP_IMG_DIR = "src/main/resources/static/Images/border/step/";
@@ -124,6 +133,11 @@ public class MyUserServiceImpl implements MyUserService {
             boardRepository.findByUser_UserNumber(userNumber).forEach(board -> {
                 fileService.deleteFile(board.getMainImg(), MAIN_IMG_DIR);
                 boardRepository.delete(board);
+            });
+
+            // 유저의 냉장고 재료 삭제
+            refrigeratorRepository.findByUser_UserNumber(userNumber).forEach(refrigerator -> {
+                refrigeratorRepository.delete(refrigerator);
             });
 
             // 유저 정보 삭제

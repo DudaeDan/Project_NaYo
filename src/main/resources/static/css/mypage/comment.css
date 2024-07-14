@@ -1,3 +1,13 @@
+@charset "utf-8";
+
+.test{
+    width: 21%; /* 너비를 21%로 줄여 한 줄에 4개의 아이템이 들어가도록 설정 */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
 .container {
     display: flex;
 }
@@ -10,14 +20,46 @@
     align-items: center;
 }
 
+.mypage-header {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* 간격을 줄임 */
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.mypage-header .nav-item {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #fff5d9;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    flex: 1;
+    max-width: 150px; /* 각 항목의 최대 넓이 설정 */
+}
+
+.mypage-header .nav-item:hover, .mypage-header .nav-item:focus {
+    background-color: #f7cc53;
+}
+
 .board-list {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
+}
+
+.board-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%; /* 간격을 2%로 설정하여 각 아이템의 너비와 합이 100%를 넘지 않도록 조정 */
+    justify-content: center;
 }
 
 .board-item {
-    width: 100%;
+    width: 100%; /* 너비를 21%로 줄여 한 줄에 4개의 아이템이 들어가도록 설정 */
     border: 1px solid #ddd;
     border-radius: 4px;
     overflow: hidden;
