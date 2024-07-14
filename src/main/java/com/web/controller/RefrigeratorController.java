@@ -36,24 +36,6 @@ public class RefrigeratorController {
 	private HttpSession session;
 
 	// 냉장고 메인 페이지
-//	@GetMapping("")
-//	public String refrigerator(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
-//			@RequestParam(value = "size", defaultValue = "10") int size) {
-//		Object loginMember = session.getAttribute(SessionConst.LOGIN_MEMBER);
-//		if (loginMember != null) {
-//			Long userNumber = ((User) loginMember).getUserNumber();
-//
-//			Pageable pageable = PageRequest.of(page - 1, size);
-//			Page<Refrigerator> refriPage = refService.getRefriList(pageable, userNumber);
-//			model.addAttribute("refriList", refriPage.getContent());
-//			model.addAttribute("totalPages", refriPage.getTotalPages());
-//			model.addAttribute("currentPage", page);
-//			return "refrigerator/refrigerator_main";
-//		} else {
-//			return "redirect:/login/login";
-//		}
-//	}
-
 	@GetMapping("")
 	public String refrigerator(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "size", defaultValue = "10") int size) {
@@ -102,16 +84,6 @@ public class RefrigeratorController {
 	}
 
 	// 레시피 검색
-//	@GetMapping("searchRecipe")
-//	public String searchRecipe(Model model) {
-//		Object loginMember = session.getAttribute(SessionConst.LOGIN_MEMBER);
-//		Long userNumber = ((User) loginMember).getUserNumber();
-//		List<String> ingre = refService.getIngreName(userNumber);
-//		List<SearchRecipe> recipe = refService.getRecipe(ingre);
-//		model.addAttribute("ingre", ingre);
-//		model.addAttribute("recipe", recipe);
-//		return "refrigerator/refrigerator_search";
-//	}
 	@GetMapping("searchRecipe")
 	public String searchRecipe(Model model) {
 		User loginMember = (User) session.getAttribute("user");
