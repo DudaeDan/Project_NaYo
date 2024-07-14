@@ -1,4 +1,4 @@
-
+@charset "utf-8";
 
 .container {
     display: flex;
@@ -12,119 +12,74 @@
     align-items: center;
 }
 
-.board-grid {
+.mypage-header {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-.board-item {
-    width: 23%;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.thumbnail {
+    justify-content: space-around;
     width: 100%;
-    height: 200px;
-    overflow: hidden;
+    margin-bottom: 20px;
 }
 
-.thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.board-details {
+.mypage-header a {
     padding: 10px;
-    background-color: white;
-}
-
-.board-details h3 {
-    margin: 0 0 10px;
-    font-size: 1.2em;
-    font-family: 'MangoDdobak-B';
+    border: 1px solid #cdcdcd;
+    border-radius: 5px;
+    text-decoration: none;
     color: black;
 }
 
-.board-title a {
-    color: black !important;
+.mypage-header a:hover {
+    background-color: #f7cc53;
 }
 
-.board-details p {
-    margin: 0 0 10px;
-    font-size: 0.9em;
-    color: #999;
-}
-
-.board-details .stats {
+.inquiry-button-container {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    font-size: 0.9em;
-    color: #999;
+    justify-content: flex-end;
+    margin-bottom: 20px;
 }
 
-.pagination-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.inquiry-button-container .btn-primary {
+    padding: 10px;
+    border: 1px solid #cdcdcd;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+    background-color: #fff5d9;
+    border-color: #ffe5c5;
+    color: black;
+}
+
+.inquiry-button-container .btn-primary:hover {
+    background-color: #f7cc53;
+    border-color: #ffd9b3;
+}
+
+.table {
+    width: 100%;
     margin-top: 20px;
+    border-collapse: collapse;
 }
 
-.pagination {
+.table th, .table td {
+    padding: 10px;
     text-align: center;
+    border: 1px solid #cdcdcd;
 }
 
-.pagination button {
-    margin: 0 5px;
-    padding: 5px 10px;
-    border: none;
-    background-color: 	#fff5d9
+.table th {
+    background-color: #f9f9f9;
+}
 
-;
-    cursor: pointer;
+.table td a {
+    text-decoration: none;
     color: black;
 }
 
-.pagination button.active {
-    background-color: 	#fff5d9
-
-;
-    color: black;
+.table td a:hover {
+    text-decoration: underline;
 }
 
-.pagination button:hover {
-    background-color: 	#fff5d9
-
-;
-    color: black;
-}
-
-.write-button {
-    text-align: right;
-    margin-left: 20px;
-}
-
-.write-button .btn {
-    padding: 5px 10px;
-    background-color: 	#fff5d9
-
-;
-    border-color: 	#ffe5c5
-
-;
-    color:black;
-}
-
-.write-button .btn:hover {
-    background-color: 	#fff5d9
-
-;
-    border-color: 	#ffe5c5
-
-;
+h2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

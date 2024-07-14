@@ -5,10 +5,14 @@ import com.web.domain.Comments;
 import com.web.domain.User;
 import com.web.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MyBoardServiceImpl implements MyBoardService {
@@ -99,4 +103,13 @@ public class MyBoardServiceImpl implements MyBoardService {
     public List<Board> findBoardsByUserComments(Long userNumber) {
         return myBoardRepository.findBoardsByUserComments(userNumber);
     }
+    
+    
+    @Override
+    public Page<Board> findPostsByUserNumber(Long userNumber, PageRequest pageRequest) {
+        return myBoardRepository.findByUser_UserNumber(userNumber, pageRequest);
+    }
+    
+
+
 }

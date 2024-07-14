@@ -11,6 +11,9 @@ import com.web.service.CommentService;
 import com.web.service.InquiryService;
 import com.web.service.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,16 +43,25 @@ public class MyPageController {
     private AnswerService answerService;
     
 
-    // 작성 글 목록
     @GetMapping("/boardlist")
-    public String boardList(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user"); // 세션에서 user를 가져옴
+    public String boardList(Model model, HttpSession session,
+                            @RequestParam(defaultValue = "1") int page,
+                            @RequestParam(defaultValue = "8") int size) {
+        if(page<1) {
+            page = 1;
+        }
+        User user = (User) session.getAttribute("user");
         if (user != null) {
-            Long userNumber = user.getUserNumber(); // user 객체에서 userNumber를 가져옴
-            List<Board> boards = myBoardService.findPostsByUserNumber(userNumber);
-            model.addAttribute("boards", boards);
+            Long userNumber = user.getUserNumber();
+            // PageRequest에 정렬 옵션 추가
+            PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "boardDate"));
+            Page<Board> boardPage = myBoardService.findPostsByUserNumber(userNumber, pageRequest);
+
+            model.addAttribute("boards", boardPage.getContent());
+            model.addAttribute("currentPage", page);
+            model.addAttribute("totalPages", boardPage.getTotalPages());
         } else {
-            return "redirect:/login/login"; // 로그인된 사용자가 없으면 로그인 페이지로 리다이렉트
+            return "redirect:/login/login";
         }
         return "mypage/myboardlist";
     }
@@ -69,6 +81,9 @@ public class MyPageController {
         }
         return "mypage/comment";
     }
+
+
+
 
     // 개인정보 수정
     @GetMapping("/profile")

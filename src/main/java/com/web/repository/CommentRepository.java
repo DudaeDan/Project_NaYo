@@ -20,7 +20,7 @@ public interface CommentRepository extends JpaRepository<Comments, Long> {
     List<Comments> findByUser_UserNumber(Long userNumber);
     List<Comments> findByBoard_BoardNumber(Long boardNumber);
     
-    
+
 
     
     

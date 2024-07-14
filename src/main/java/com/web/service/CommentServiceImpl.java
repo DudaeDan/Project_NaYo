@@ -147,4 +147,5 @@ public class CommentServiceImpl implements CommentService {
     public List<Comments> findCommentsByUserNumber(Long userNumber) {
     	return commentRepository.findByUser_UserNumber(userNumber);
     }
+    
 }

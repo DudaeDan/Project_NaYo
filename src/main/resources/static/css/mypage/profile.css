@@ -14,7 +14,7 @@ body {
     width: calc(100% - 200px); /* 사이드바 넓이 빼기 */
     padding: 20px;
     box-sizing: border-box;
-    max-width: 650px; /* profile 클래스 넓이와 동일하게 설정 */
+    max-width: 650px; 
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -42,12 +42,29 @@ body {
 }
 
 .mypage-header .nav-item:hover, .mypage-header .nav-item:focus {
-    background-color: #d4d4d4;
+    background-color: #f7cc53;
 }
 
 h2 {
     text-align: center;
     margin-bottom: 18px;
+}
+
+.delete-form {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 20px; /* 버튼을 다른 요소와 구분 */
+}
+
+.delete-form .check-button {
+    width: 100px; /* 버튼의 넓이 */
+    height: 40px;
+    background: #fff5d9;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .profile {
