@@ -48,4 +48,10 @@ public interface BoardService {
     public void updateBoard(Long id, Board board, MultipartFile mainImgFile, List<String> stepDescriptions, List<MultipartFile> stepImages, List<String> ingredientNames, List<String> ingredientAmounts, String existingMainImg, List<String> existingStepImages);
 
 
+    List<Board> findBestBoards();
+
+    List<Board> findRecentBoards();
+
+    List<Board> findWeeklyBestBoards();
+
 }

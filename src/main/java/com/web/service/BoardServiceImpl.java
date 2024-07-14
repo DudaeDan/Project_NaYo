@@ -18,11 +18,14 @@ import com.web.repository.StepRepository;
 import com.web.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -269,11 +272,24 @@ public class BoardServiceImpl implements BoardService {
     
     
     
-    
-    
-    
-    
-    
+    @Override
+    public List<Board> findBestBoards() {
+        PageRequest pageRequest = PageRequest.of(0, 20, Sort.by(Sort.Direction.DESC, "boardLike"));
+        return boardRepository.findAll(pageRequest).getContent();
+    }
+
+    @Override
+    public List<Board> findRecentBoards() {
+        PageRequest pageRequest = PageRequest.of(0, 20, Sort.by(Sort.Direction.DESC, "boardDate"));
+        return boardRepository.findAll(pageRequest).getContent();
+    }
+
+    @Override
+    public List<Board> findWeeklyBestBoards() {
+        LocalDateTime oneWeekAgo = LocalDateTime.now().minusDays(7);
+        return boardRepository.findTop20ByBoardDateAfterOrderByBoardHitDesc(oneWeekAgo);
+    }
+
     
     
     

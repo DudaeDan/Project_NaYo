@@ -40,10 +40,17 @@ public class BoardController {
 
     @GetMapping("/list")
     public String listBoards(Model model,
-                             @RequestParam(defaultValue = "0") int page,
-                             @RequestParam(defaultValue = "10") int size) {
-        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "boardDate"));
+                             @RequestParam(defaultValue = "1") int page,
+                             @RequestParam(defaultValue = "8") int size) {
+        if (page < 1) {
+            page = 1;
+        }
+        PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "boardDate"));
         Page<Board> boardPage = boardService.findAllBoards(pageRequest);
+
+        if (boardPage.isEmpty() && page > 1) {
+            return "redirect:/board/list?page=" + (page - 1) + "&size=" + size;
+        }
 
         model.addAttribute("boards", boardPage.getContent());
         model.addAttribute("currentPage", page);
@@ -57,15 +64,23 @@ public class BoardController {
     @GetMapping("/ranking")
     public String rankingBoards(Model model,
                                 @RequestParam(defaultValue = "1") int page,
-                                @RequestParam(defaultValue = "30") int size) {
+                                @RequestParam(defaultValue = "8") int size) {
+        if (page < 1) {
+            page = 1;
+        }
         PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "boardLike"));
         Page<Board> boardPage = boardService.findAllBoards(pageRequest);
+
+        if (boardPage.isEmpty() && page > 1) {
+            return "redirect:/board/ranking?page=" + (page - 1) + "&size=" + size;
+        }
+
         model.addAttribute("boards", boardPage.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", boardPage.getTotalPages());
+
         return "/board/ranking";
     }
-
     @GetMapping("/create")
     public String showCreateForm(Model model, HttpSession session) {
         User loggedInUser = (User) session.getAttribute("user");
@@ -196,4 +211,18 @@ public class BoardController {
         boardService.updateBoard(id, board, mainImgFile, stepDescriptions, stepImages, ingredientNames, ingredientAmounts, existingMainImg, existingStepImages);
         return "redirect:/board/view/" + id;
     }
+    
+    @GetMapping("/index")
+    public String index(Model model) {
+        List<Board> bestBoards = boardService.findBestBoards(); // 좋아요 순
+        List<Board> recentBoards = boardService.findRecentBoards(); // 최신순
+        List<Board> weeklyBestBoards = boardService.findWeeklyBestBoards(); // 금주의 베스트
+
+        model.addAttribute("bestBoards", bestBoards);
+        model.addAttribute("recentBoards", recentBoards);
+        model.addAttribute("weeklyBestBoards", weeklyBestBoards);
+
+        return "board/index";
+    }
+
 }
