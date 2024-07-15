@@ -20,8 +20,6 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
 
  
-    List<Board> findByBoardTitleContaining(String title);
-    List<Board> findByBoardContentContaining(String content);
-
+ 
 }
 
