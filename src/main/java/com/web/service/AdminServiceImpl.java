@@ -230,41 +230,86 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 
-    @Override
-    @Transactional
-    public void deleteBoardWithFiles(Long id) {
-        Board board = boardRepository.findById(id).orElse(null);
-        if (board != null) {
-            // 이미지 파일 삭제
-            fileService.deleteFile(board.getMainImg(), MAIN_IMG_DIR);
-            System.out.println("===========================메인 이미지 삭제");
-            board.getSteps().forEach(step -> fileService.deleteFile(step.getStepImage(), STEP_IMG_DIR));
-            System.out.println("===========================스텝 이미지 삭제");
+//    @Override
+//    @Transactional
+//    public void deleteBoardWithFiles(Long id) {
+//    	Board board = boardRepository.findById(id).orElse(null);
+//        if (board != null) {
+//            // 이미지 파일 삭제
+//            fileService.deleteFile(board.getMainImg(), MAIN_IMG_DIR);
+//            System.out.println("===========================메인 이미지 삭제");
+//            board.getSteps().forEach(step -> fileService.deleteFile(step.getStepImage(), STEP_IMG_DIR));
+//            System.out.println("===========================스텝 이미지 삭제");
+//
+//            // ----------------여기서 오류----------------------
+//            // 댓글 및 관련된 답글, 좋아요 삭제
+//            board.getComments().forEach(comment -> {
+//                // 답글 및 답글 좋아요 삭제
+//                comment.getReplies().forEach(reply -> {
+//                    replyLikeRepository.deleteAll(replyLikeRepository.findByReply(reply));
+//                    System.out.println("===========================답글 좋아요 삭제");
+//                    replyRepository.delete(reply);
+//                    System.out.println("===========================답글 삭제");
+//                });
+//
+//                // 댓글 좋아요 삭제
+//                commentLikeRepository.deleteAll(commentLikeRepository.findByComment(comment));
+//                System.out.println("===========================댓글 좋아요 삭제");
+//                // 댓글 삭제
+//                commentRepository.delete(comment);
+//                System.out.println("===========================댓글 삭제");
+//            });
+//
+//            // 보드 삭제
+//            boardRepository.delete(board);
+//            System.out.println("===========================게시글 삭제");
+//        }
+//    }
 
-            // ----------------여기서 오류----------------------
-            // 댓글 및 관련된 답글, 좋아요 삭제
-            board.getComments().forEach(comment -> {
-                // 답글 및 답글 좋아요 삭제
-                comment.getReplies().forEach(reply -> {
-                    replyLikeRepository.deleteAll(replyLikeRepository.findByReply(reply));
-                    System.out.println("===========================답글 좋아요 삭제");
-                    replyRepository.delete(reply);
-                    System.out.println("===========================답글 삭제");
-                });
+	@Override
+	@Transactional
+	public void deleteBoardWithFiles(Long id) {
+		Board board = boardRepository.findById(id).orElse(null);
+		if (board != null) {
+			// 이미지 파일 삭제
+			fileService.deleteFile(board.getMainImg(), MAIN_IMG_DIR);
+			System.out.println("===========================메인 이미지 삭제");
+			board.getSteps().forEach(step -> fileService.deleteFile(step.getStepImage(), STEP_IMG_DIR));
+			System.out.println("===========================스텝 이미지 삭제");
 
-                // 댓글 좋아요 삭제
-                commentLikeRepository.deleteAll(commentLikeRepository.findByComment(comment));
-                System.out.println("===========================댓글 좋아요 삭제");
-                // 댓글 삭제
-                commentRepository.delete(comment);
-                System.out.println("===========================댓글 삭제");
-            });
+			// 댓글 및 관련된 답글, 좋아요 삭제
+			if (board.getComments() != null && !board.getComments().isEmpty()) {
+				board.getComments().forEach(comment -> {
+					if (comment.getReplies() != null && !comment.getReplies().isEmpty()) {
+						// 답글 및 답글 좋아요 삭제
+						comment.getReplies().forEach(reply -> {
+							replyLikeRepository.deleteAll(replyLikeRepository.findByReply(reply));
+							System.out.println("===========================답글 좋아요 삭제");
+							replyRepository.delete(reply);
+							System.out.println("===========================답글 삭제");
+						});
+					} else {
+						System.out.println("===========================답글 없음");
+					}
 
-            // 보드 삭제
-            boardRepository.delete(board);
-            System.out.println("===========================게시글 삭제");
-        }
-    }
+					// 댓글 좋아요 삭제
+					commentLikeRepository.deleteAll(commentLikeRepository.findByComment(comment));
+					System.out.println("===========================댓글 좋아요 삭제");
+					// 댓글 삭제
+					commentRepository.delete(comment);
+					System.out.println("===========================댓글 삭제");
+				});
+			} else {
+				System.out.println("===========================댓글 없음");
+			}
+
+			// 보드 삭제
+			boardRepository.delete(board);
+			System.out.println("===========================게시글 삭제");
+		} else {
+			System.out.println("===========================게시글 없음");
+		}
+	}
 
 	@Override
 	@Transactional
