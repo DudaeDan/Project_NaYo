@@ -22,18 +22,18 @@
 }
 
 .classification-btn {
-	width: 65px;
-	height: 65px;
-	background-color: white;
-	border-radius: 5px;
-	border: 1px solid black;
-	align-items: center;
-	display: inline-flex;
-	flex-direction: column;
-	justify-content: end;
-	font-size: 12px;
-	font-weight: bold;
-	margin: 5px;
+    width: 85px;
+    height: 65px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.btn-active {
+	background-color: #fff5d9;
 }
 
 /* 선택부분 */

@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import com.web.domain.Ingredient;
 import com.web.domain.Refrigerator;
 import com.web.domain.RefrigeratorIngredient;
 import com.web.domain.SearchRecipe;
@@ -52,11 +50,6 @@ public class RefrigeratorServiceImpl implements RefrigeratorService {
 	@Override
 	public void ingredientAddConfirm(List<Refrigerator> refrigerators) {
 		refriRepo.saveAll(refrigerators);
-	}
-
-	@Override
-	public List<String> getIngreName(Long userNumber) {
-		return refriRepo.findIngredientNamesByUserNumber(userNumber);
 	}
 
 	@Override

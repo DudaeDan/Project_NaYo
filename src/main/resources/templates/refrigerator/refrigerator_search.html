@@ -14,17 +14,26 @@
 	<header th:replace="fragments/header :: header"></header>
 	<aside th:replace="fragments/sidebar :: sidebar"></aside>
 	<div class="refri-content-box">
+
 		<div class="search-result-title">
 			<span>레시피 목록</span>
+			<div class="selected-ingre">
+				<span> - </span>
+				<span th:each="ingredient, iterStat : ${ingre}">
+					<span th:text="${ingredient}"></span>
+					<span th:if="${!iterStat.last}">, </span>
+				</span>
+				<span> 검색중</span>
+			</div>
 		</div>
 
+		<input type="button" class="refri_btn" value="돌아가기" th:onclick="|location.href='@{/refrigerator}'|">
+
 		<div class="search-result">
-
-
 			<table class="recipe-list">
 				<thead>
 					<tr>
-						<th style="width: 30%;">글 제목</th>
+						<th style="width: 30%;">제목</th>
 						<th style="width: 15%;">요리명</th>
 						<th style="width: 55%;">재료</th>
 					</tr>
@@ -32,7 +41,8 @@
 				<tbody>
 					<tr th:each="recipe : ${recipe}">
 						<td class="recipe-title">
-							<a class="recipe-link" th:href="@{'https://www.10000recipe.com/recipe/' + ${recipe.recipeNumber}}"
+							<a class="recipe-link"
+								th:href="@{'https://www.10000recipe.com/recipe/' + ${recipe.recipeNumber}}"
 								target="_blank" th:text="${recipe.recipeTitle}"></a>
 						</td>
 						<td th:text="${recipe.recipeName}"></td>

@@ -40,6 +40,13 @@ body {
 	margin-left: 33%;
 }
 
+.search-select {
+	height: 30px !important;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	outline: none;
+}
+
 .header .header-search {
 	display: flex;
 	align-items: center;

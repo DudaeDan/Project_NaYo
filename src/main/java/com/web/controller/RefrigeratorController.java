@@ -1,9 +1,7 @@
 package com.web.controller;
 
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,14 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
-import com.web.domain.Ingredient;
 import com.web.domain.Refrigerator;
 import com.web.domain.SearchRecipe;
 import com.web.domain.User;
 import com.web.service.RefrigeratorService;
-import com.web.util.SessionConst;
 
 @Controller
 @SessionAttributes("user")
@@ -84,14 +80,25 @@ public class RefrigeratorController {
 	}
 
 	// 레시피 검색
-	@GetMapping("searchRecipe")
-	public String searchRecipe(Model model) {
-		User loginMember = (User) session.getAttribute("user");
-		Long userNumber = loginMember.getUserNumber();
-		List<String> ingre = refService.getIngreName(userNumber);
-		List<SearchRecipe> recipe = refService.getRecipe(ingre);
-		model.addAttribute("ingre", ingre);
-		model.addAttribute("recipe", recipe);
+	@PostMapping("/searchRecipe")
+	@ResponseBody
+	public String searchRecipe(@RequestBody List<String> ingredients, Model model) {
+		List<SearchRecipe> recipe = refService.getRecipe(ingredients);
+		session.setAttribute("searchIngredients", ingredients);
+		session.setAttribute("searchRecipes", recipe);
+
+		return "success";
+	}
+
+	@SuppressWarnings("unchecked")
+	@GetMapping("/searchRecipeResult")
+	public String searchRecipeResults(Model model) {
+		List<String> ingredients = (List<String>) session.getAttribute("searchIngredients");
+		List<SearchRecipe> recipes = (List<SearchRecipe>) session.getAttribute("searchRecipes");
+
+		model.addAttribute("ingre", ingredients);
+		model.addAttribute("recipe", recipes);
+
 		return "refrigerator/refrigerator_search";
 	}
 

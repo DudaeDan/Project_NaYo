@@ -13,7 +13,7 @@ function addIngredient(button) {
 	var rowCheck = document.querySelector(`#${rowId}`);
 
 	//행이 있으면 삭제 없으면 추가
-	if (rowCheck) { 
+	if (rowCheck) {
 		rowCheck.remove();
 		button.classList.remove('btn-selected');
 	} else {
@@ -51,13 +51,20 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 });
 
+var previousButton = null;
 //카테고리 변환
-function changeCategory(category) {
+function changeCategory(category, clickedButton) {
 	var categories = document.querySelectorAll('.category');
 	categories.forEach(function(cat) {
 		cat.style.display = 'none';
 	});
 	document.getElementById(category).style.display = 'block';
+
+	if (previousButton) {
+		previousButton.classList.remove('btn-active');
+	}
+	clickedButton.classList.add('btn-active');
+	previousButton = clickedButton;
 }
 
 //컨트롤러로 정보 전달

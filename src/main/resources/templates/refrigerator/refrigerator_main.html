@@ -21,8 +21,11 @@
 				<span>재료 목록</span>
 			</div>
 			<div class="refri_btn_container">
-				<input type="button" class="refri_search_btn" name="" id="" value="레시피 검색"
+				<input type="button" class="refri_search_btn" value="레시피 검색" onclick="searchRecipe()">
+				<!--				
+				<input type="button" class="refri_search_btn" value="레시피 검색"
 					th:onclick="|location.href='@{/refrigerator/searchRecipe}'|">
+				-->
 				<input type="button" class="refri_main_btn" value="추가"
 					th:onclick="|location.href='@{/refrigerator/addIngredient}'|">
 				<input type="button" class="refri_main_btn" value="삭제" onclick="refriDeleteConfirm()">

@@ -23,30 +23,30 @@
 				<table class="classification-table">
 					<tr>
 						<td>
-							<button class="classification-btn" th:onclick="changeCategory('meat')">육류</button>
+							<button class="classification-btn" th:onclick="changeCategory('meat', this)">육류</button>
 						</td>
 						<td>
-							<button class="classification-btn" th:onclick="changeCategory('vegetable')">채소</button>
+							<button class="classification-btn" th:onclick="changeCategory('vegetable', this)">채소</button>
 						</td>
 						<td>
-							<button class="classification-btn" th:onclick="changeCategory('fruit')">과일</button>
+							<button class="classification-btn" th:onclick="changeCategory('fruit', this)">과일</button>
 						</td>
 						<td>
-							<button class="classification-btn" th:onclick="changeCategory('sauce')">소스</button>
+							<button class="classification-btn" th:onclick="changeCategory('sauce', this)">양념</button>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<button class="classification-btn" th:onclick="changeCategory('grain')">곡류</button>
+							<button class="classification-btn" th:onclick="changeCategory('grain', this)">곡류</button>
 						</td>
 						<td>
-							<button class="classification-btn" th:onclick="changeCategory('processed')">가공식품</button>
+							<button class="classification-btn" th:onclick="changeCategory('processed', this)">가공식품</button>
 						</td>
 						<td>
-							<button class="classification-btn" th:onclick="changeCategory('seafood')">해산물</button>
+							<button class="classification-btn" th:onclick="changeCategory('seafood', this)">해산물</button>
 						</td>
 						<td>
-							<button class="classification-btn" th:onclick="changeCategory('dairy')">유제품</button>
+							<button class="classification-btn" th:onclick="changeCategory('dairy', this)">유제품</button>
 						</td>
 					</tr>
 				</table>

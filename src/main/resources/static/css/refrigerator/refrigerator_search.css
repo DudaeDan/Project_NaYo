@@ -9,7 +9,26 @@
 	font-size: 24px;
 	font-weight: bold;
 	margin-left: 50px;
-	padding-top:20px;
+	padding-top: 20px;
+	display: inline-block;
+}
+
+.selected-ingre {
+	font-size: 14px;
+	margin-top: 10px;
+	font-weight: normal;
+	max-width: 750px;
+}
+
+.refri_btn {
+	width: 80px;
+	height: 40px;
+	background-color: #fff5d9;
+	border-radius: 5px;
+	border: 1px solid #f7cc53;
+	float: right;
+	margin-top: 40px;
+	margin-right: 55px;
 }
 
 

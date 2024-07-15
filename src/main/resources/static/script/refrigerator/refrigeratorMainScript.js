@@ -73,6 +73,34 @@ function uncheckAllCheckbox() {
 	});
 }
 
+//체크박스 체크로 레시피 검색
+function searchRecipe() {
+	const selectedIngre = [];
+	document.querySelectorAll('.listCheckbox:checked').forEach(function(checkbox) {
+		const ingredientName = checkbox.closest('.refriListRow').querySelector('td:nth-child(3)').textContent.trim();
+		selectedIngre.push(ingredientName);
+	});
+
+
+	if (selectedIngre.length > 0) {
+		$.ajax({
+			type: "POST",
+			url: "/refrigerator/searchRecipe",
+			contentType: "application/json",
+			data: JSON.stringify(selectedIngre),
+			success: function(response) {
+				window.location.href = "/refrigerator/searchRecipeResult";
+			},
+			error: function() {
+				alert("오류가 발생했습니다");
+			}
+		});
+	} else {
+		alert('재료를 선택해주세요');
+	}
+
+}
+
 //삭제할 정보 전송
 function refriDeleteConfirm() {
 	const selectedItems = [];
