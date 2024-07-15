@@ -103,6 +103,10 @@ function execDaumPostcode() {
 }
 
 
+function confirmDelete() {
+    return confirm("정말로 탈퇴하시겠습니까?");
+}
+
 
 
 

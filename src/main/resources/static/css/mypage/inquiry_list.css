@@ -58,16 +58,21 @@
     width: 100%;
     margin-top: 20px;
     border-collapse: collapse;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .table th, .table td {
-    padding: 10px;
+    padding: 15px;
     text-align: center;
     border: 1px solid #cdcdcd;
 }
 
 .table th {
-    background-color: #f9f9f9;
+    background-color: #fff5d9;
+}
+
+.table td {
+    background-color: white;
 }
 
 .table td a {
@@ -76,10 +81,12 @@
 }
 
 .table td a:hover {
-    text-decoration: underline;
+    color: blue;
 }
 
 h2 {
     margin-top: 20px;
     margin-bottom: 20px;
+    font-size: 2em;
+    text-align: center;
 }
