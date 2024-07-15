@@ -1,27 +1,35 @@
 package com.web.controller;
 
-import com.web.domain.Answer;
-import com.web.domain.Board;
-import com.web.domain.Comments;
-import com.web.domain.Inquiry;
-import com.web.domain.User;
-import com.web.service.MyBoardService;
-import com.web.service.AnswerService;
-import com.web.service.CommentService;
-import com.web.service.InquiryService;
-import com.web.service.MyUserService;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import com.web.domain.Answer;
+import com.web.domain.Board;
+import com.web.domain.Comments;
+import com.web.domain.Inquiry;
+import com.web.domain.User;
+import com.web.service.AnswerService;
+import com.web.service.CommentService;
+import com.web.service.InquiryService;
+import com.web.service.MyBoardService;
+import com.web.service.MyUserService;
 
 @Controller
 @RequestMapping("/mypage")
@@ -69,6 +77,21 @@ public class MyPageController {
     }
 
     // 작성 댓글 글 목록
+//    @GetMapping("/comment")
+//    public String commentList(Model model, HttpSession session) {
+//        User user = (User) session.getAttribute("user");
+//        if (user != null) {
+//            Long userNumber = user.getUserNumber();
+//            List<Comments> comments = commentService.findCommentsByUserNumber(userNumber);
+//            Map<Board, List<Comments>> commentsByBoard = comments.stream()
+//                    .collect(Collectors.groupingBy(Comments::getBoard));
+//            model.addAttribute("commentsByBoard", commentsByBoard);
+//        } else {
+//            return "redirect:/login/login";
+//        }
+//        return "mypage/comment";
+//    }
+
     @GetMapping("/comment")
     public String commentList(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
@@ -76,14 +99,17 @@ public class MyPageController {
             Long userNumber = user.getUserNumber();
             List<Comments> comments = commentService.findCommentsByUserNumber(userNumber);
             Map<Board, List<Comments>> commentsByBoard = comments.stream()
-                    .collect(Collectors.groupingBy(Comments::getBoard));
+                    .collect(Collectors.groupingBy(
+                        Comments::getBoard,
+                        LinkedHashMap::new,
+                        Collectors.toList()
+                    ));
             model.addAttribute("commentsByBoard", commentsByBoard);
         } else {
             return "redirect:/login/login";
         }
         return "mypage/comment";
     }
-
 
 
 

@@ -20,7 +20,8 @@ public interface CommentRepository extends JpaRepository<Comments, Long> {
     List<Comments> findByUser_UserNumber(Long userNumber);
     List<Comments> findByBoard_BoardNumber(Long boardNumber);
     
-
+    @Query("SELECT c FROM Comments c WHERE c.user.userNumber = :userNumber ORDER BY c.board.boardNumber DESC")
+    List<Comments> findByUserNumberOrderByboardNumberDesc(@Param("userNumber") Long userNumber);
 
     
     

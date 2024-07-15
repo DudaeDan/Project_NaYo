@@ -143,9 +143,14 @@ public class CommentServiceImpl implements CommentService {
         return commentLikeRepository.findByUserAndComment(user, comment) != null;
     }
     
+//    @Override
+//    public List<Comments> findCommentsByUserNumber(Long userNumber) {
+//    	return commentRepository.findByUser_UserNumber(userNumber);
+//    }
+    
     @Override
     public List<Comments> findCommentsByUserNumber(Long userNumber) {
-    	return commentRepository.findByUser_UserNumber(userNumber);
+    	return commentRepository.findByUserNumberOrderByboardNumberDesc(userNumber);
     }
     
 }

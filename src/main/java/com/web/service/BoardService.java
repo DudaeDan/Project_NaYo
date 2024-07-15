@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface BoardService {
 
     Page<Board> findAllBoards(Pageable pageable);
+    Page<Board> findBoardsAtLeast5Likes(Pageable pageable);
 
     Board saveBoard(Board board);
 

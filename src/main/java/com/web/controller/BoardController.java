@@ -68,8 +68,11 @@ public class BoardController {
         if (page < 1) {
             page = 1;
         }
-        PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "boardLike"));
-        Page<Board> boardPage = boardService.findAllBoards(pageRequest);
+//        PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "boardLike"));
+        PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "boardLike").and(Sort.by(Sort.Direction.DESC, "boardDate")));
+
+//        Page<Board> boardPage = boardService.findAllBoards(pageRequest);
+        Page<Board> boardPage = boardService.findBoardsAtLeast5Likes(pageRequest);
 
         if (boardPage.isEmpty() && page > 1) {
             return "redirect:/board/ranking?page=" + (page - 1) + "&size=" + size;

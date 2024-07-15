@@ -266,7 +266,10 @@ public class BoardServiceImpl implements BoardService {
         return boardRepository.findAll(pageable);
     }
     
-    
+    @Override
+    public Page<Board> findBoardsAtLeast5Likes(Pageable pageable) {
+    	return boardRepository.findBoardsAtLeast5Likes(pageable);
+    }
     
     
     

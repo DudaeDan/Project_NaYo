@@ -73,6 +73,23 @@ table input {
 	border: none;
 }
 
+.main-img {
+	width: 100%;
+	max-width: 450px;
+	margin: 10px;
+}
+
+.step-img {
+	width: 100%;
+	max-width: 300px;
+	height: auto;
+	display: block;
+	margin: 0 auto 10px;
+}
+.step-description {
+	margin-bottom: 20px;
+}
+
 /* 버튼 */
 .post-btns {
 	display: flex;
@@ -103,7 +120,7 @@ form>input {
 	border: none;
 	font-weight: bold;
 	cursor: pointer;
-	
+
 }
 
 .inquiry_answer {
