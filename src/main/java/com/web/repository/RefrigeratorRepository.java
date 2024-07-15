@@ -17,6 +17,6 @@ public interface RefrigeratorRepository extends JpaRepository<Refrigerator, Long
 	
 	@Query("SELECT ri.refIngredientName FROM Refrigerator r JOIN r.refrigeratorIngredient ri WHERE r.user.userNumber = :userNumber")
     List<String> findIngredientNamesByUserNumber(Long userNumber);
-	void deleteByUser_UserNumber(Long userNumber);
+//	void deleteByUser_UserNumber(Long userNumber);
 
 }

@@ -56,12 +56,6 @@ public class MyUserServiceImpl implements MyUserService {
     private ReplyLikeRepository replyLikeRepository;
 
     @Autowired
-    private RefrigeratorRepository refrigeratorRepository;
-    
-    @Autowired
-    private RefrigeratorIngredientRepository refrigeratorIngredientRepository;
-    
-    @Autowired
     private FileService fileService;
 
     private static final String MAIN_IMG_DIR = "src/main/resources/static/Images/border/main/";

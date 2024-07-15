@@ -9,6 +9,6 @@ import com.web.domain.RefrigeratorIngredient;
 public interface RefrigeratorIngredientRepository extends JpaRepository<RefrigeratorIngredient, Long>{
 
 	List<RefrigeratorIngredient> findByRefIngredientCategoryContaining(String category);
-	void deleteByUser_UserNumber(Long userNumber);
+//	void deleteByUser_UserNumber(Long userNumber);
 
 }

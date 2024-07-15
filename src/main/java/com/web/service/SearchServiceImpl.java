@@ -11,17 +11,17 @@ import com.web.repository.BoardRepository;
 @Service
 public class SearchServiceImpl implements SearchService {
 	
-//	  
-//	@Autowired
-//	private BoardRepository boardRepository;
-//	    @Override
-//	    public List<Board> search(String type, String keyword) {
-//	        if (type.equals("title")) {
-//	            return boardRepository.findByBoardTitleContaining(keyword);
-//	        } else if (type.equals("content")) {
-//	            return boardRepository.findByBoardContentContaining(keyword);
-//	        }
-//	        return null;
-//	    }
+	  
+	@Autowired
+	private BoardRepository boardRepository;
+	    @Override
+	    public List<Board> search(String type, String keyword) {
+	        if (type.equals("title")) {
+	            return boardRepository.findByBoardTitleContaining(keyword);
+	        } else if (type.equals("content")) {
+	            return boardRepository.findByBoardContentContaining(keyword);
+	        }
+	        return null;
+	    }
 
 }
