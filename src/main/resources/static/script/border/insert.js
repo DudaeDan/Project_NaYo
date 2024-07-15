@@ -14,7 +14,7 @@ function previewStepImage(event, input) {
         const output = input.parentElement.querySelector('img');
         if (output) {
             output.src = reader.result;
-            output.style.display = 'block';
+            output.style.display = 'inline-block';
         } else {
             const img = document.createElement('img');
             img.src = reader.result;
@@ -47,10 +47,15 @@ function addStep() {
     const newStep = document.createElement('div');
     newStep.classList.add('step-item');
     newStep.innerHTML = `
-        <img src="#" alt="step_img" class="step-img" style="display: none;">
-        <textarea name="stepDescriptions" rows="5" placeholder="예) 물 1L기준 설탕 1숟가락을 넣고 고기를 담가 30분간 핏물을 제거해주세요" required style="resize: none;"></textarea>
-        <input type="file" name="stepImages" accept="image/*" onchange="previewStepImage(event, this)" required>
-        <button type="button" class="btn btn-danger" onclick="removeStep(this)">삭제</button>
+        <div>
+        	<div>
+		        <img src="#" alt="step_img" class="step-img" style="display: none;">
+			    <textarea class="recipe-step" name="stepDescriptions" rows="5" placeholder="예) 물 1L기준 설탕 1숟가락을 넣고 고기를 담가 30분간 핏물을 제거해주세요" required style="resize: none;"></textarea>
+		    </div>
+	        <br/>
+	        <input type="file" name="stepImages" accept="image/*" onchange="previewStepImage(event, this)" required>
+       	</div>
+        <button type="button" class="btn btn-danger step-delete-btn" onclick="removeStep(this)">삭제</button>
     `;
     stepList.appendChild(newStep);
 }

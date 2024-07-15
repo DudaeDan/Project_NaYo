@@ -48,10 +48,13 @@
                         <div id="stepList" class="step-list">
                             <div th:each="step, iterStat : ${board.steps}" class="step-item">
                                 <img th:src="@{'/Images/border/step/' + ${step.stepImage}}" alt="step_img" class="step-img">
-                                <input type="hidden" name="existingStepImages" th:value="${step.stepImage}"/>
-                                <textarea name="stepDescriptions" rows="3" required th:text="${step.stepDescription}"></textarea>
-                                <input type="file" name="stepImages" onchange="previewStepImage(event, this)">
-                                <button type="button" class="btn btn-danger" onclick="removeStep(this)">삭제</button>
+								<div>
+	                                <input type="hidden" name="existingStepImages" th:value="${step.stepImage}"/>
+	                                <textarea class="recipe-step" name="stepDescriptions" rows="3" required th:text="${step.stepDescription}"></textarea>
+									<br/>
+	                                <input type="file" name="stepImages" onchange="previewStepImage(event, this)">
+								</div>
+                                <button type="button" class="btn btn-danger step-delete-btn" onclick="removeStep(this)">삭제</button>
                             </div>
                         </div>
                         <button type="button" class="btn btn-secondary" onclick="addStep()">과정 추가</button>

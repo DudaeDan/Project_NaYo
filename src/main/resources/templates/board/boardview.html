@@ -60,7 +60,7 @@
                 <h2>댓글</h2>
                 <div id="commentForm">
                     <textarea id="commentContent" placeholder="댓글을 입력하세요"></textarea>
-                    <button th:onclick="|addComment(${board.boardNumber})|">등록</button>
+                    <button class="add-comment-btn" th:onclick="|addComment(${board.boardNumber})|">등록</button>
                 </div>
                 <!-- 베스트 댓글 -->
                 <div th:if="${bestComments != null && !bestComments.isEmpty()}" id="bestComments">
@@ -73,7 +73,7 @@
                                     th:onclick="|deleteComment(${bestComment.id})|" class="delete-btn">삭제</button>
                             <img th:src="${commentLikes != null && commentLikes[bestComment.id] ? '/Images/border/like.png' : '/Images/border/empty_like.png'}"
                                  th:onclick="|toggleCommentLike(${bestComment.id})|"
-                                 class="like-icon">
+                                 class="like-icon reply-like">
                             <span th:text="${bestComment.likes}" class="like-count">0</span>
                         </div>
                         <div class="comment-content" th:text="${bestComment.content}" th:onclick="|scrollToComment(${bestComment.id})|"></div>
@@ -92,7 +92,7 @@
 				                    <button type="button" th:onclick="|showReplyForm(${comment.id})|" class="reply-btn">답글</button>
 				                    <img th:src="${commentLikes != null && commentLikes[comment.id] ? '/Images/border/like.png' : '/Images/border/empty_like.png'}"
 				                         th:onclick="|toggleCommentLike(${comment.id})|"
-				                         class="like-icon">
+				                         class="like-icon reply-like">
 				                    <span th:text="${comment.likes}" class="like-count">0</span>
 				                </div>
 				                <div class="comment-content">
@@ -112,7 +112,7 @@
 				                                        th:onclick="|deleteReply(${reply.id})|" class="delete-btn">삭제</button>
 				                                <img th:src="${replyLikes != null && replyLikes[reply.id] ? '/Images/border/like.png' : '/Images/border/empty_like.png'}"
 				                                     th:onclick="|toggleReplyLike(${reply.id})|"
-				                                     class="like-icon">
+				                                     class="like-icon reply-like">
 				                                <span th:text="${reply.likes}" class="like-count">0</span>
 				                            </div>
 				                            <div class="reply-content">

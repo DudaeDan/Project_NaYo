@@ -43,7 +43,6 @@ body {
 	font-weight: 200;
 	color: #9596A2;
 	font-size: 19px;
-	text-align: center;
 }
 
 .login .form .form-field {
@@ -109,13 +108,13 @@ body {
 	font-family: 'Roboto', sans-serif;
 	font-size: 14px;
 
-
 }
 
 .form-find {
 	text-align: center;
 	font-family: 'Roboto', sans-serif;
 	font-size: 14px;
+	margin-bottom: 20px;
 }
 
 .form-find a:hover {

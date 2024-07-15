@@ -31,14 +31,37 @@
                     </div>
                     <div class="details" style="background-color: white;">
                         <h3 class="title">
-                            <a th:href="@{'/recipes/' + ${recipe.encodedName}}" th:text="${recipe.RCP_NM}">제목</a>
+                            <a th:href="@{'/recipes/recipes/' + ${recipe.encodedName}}" th:text="${recipe.RCP_NM}">제목</a>
                         </h3>
                         <div class="nutrients">
                             <p>열량: <span th:text="${recipe.INFO_ENG}">0</span> kcal</p>
-                            <p>탄수화물: <span th:text="${recipe.INFO_CAR}">0</span> g</p>
-                            <p>단백질: <span th:text="${recipe.INFO_PRO}">0</span> g</p>
-                            <p>지방: <span th:text="${recipe.INFO_FAT}">0</span> g</p>
-                            <p>나트륨: <span th:text="${recipe.INFO_NA}">0</span> mg</p>
+							<div class="nutrient-list">
+								<table class="nutrient-list-table">
+									<tr>
+										<td>
+											<span>탄수화물: <span th:text="${recipe.INFO_CAR}">0</span> g</span> 
+										</td>
+										<td>
+											<span>단백질: <span th:text="${recipe.INFO_PRO}">0</span> g</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span>지방: <span th:text="${recipe.INFO_FAT}">0</span> g</span>
+										</td>
+										<td>
+											<span>나트륨: <span th:text="${recipe.INFO_NA}">0</span> mg</span>
+										</td>
+									</tr>
+								</table>
+								
+								<!--
+								<span>탄수화물: <span th:text="${recipe.INFO_CAR}">0</span> g</span> 
+								<span>단백질: <span th:text="${recipe.INFO_PRO}">0</span> g</span> 
+								<br/>
+								<span>지방: <span th:text="${recipe.INFO_FAT}">0</span> g</span> 
+								<span>나트륨: <span th:text="${recipe.INFO_NA}">0</span> mg</span>-->
+							</div>
                         </div>
                     </div>
                 </div>

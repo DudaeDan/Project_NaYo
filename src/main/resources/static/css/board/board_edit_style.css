@@ -1,137 +1,166 @@
 .container {
-    display: flex;
+	display: flex;
 }
 
 .main-content {
-    flex: 1;
-    padding: 20px;
-    background-color: #f9f9f9; /* 연한 회색 배경 */
-    max-width: 800px; /* 최대 너비 설정 */
-    margin: 0 auto; /* 가운데 정렬 */
-    border-radius: 8px; /* 둥근 모서리 */
+	flex: 1;
+	padding: 20px;
+	background-color: #f9f9f9;
+	/* 연한 회색 배경 */
+	max-width: 800px;
+	/* 최대 너비 설정 */
+	margin: 0 auto;
+	/* 가운데 정렬 */
+	border-radius: 8px;
+	/* 둥근 모서리 */
 }
 
 .box {
-    padding: 20px;
-    margin-bottom: 20px; /* 박스 간격 */
-    background-color: #fff;
-    border-radius: 8px; /* 둥근 모서리 */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	padding: 20px;
+	margin-bottom: 20px;
+	/* 박스 간격 */
+	background-color: #fff;
+	border-radius: 8px;
+	/* 둥근 모서리 */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .title-image-section {
-    text-align: center;
+	text-align: center;
 }
 
 .form-group {
-    margin-bottom: 20px;
-    text-align: left;
+	margin-bottom: 20px;
+	text-align: left;
 }
 
 .form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
 }
 
-.form-group input, .form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+.form-group input,
+.form-group textarea {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
 }
 
 .img-preview {
-    text-align: center;
-    margin-top: 10px;
+	text-align: center;
+	margin-top: 10px;
 }
 
 .img-preview img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
+	max-width: 100%;
+	height: auto;
+	border-radius: 5px;
 }
 
-.ingredient-section, .steps-section {
-    text-align: left;
+.ingredient-section,
+.steps-section {
+	text-align: left;
 }
 
-.ingredient-list, .step-list {
-    list-style: none; /* 점 없애기 */
-    padding: 0;
-    margin: 0;
+.ingredient-list,
+.step-list {
+	list-style: none;
+	/* 점 없애기 */
+	padding: 0;
+	margin: 0;
 }
 
-.ingredient-item, .step-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+.ingredient-item,
+.step-item {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
 }
 
-.ingredient-name, .step-description {
-    flex: 1;
-    margin-right: 10px;
+.ingredient-item>input:first-child {
+	margin-right: 5px;
+}
+
+.ingredient-name,
+.step-description {
+	flex: 1;
+	margin-right: 10px;
 }
 
 .ingredient-amount {
-    flex: 0.5;
-    margin-right: 10px;
+	flex: 0.5;
+	margin-right: 10px;
 }
 
-.ingredient-name input, .ingredient-amount input, .step-description textarea {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+.ingredient-name input,
+.ingredient-amount input,
+.step-description textarea {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+.recipe-step {
+	resize: none;
+	width: 500px;
+	height: 60px;
 }
 
 .step-item img {
-    margin-right: 20px;
-    max-width: 100px;
+	margin-right: 20px;
+	max-width: 100px;
+}
+
+.step-delete-btn {
+	height: 40px;
 }
 
 .action-buttons {
-    text-align: center;
-    margin-top: 20px;
+	text-align: center;
+	margin-top: 20px;
 }
 
 .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-left: 10px;
-    transition: background-color 0.3s ease;
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 16px;
+	border-radius: 5px;
+	text-decoration: none;
+	margin-left: 10px;
+	transition: background-color 0.3s ease;
 }
 
 .btn-primary {
-    background-color: #007bff;
-    color: white;
-    border: none;
+	background-color: #007bff;
+	color: white;
+	border: none;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+	background-color: #0056b3;
 }
 
 .btn-secondary {
-    background-color: #6c757d;
-    color: white;
-    border: none;
+	background-color: #6c757d;
+	color: white;
+	border: none;
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268;
+	background-color: #5a6268;
 }
 
 .btn-danger {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 5px 10px; /* 삭제 버튼 크기 줄이기 */
+	background-color: #dc3545;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	/* 삭제 버튼 크기 줄이기 */
 }
 
 .btn-danger:hover {
-    background-color: #c82333;
+	background-color: #c82333;
 }

@@ -33,14 +33,16 @@
                         <h3 class="board-title">
                             <a th:href="@{/board/view/{id}(id=${board.boardNumber})}" th:text="${board.boardTitle}">board_title</a>
                         </h3>
-                        <p style="font-size: 0.9em; color: #999;" th:text="'작성자 : '+${board.user.userNickname}">user_nickname</p>
-                        <div class="stats">
-                            <span th:text="'조회수 : ' + ${board.boardHit}">조회수 : board_hit</span>
-                            <span>
-                                <img src="/Images/border/like.png" alt="Like icon" style="width: 16px; height: 16px;">
-                                <span th:text="${board.boardLike}">board_like</span>
-                            </span>
-                        </div>
+						<div class="board-detail-bottom">
+	                        <p style="font-size: 0.9em; color: #999;" th:text="'작성자 : '+${board.user.userNickname}">user_nickname</p>
+	                        <div class="stats">
+	                            <span th:text="'조회수 : ' + ${board.boardHit}">조회수 : board_hit</span>
+	                            <span class="like-icon">
+	                                <img src="/Images/border/like.png" alt="Like icon" style="width: 16px; height: 16px;">
+	                                <span th:text="${board.boardLike}">board_like</span>
+	                            </span>
+	                        </div>
+						</div>
                     </div>
                 </div>
             </div>

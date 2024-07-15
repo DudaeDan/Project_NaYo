@@ -28,12 +28,12 @@
     <header th:replace="fragments/header :: header"></header>
     <div class="container">
         <div th:replace="fragments/sidebar :: sidebar"></div>
-        <div class="main-content">
+        <div class="myboard-main-content">
             <div class="mypage-header">
+                <a th:href="@{/mypage/boardlist}" class="nav-item">작성 글</a>
                 <a th:href="@{/mypage/comment}" class="nav-item">작성댓글</a>
-                <a th:href="@{/mypage/boardlist}" class="nav-item">작성 글 목록</a>
                 <a th:href="@{/mypage/profile}" class="nav-item">개인정보 수정</a>
-                <a th:href="@{/mypage/inquiry_list}" class="nav-item">문의 글 목록</a>
+                <a th:href="@{/mypage/inquiry_list}" class="nav-item">문의 글</a>
             </div>
             <div class="board-list">
                 <div class="board-grid">

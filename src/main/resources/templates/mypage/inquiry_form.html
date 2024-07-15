@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>문의 글 작성</title>
-    <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
-    <link rel="stylesheet" th:href="@{/css/mypage/profile.css}">
-    <link rel="stylesheet" th:href="@{/css/mypage/inquiry_form.css}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script th:src="@{/script/layout/Layout_scripts.js}"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>문의 글 작성</title>
+	<link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
+	<link rel="stylesheet" th:href="@{/css/mypage/profile.css}">
+	<link rel="stylesheet" th:href="@{/css/mypage/inquiry_form.css}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script th:src="@{/script/layout/Layout_scripts.js}"></script>
 </head>
+
 <body>
-    <header th:replace="fragments/header :: header"></header>
-    <div class="container">
-        <div th:replace="fragments/sidebar :: sidebar"></div>
-        <div class="main-content">
-           <div class="mypage-header">
-                <a th:href="@{/mypage/comment}" class="nav-item">작성댓글</a>
-                <a th:href="@{/mypage/boardlist}" class="nav-item">작성 글 목록</a>
-                <a th:href="@{/mypage/profile}" class="nav-item">개인정보 수정</a>
-                <a th:href="@{/mypage/inquiry_list}" class="nav-item">문의 글 목록</a>
-            </div>
-            <h3>문의 글 작성</h3>
-            <form th:action="@{/mypage/inquiries}" method="post">
-                <div class="form-group">
-                    <label for="title">제목</label>
-                    <input type="text" id="title" name="inquiryTitle" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="content">내용</label>
-                    <textarea id="content" name="inquiryContent" class="form-control" required></textarea>
-                </div>
-                <button type="submit" class="btn">작성</button>
-            </form>
-        </div>
-    </div>
+	<header th:replace="fragments/header :: header"></header>
+	<div class="container">
+		<div th:replace="fragments/sidebar :: sidebar"></div>
+		<div class="main-content">
+			<div class="mypage-header">
+				<a th:href="@{/mypage/boardlist}" class="nav-item">작성 글</a>
+				<a th:href="@{/mypage/comment}" class="nav-item">작성댓글</a>
+				<a th:href="@{/mypage/profile}" class="nav-item">개인정보 수정</a>
+				<a th:href="@{/mypage/inquiry_list}" class="nav-item">문의 글</a>
+			</div>
+			<h3>문의 글 작성</h3>
+			<form th:action="@{/mypage/inquiries}" method="post">
+				<div class="form-group">
+					<label for="title">제목</label>
+					<input type="text" id="title" name="inquiryTitle" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="content">내용</label>
+					<textarea id="content" name="inquiryContent" class="form-control" required></textarea>
+				</div>
+				<button type="submit" class="btn">작성</button>
+			</form>
+		</div>
+	</div>
 </body>
+
 </html>

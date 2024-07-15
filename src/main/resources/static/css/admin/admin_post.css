@@ -98,6 +98,14 @@ form>input {
 	/* 간격 추가 */
 }
 
+.delete-btn {
+	background-color: unset;
+	border: none;
+	font-weight: bold;
+	cursor: pointer;
+	
+}
+
 .inquiry_answer {
 	height: 200px;
 }
