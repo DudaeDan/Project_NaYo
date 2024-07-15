@@ -5,35 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>레시피 웹페이지 - 마이페이지</title>
     <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
-    <link rel="stylesheet" th:href="@{/css/board/board_list_style.css}">
+    <link rel="stylesheet" th:href="@{/css/mypage/profile.css}">
+    <link rel="stylesheet" th:href="@{/css/mypage/comment.css}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <style>
-        .board-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1%;
-        }
-        .board-item {
-            width: 24%;
-            box-sizing: border-box;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .thumbnail img {
-            width: 100%;
-            height: auto;
-        }
-        .comments {
-            margin-top: 10px;
-            border-top: 1px solid #ddd;
-            padding-top: 10px;
-        }
-        .comment-item {
-            margin-bottom: 10px;
-        }
-    </style>
     <script th:src="@{/script/layout/Layout_scripts.js}"></script>
 </head>
 <body>
@@ -42,13 +16,14 @@
         <div th:replace="fragments/sidebar :: sidebar"></div>
         <div class="main-content">
             <div class="mypage-header">
-                <a th:href="@{/mypage/comment}">작성댓글</a>
-                <a th:href="@{/mypage/boardlist}">작성 글 목록</a>
-                <a th:href="@{/mypage/profile}">개인정보 수정</a>
-                <a th:href="@{/mypage/inquiry_list}">문의 글 목록</a>
+                <a th:href="@{/mypage/comment}" class="nav-item">작성댓글</a>
+                <a th:href="@{/mypage/boardlist}" class="nav-item">작성 글 목록</a>
+                <a th:href="@{/mypage/profile}" class="nav-item">개인정보 수정</a>
+                <a th:href="@{/mypage/inquiry_list}" class="nav-item">문의 글 목록</a>
             </div>
             <div class="board-list">
-                <div th:each="entry : ${commentsByBoard}">
+				<div class="board-grid">
+                <div th:each="entry : ${commentsByBoard}" class="test">
                     <div class="board-item">
                         <div class="thumbnail">
                             <a th:href="@{/board/view/{id}(id=${entry.key.boardNumber})}">
@@ -71,14 +46,14 @@
                             <div th:each="comment : ${entry.value}" class="comment-item">
                                 <p th:text="${comment.user.userNickname}">user_nickname</p>
                                 <p th:text="${comment.content}">comment_content</p>
-                            <p th:text="${#temporals.format(comment.createdDate, 'yyyy-MM-dd HH:mm')}">comment_date</p>
+                                <p th:text="${#temporals.format(comment.createdDate, 'yyyy-MM-dd HH:mm')}">comment_date</p>
                             </div>
                         </div>
                     </div>
                 </div>
+				</div>
             </div>
         </div>
     </div>
 </body>
 </html>
-

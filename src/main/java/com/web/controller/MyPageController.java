@@ -43,6 +43,8 @@ public class MyPageController {
     private AnswerService answerService;
     
 
+    
+    
     @GetMapping("/boardlist")
     public String boardList(Model model, HttpSession session,
                             @RequestParam(defaultValue = "1") int page,
@@ -125,7 +127,7 @@ public class MyPageController {
     public boolean checkNickname(@RequestParam String nickname) {
         return myUserService.isNicknameAvailable(nickname);
     }
-
+    
     @PostMapping("/delete")
     public String deleteUser(HttpSession session, @RequestParam String currentPw) {
         User user = (User) session.getAttribute("user");
@@ -137,6 +139,7 @@ public class MyPageController {
         }
         return "redirect:/board/ranking";
     }
+
 
 
  // 문의 리스트

@@ -14,6 +14,8 @@ import com.web.repository.ReplyRepository;
 import com.web.repository.StepRepository;
 import com.web.repository.UserRepository;
 import com.web.repository.MyUserRepository;
+import com.web.repository.RefrigeratorIngredientRepository;
+import com.web.repository.RefrigeratorRepository;
 import com.web.repository.ReplyLikeRepository;
 import com.web.repository.MyBoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +55,12 @@ public class MyUserServiceImpl implements MyUserService {
     @Autowired
     private ReplyLikeRepository replyLikeRepository;
 
+    @Autowired
+    private RefrigeratorRepository refrigeratorRepository;
+    
+    @Autowired
+    private RefrigeratorIngredientRepository refrigeratorIngredientRepository;
+    
     @Autowired
     private FileService fileService;
 
@@ -130,11 +138,24 @@ public class MyUserServiceImpl implements MyUserService {
             userRepository.delete(user);
         }
     }
-
     
 
+    //닉네임 중복 확인
     @Override
     public boolean isNicknameAvailable(String nickname) {
         return !myUserRepository.existsByUserNickname(nickname);
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

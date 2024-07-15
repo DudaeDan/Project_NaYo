@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색 결과</title>
+    <link rel="stylesheet" th:href="@{/css/layout/Layout_styles.css}">
+    <link rel="stylesheet" th:href="@{/css/board/board_list_style.css}">
+</head>
+<body>
+    <header th:replace="fragments/header :: header"></header>
+    <div class="container">
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+        <div class="main-content">
+            <h2>검색 결과</h2>
+            <div class="board-grid">
+                <div th:each="board : ${boards}" class="board-item">
+                    <div class="thumbnail">
+                        <a th:href="@{/board/view/{id}(id=${board.boardNumber})}">
+                            <img th:src="@{'/Images/border/main/' + ${board.mainImg}}" alt="Main image" class="main-img">
+                        </a>
+                    </div>
+                    <div class="board-details">
+                        <h3 class="board-title">
+                            <a th:href="@{/board/view/{id}(id=${board.boardNumber})}" th:text="${board.boardTitle}">board_title</a>
+                        </h3>
+                        <p th:text="'작성자 : '+${board.user.userNickname}">user_nickname</p>
+                        <div class="stats">
+                            <span th:text="'조회수 : ' + ${board.boardHit}">조회수 : board_hit</span>
+                            <span>
+                                <img src="/Images/border/like.png" alt="Like icon" style="width: 16px; height: 16px;">
+                                <span th:text="${board.boardLike}">board_like</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
