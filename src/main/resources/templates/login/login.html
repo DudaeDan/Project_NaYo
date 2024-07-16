@@ -8,6 +8,11 @@
 </head>
 <body>
     <div class="login">
+	<div class="logo-container">
+		<a th:href="@{/}">
+			<img th:src="@{/images/admin/admin_logo.png}" class="login-logo">
+		</a>
+	</div>
      <div class="form">
        <h2>로그인</h2>
          <form th:action="@{/login/login}" method="post">

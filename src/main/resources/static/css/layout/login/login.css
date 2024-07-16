@@ -16,6 +16,18 @@ body {
 	transform: translate(-50%, -50%);
 }
 
+.logo-container {
+	display: flex;
+	justify-content: center;
+	background: #f5f5fa;
+	padding-top: 10px;
+}
+
+.login-logo {
+	height: 100px;
+	width: 160px;
+}
+
 .login:before {
 	content: "";
 	position: absolute;
