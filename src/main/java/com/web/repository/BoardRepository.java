@@ -20,6 +20,8 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     List<Board> findTop20ByBoardDateAfterOrderByBoardHitDesc(LocalDateTime date);
     List<Board> findByBoardTitleContaining(String title);
     List<Board> findByBoardContentContaining(String content);
+    List<Board> findByBoardTitleContainingOrderByBoardLikeDesc(String title);
+    List<Board> findByBoardContentContainingOrderByBoardLikeDesc(String content);
 
     @Query("SELECT b FROM Board b WHERE b.boardLike >= 5")
     Page<Board> findBoardsAtLeast5Likes(Pageable pageable);

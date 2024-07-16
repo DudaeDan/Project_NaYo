@@ -36,6 +36,11 @@ h2 {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+	resize: none;
+}
+
+.inquiryForm-title {
+	height: 50px !important;
 }
 
 .btn-primary {

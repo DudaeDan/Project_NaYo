@@ -88,6 +88,17 @@ public class AdminController {
 		}
 		return "redirect:/admin/login";
 	}
+	
+	@GetMapping("/goMainPage")
+	public String goMainPage(HttpServletRequest request) {
+		session = request.getSession(false);
+		if (session != null) {
+			session.invalidate();
+		}
+		return "redirect:/";
+	}
+	
+	
 
 	// 메인페이지 데이터
 	@GetMapping("/main")

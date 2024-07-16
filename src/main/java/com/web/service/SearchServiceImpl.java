@@ -19,9 +19,11 @@ public class SearchServiceImpl implements SearchService {
 	    @Override
 	    public List<Board> search(String type, String keyword) {
 	        if (type.equals("title")) {
-	            return boardRepository.findByBoardTitleContaining(keyword);
+//	            return boardRepository.findByBoardTitleContaining(keyword);
+	            return boardRepository.findByBoardTitleContainingOrderByBoardLikeDesc(keyword);
 	        } else if (type.equals("content")) {
-	            return boardRepository.findByBoardContentContaining(keyword);
+//	            return boardRepository.findByBoardContentContaining(keyword);
+	            return boardRepository.findByBoardContentContainingOrderByBoardLikeDesc(keyword);
 	        }
 	        return null;
 	    }

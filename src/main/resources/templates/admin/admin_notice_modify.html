@@ -30,7 +30,7 @@
 								<tr>
 									<th>제목</th>
 									<td class="notice-title">
-										<input type="text" name="noticeTitle" th:value="${noticeModify.noticeTitle}">
+										<input type="text" name="noticeTitle" class="admin-post-write" th:value="${noticeModify.noticeTitle}">
 									</td>
 									<th>작성일</th>
 									<td th:text="${#dates.format(noticeModify.noticeDate, 'yyyy-MM-dd')}"></td>
@@ -38,7 +38,7 @@
 								<tr>
 									<th>내용</th>
 									<td colspan="3" class="post-content post-modify">
-										<textarea name="noticeContent"
+										<textarea name="noticeContent" class="admin-post-write"
 											th:text="${noticeModify.noticeContent}"></textarea>
 									</td>
 								</tr>
